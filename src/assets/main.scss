@@ -1,0 +1,127 @@
+$colors: (skin-tone:#FFE1A0,
+coal:#0E0E0E,
+dark-gray:#191919,
+dimm-black: rgba(#000, .56),
+chocolate:#704C00,
+grullo:#A49679,
+red:#D52004,
+jelly-bean: #E2574C);
+$mobile-width:650px;
+$fonts-path:'@/assets/fonts/';
+
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+}
+
+
+
+@function image($svg-name, $ext:'svg') {
+    @return url('@/assets/icons/#{$svg-name}.#{$ext}')
+}
+
+@mixin desktop($width: $mobile-width) {
+    @media (min-width: #{$width}) {
+        @content;
+    }
+}
+
+@mixin font($font-name, $font-path, $weight) {
+    @font-face {
+        font-family: $font-name;
+        font-weight: $weight;
+        src: url($font-path);
+    }
+}
+
+@mixin VerticalCenter {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin HorizontalCenter {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin content() {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@mixin CircleFillHover() {
+    & {
+        overflow: hidden;
+        position: relative;
+    }
+
+    &::before {
+        @include content();
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        background-color: rgba($color: #000, $alpha: .1);
+        @include size(0, 0);
+        border-radius: 100%;
+        transition: .5s;
+    }
+
+    &:hover::before {
+        border-radius: 0;
+        @include size(150%, 150%);
+    }
+}
+
+@include font(Mj_Dinar, $fonts-path+'Mj_Dinar Two Light.ttf', 100);
+@include font(Mj_Dinar, $fonts-path+'Mj_Dinar Two Medium.ttf', normal);
+
+@include font(Roboto, $fonts-path+'robotobold.ttf', bold);
+@include font(Roboto, $fonts-path+'robotolight.ttf', 100);
+@include font(Roboto, $fonts-path+'robotoregular.ttf', normal);
+
+
+* {
+    font-family: Mj_Dinar, Roboto;
+    padding: 0;
+    margin: 0;
+}
+
+
+@keyframes LeftAndRight {
+    from {
+        transform: translateX(-3px);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-3px);
+    }
+}
+
+@keyframes UpAndDown {
+    from {
+        transform: translateY(-3px);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-3px);
+    }
+}
