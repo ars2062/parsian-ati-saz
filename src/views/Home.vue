@@ -296,14 +296,26 @@
     <section :class="$style.five">
       <Title title="استاد کاران برند منطقه" style="margin-top:65px"/>
       <CardSlider>
-        <div v-for="i in [1,1,1,1,1,1,1,1,1]" :key="i" :class="$style.card">
+        <div v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i" :class="$style.card">
           <img src="@/assets/icons/450-3366-225x168.jpg">
           <h4>کنعان پاسبانی</h4>
-          <span>کار 27</span>
+          <span>کار {{i}}</span>
           <button>نمایش نمونه کارها</button>
         </div>
       </CardSlider>
+      <button :class="$style.more">
+        <span>نمایش به صورت کامل</span>
+      </button>
     </section>
+    <section :class="$style.six">
+      <Title title="سازنده گانی که باما کار میکنند"/>
+      <div :class="$style.collaborators">
+        <a href="#" v-for="i in [1,2,3,4,5,6,7,8]" :key="i">
+          <img src="@/assets/icons/Kamyar-Maroufzadeh-225x168.jpg">
+        </a>
+      </div>
+    </section>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -313,12 +325,14 @@ import Header from "@/components/Header.vue";
 import Searchcard from "@/components/SearchCard.vue";
 import Title from "@/components/Title.vue";
 import CardSlider from "@/components/CardSlider.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   components: {
     Header,
     Searchcard,
     Title,
-    CardSlider
+    CardSlider,
+    Footer
   }
 };
 </script>
@@ -634,8 +648,87 @@ export default {
   }
   section.five {
     .card {
+      border-radius: 6px;
+      box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.16);
+      background-color: white;
+      position: relative;
       img {
         width: calc((100vw - 340px) / 4);
+        border-radius: 6px;
+        height: 195px;
+      }
+      h4 {
+        float: right;
+        font-size: 18px;
+        margin: 7px;
+      }
+      span {
+        float: left;
+        font-size: 14px;
+        font-weight: 100;
+        margin: 17px;
+      }
+      button {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        margin: auto;
+        position: absolute;
+        border-radius: 0 0 6px 6px;
+        background-color: color(skin-tone);
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        outline: none;
+        &:active {
+          background-color: darken(color(skin-tone), 10%);
+        }
+      }
+    }
+    .more {
+      font-size: 20px;
+      position: relative;
+      line-height: 54px;
+      margin-top: 45px;
+      margin-bottom: 100px;
+      text-align: center;
+      width: 620px;
+      border: none;
+      @include HorizontalCenter();
+      cursor: pointer;
+      transition: all 0.1s;
+      outline: none;
+      &:active::before {
+        border-top: 54px solid darken(color(skin-tone), 5%);
+      }
+      &::before {
+        content: "";
+        height: 0;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: -54px;
+        /* stick out into margined area */
+        z-index: -1;
+        /* make it the background */
+        border: 54px solid transparent;
+        /* left/right diagonals */
+        border-top: 54px solid color(skin-tone);
+        border-bottom: 0px solid transparent;
+      }
+    }
+  }
+  section.six {
+    .collaborators {
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(auto-fit, 150px);
+      margin: 50px 0;
+      a {
+        img {
+          @include size(100%, 100%);
+        }
       }
     }
   }
