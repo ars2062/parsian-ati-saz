@@ -1,74 +1,59 @@
 <template>
   <div :class="$style.sliderContainer">
-    <button :class="$style.navBtn" @mousedown="this.slideLeft">
+    <button :class="$style.navBtn" @mousedown="this.slideLeft" @mouseup="this.stopLeft">
       <i class="fas fa-chevron-left"></i>
     </button>
-    <button :class="$style.navBtn" @mousedown="this.slideRight">
+    <button :class="$style.navBtn" @mousedown="this.slideRight" @mouseup="this.stopRight">
       <i class="fas fa-chevron-right"></i>
     </button>
     <div :class="$style.cardSlider" ref="slider">
       <slot></slot>
+      <section :class="$style.padding"></section>
     </div>
   </div>
 </template>
 
 <script>
 import JQuery from "jquery";
+import { setInterval, clearInterval } from "timers";
 let $ = JQuery;
 export default {
   data() {
     return {
-      index
+      index,
+      slideleft,
+      slideright
     };
   },
   methods: {
     slideLeft() {
-      let w = Math.max(
-        document.documentElement.clientWidth,
-        window.innerWidth || 0
-      );
-      let cardWidth = (w - 340) / 4 + 15;
-      this.scrollTo(
-        this.$refs["slider"],
-        this.$refs["slider"].scrollLeft - cardWidth,
-        600
-      );
-      console.log(this.$refs["slider"]);
+      if (!this.slideleft) {
+        this.slideleft = setInterval(() => {
+          this.$refs["slider"].scrollBy(-5,0);
+        }, 10);
+      }
     },
     slideRight() {
-      let w = Math.max(
+      if (!this.slideright) {
+        this.slideright = setInterval(() => {
+          this.$refs["slider"].scrollBy(5,0);
+        }, 10);
+      }
+    },
+    vw(v) {
+      var w = Math.max(
         document.documentElement.clientWidth,
         window.innerWidth || 0
       );
-      let cardWidth = (w - 340) / 4 + 15;
-      this.scrollTo(
-        this.$refs["slider"],
-        this.$refs["slider"].scrollLeft + cardWidth,
-        600
-      );
-      console.log(this.$refs["slider"]);
+      return (v * w) / 100;
     },
-    scrollTo(element, to, duration) {
-      var start = element.scrollLeft,
-        change = to - start,
-        currentTime = 0,
-        increment = 20;
-      var ease = this.easeInOutQuad;
-      var animateScroll = function() {
-        currentTime += increment;
-        var val = ease(currentTime, start, change, duration);
-        element.scrollLeft = val;
-        if (currentTime < duration) {
-          setTimeout(animateScroll, increment);
-        }
-      };
-      animateScroll();
+    stopLeft() {
+      clearInterval(this.slideleft);
+      this.slideleft = undefined;
     },
-    easeInOutQuad(t, b, c, d) {
-      t /= d / 2;
-      if (t < 1) return (c / 2) * t * t + b;
-      t--;
-      return (-c / 2) * (t * (t - 2) - 1) + b;
+    stopRight() {
+      clearInterval(this.slideright);
+      this.slideright = undefined;
     }
   }
 };
@@ -109,14 +94,14 @@ export default {
     }
   }
   &::before,
-  &::after{
+  &::after {
     @include content();
-    width: .1px;
+    width: 0.1px;
     box-shadow: 0 0 140px 100px white;
     z-index: 1;
   }
   &::before {
-    left:100%;
+    left: 100%;
   }
   &::after {
     left: 0;
@@ -128,16 +113,21 @@ export default {
     display: flex;
     flex-direction: row;
     padding: 0 140px;
-    overflow-x: hidden;
-    scroll-snap-type: x proximity;
+    overflow-x: scroll;
+    &::-webkit-scrollbar { display: none !important }
     div {
       margin: 10px 0;
       height: calc(100% - 20px);
-      scroll-snap-align: center;
       &:not(:first-of-type) {
         margin-right: 15px;
       }
       width: calc((100vw - 340px) / 4);
+      display: inline-block;
+    }
+    .padding{
+      width: 140px;
+      height: 100%;
+      background-color: red;
       display: inline-block;
     }
   }

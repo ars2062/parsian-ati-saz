@@ -51,7 +51,7 @@ export default {
       @include size(5px, 5px);
       top: 0;
       bottom: 0;
-      left: calc(100% + 2.5px);
+      left: 100%;
       margin: auto;
       background-color: color(chocolate);
     }

@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.combolist" dir="rtl">
     <div @click="toggleDisplay">
-      <span>نوع ملک مد نظرتون رو انتخاب کنید</span>
+      <span>{{choosen||title}}</span>
       <img src="@/assets/icons/right-arrow.svg">
     </div>
     <ul :style="{display:this.display}">
@@ -13,18 +13,23 @@
 <script>
 export default {
   name: "Combolist",
-  props: { items: { type: Array } },
+  props: { items: { type: Array }, title: { type: String } },
   data() {
     return {
-      display: "none"
+      display: "none",
+      choosen: ""
     };
   },
   methods: {
     toggleDisplay() {
       this.display = this.display === "block" ? "none" : "block";
     },
-    choose(id){
-      this.$emit('value',id);
+    choose(id) {
+      this.choosen = this.items.find(item => {
+        return item.id == id;
+      }).text;
+      this.$emit("value", id);
+      this.toggleDisplay();
     }
   }
 };
@@ -34,7 +39,7 @@ export default {
 @import "@/assets/main.scss";
 .combolist {
   margin: auto;
-  margin-bottom: 175px;
+  
   position: relative;
   user-select: none;
   div {

@@ -1,6 +1,9 @@
 <template>
   <div :class="$style.home">
-    <Header></Header>
+    <Header 
+      :Title="[{text:'تخصصی'},{text:'ترین سایت', class:$style.light},{text:'مشارکت', class:$style.skin_tone},{text:'در', class:$style.light},{text:'ساخت'}]"
+      :subtitle="[{text:'اخبار روز مسکن',class:$style.skin_tone}]"
+      :image="require('@/assets/icons/slide1.svg')"/>
     <Searchcard></Searchcard>
     <section :class="$style.one">
       <Title title="دسترسی سریع به امکانات سایت" style="margin-top:90px"/>
@@ -163,7 +166,7 @@
     <section :class="$style.three">
       <Title title="املاک طلایی این هفته" style="margin-top:50px"/>
       <div :class="$style.goldenPosts">
-        <div :class="$style.post">
+        <a href="#" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
           <div :class="$style.ribbonContainer">
             <div :class="$style.ribbon">
               <img src="@/assets/icons/star.svg">
@@ -180,97 +183,7 @@
           </ul>
           <hr>
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </div>
-        <div :class="$style.post">
-          <div :class="$style.ribbonContainer">
-            <div :class="$style.ribbon">
-              <img src="@/assets/icons/star.svg">
-            </div>
-          </div>
-          <div :class="$style.type">مشارکت در ساخت</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
-          <ul>
-            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
-            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
-            <li>پهنه طرح تفصيلي : r122</li>
-            <li>تعداد مالك :٢مالك</li>
-          </ul>
-          <hr>
-          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </div>
-        <div :class="$style.post">
-          <div :class="$style.ribbonContainer">
-            <div :class="$style.ribbon">
-              <img src="@/assets/icons/star.svg">
-            </div>
-          </div>
-          <div :class="$style.type">مشارکت در ساخت</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
-          <ul>
-            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
-            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
-            <li>پهنه طرح تفصيلي : r122</li>
-            <li>تعداد مالك :٢مالك</li>
-          </ul>
-          <hr>
-          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </div>
-        <div :class="$style.post">
-          <div :class="$style.ribbonContainer">
-            <div :class="$style.ribbon">
-              <img src="@/assets/icons/star.svg">
-            </div>
-          </div>
-          <div :class="$style.type">مشارکت در ساخت</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
-          <ul>
-            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
-            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
-            <li>پهنه طرح تفصيلي : r122</li>
-            <li>تعداد مالك :٢مالك</li>
-          </ul>
-          <hr>
-          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </div>
-        <div :class="$style.post">
-          <div :class="$style.ribbonContainer">
-            <div :class="$style.ribbon">
-              <img src="@/assets/icons/star.svg">
-            </div>
-          </div>
-          <div :class="$style.type">مشارکت در ساخت</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
-          <ul>
-            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
-            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
-            <li>پهنه طرح تفصيلي : r122</li>
-            <li>تعداد مالك :٢مالك</li>
-          </ul>
-          <hr>
-          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </div>
-        <div :class="$style.post">
-          <div :class="$style.ribbonContainer">
-            <div :class="$style.ribbon">
-              <img src="@/assets/icons/star.svg">
-            </div>
-          </div>
-          <div :class="$style.type">مشارکت در ساخت</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
-          <ul>
-            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
-            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
-            <li>پهنه طرح تفصيلي : r122</li>
-            <li>تعداد مالك :٢مالك</li>
-          </ul>
-          <hr>
-          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </div>
+        </a>
       </div>
       <button :class="$style.more">
         <span>نمایش آگهی بیشتر</span>
@@ -315,7 +228,15 @@
         </a>
       </div>
     </section>
-    <Footer></Footer>
+    <Footer/>
+    <Modal>
+      <form>
+        <input type="text">
+        <input type="text">
+        <input type="text">
+        <input type="submit">
+      </form>
+    </Modal>
   </div>
 </template>
 
@@ -326,13 +247,15 @@ import Searchcard from "@/components/SearchCard.vue";
 import Title from "@/components/Title.vue";
 import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
+import Modal from "@/components/Modal.vue";
 export default {
   components: {
     Header,
     Searchcard,
     Title,
     CardSlider,
-    Footer
+    Footer,
+    Modal
   }
 };
 </script>
@@ -463,6 +386,11 @@ export default {
       padding: 0 100px;
       .post {
         position: relative;
+        text-decoration: none;
+        transition: all .2s;
+        &:hover{
+          transform: scale(1.05);
+        }
         .ribbonContainer {
           overflow: hidden;
           @include size(80px, 80px);

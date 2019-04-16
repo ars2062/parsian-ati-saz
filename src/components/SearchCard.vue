@@ -3,19 +3,45 @@
     <p>همین امروز ملک مورد نظر خودتون رو پیدا کنید</p>
     <p>فیلد های زیر را پر کنید طبق معیار های مد نظرتون سپس دکمه جستجو بزنید</p>
     <Combolist
-      style="width:300px"
-      :items="[{id: 1, text: 'aaa'},{id: 2, text: 'bbb'}]"
-      @value="alert($event)"
+      style="width:300px;margin-bottom: 120px;"
+      title="نوع ملک مد نظرتون رو انتخاب کنید"
+      :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
+      @value="chooseType($event)"
     />
-    <div :class="$style.submitContainer">
-      <button>
-        <span>جستجو</span>
-        <i></i>
-        <i></i>
-        <i></i>
-        <i></i>
-      </button>
-    </div>
+    <form>
+      <div v-if="this.showMosharekat">
+        <Combolist
+          :style="this.typeStyle"
+          title="نوع ملک مد نظرتون رو انتخاب کنید"
+          :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
+          @value="chooseType($event)"
+        />
+        <input
+          type="number"
+          name="maxMetrazh"
+          id="maxMetrazh"
+          min="1"
+          placeholder="حداکثر متراژ مورد نظر خود را وارد کنید"
+        >
+        <input
+          type="number"
+          name="minMetrazh"
+          id="minMetrazh"
+          min="1"
+          placeholder="حداحقل متراژ مورد نظر خود را وارد کنید"
+        >
+      </div>
+      <div v-if="this.showForoosh">فروش</div>
+      <div :class="$style.submitContainer">
+        <button>
+          <span>جستجو</span>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </button>
+      </div>
+    </form>
   </section>
 </template>
 
@@ -23,12 +49,35 @@
 import Combolist from "./form/ComboList.vue";
 export default {
   name: "Searchcard",
+  data() {
+    return {
+      showMosharekat: false,
+      showForoosh: false,
+      displayType: true
+    };
+  },
+  computed: {
+    typeStyle() {
+      if (this.displayType) {
+        return "display: flex; width: 20vw";
+      } else {
+        return "display: none; width: 20vw";
+      }
+    }
+  },
   components: {
     Combolist
   },
   methods: {
-    alert($event) {
-      alert($event);
+    chooseType($event) {
+      this.displayType = true;
+      if ($event === 1) {
+        this.showForoosh = false;
+        this.showMosharekat = true;
+      } else {
+        this.showForoosh = true;
+        this.showMosharekat = false;
+      }
     }
   }
 };
@@ -51,6 +100,30 @@ export default {
       margin-bottom: 25px;
     }
   }
+  form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 100px;
+    div {
+      width: 100%;
+    }
+    input {
+      width: 20vw;
+      color: color(grullo);
+      margin-left: 30px;
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid color(skin-tone);
+      height: 30px;
+      font-size: 16px;
+      direction: rtl;
+      outline: none;
+      &::placeholder {
+        color: color(grullo);
+      }
+    }
+  }
   .submitContainer {
     position: absolute;
     margin: auto;
@@ -68,9 +141,9 @@ export default {
       position: relative;
       cursor: pointer;
       outline: none;
-      transition: all .1s;
-      &:active{
-        transform: scale(1.05,1.05);
+      transition: all 0.1s;
+      &:active {
+        transform: scale(1.05, 1.05);
       }
       span {
         display: inline-block;
