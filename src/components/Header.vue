@@ -2,13 +2,13 @@
   <header>
     <img :src="image">
     <div :class="$style.trapezoids">
-      <div v-if="Title" :class="[$style.trapezoid,this.titleS]">
+      <div v-if="Title" :class="[$style.trapezoid,this.titleS,$style.first]">
         <span v-for="span in Title" :key="span.id" :class="span.class">{{span.text}}</span>
       </div>
-      <div v-if="subtitle" :class="[$style.trapezoid,this.subtitleS]">
+      <div v-if="subtitle" :class="[$style.trapezoid,this.subtitleS,$style.last]">
         <span v-for="span in subtitle" :key="span.id" :class="span.class">{{span.text}}</span>
       </div>
-    </div>
+    </div> 
     <img src="@/assets/icons/mouse.svg">
   </header>
 </template>
@@ -73,7 +73,7 @@ header {
       span {
         margin: 0 5px;
       }
-      &:first-of-type {
+      &.first {
         color: white;
         font-size: 40px;
         border-bottom: 80px solid rgba($color: #000000, $alpha: 0.65);
@@ -84,13 +84,14 @@ header {
         width: 750px;
       }
 
-      &:last-of-type {
+      &.last {
         font-size: 20px;
         position: relative;
         line-height: 54px;
         margin-top: 5px;
         text-align: center;
         width: 620px;
+        color: white;
         @include HorizontalCenter();
 
         &::before {

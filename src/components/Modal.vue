@@ -1,6 +1,11 @@
 <template>
   <div :class="$style.modal" :style="this.displayModal" @click="this.close">
-    <slot/>
+    <div :class="$style.container">
+      <button :class="$style.close" @click="this.close"></button>
+      <div :class="$style.scroller">
+        <slot/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,7 +25,8 @@ export default {
   },
   methods: {
     close($event) {
-      if ($event.target.classList.contains(this.$style.modal)) {
+      if ($event.target.classList.contains(this.$style.modal) ||
+          $event.target.classList.contains(this.$style.close)) {
         this.display = false;
         this.$emit("closed", true);
       }
@@ -41,16 +47,33 @@ export default {
   bottom: 0;
   margin: auto;
   display: flex;
-  align-items: center;
+  padding-top: 230px;
   justify-content: center;
-  form {
+  .container {
     width: 560px;
+    max-height: calc(100vh - 200px);
     background-color: #fff;
     box-shadow: 0 0 12px rgba($color: #000000, $alpha: 0.39);
     border-radius: 6px;
-    display: grid;
     padding: 20px 25px;
-    grid-gap: 10px;
+    position: relative;
+    .scroller{
+      height: 100%;
+    overflow: auto;
+    }
+    .close {
+      background: image(cancel) no-repeat;
+      background-position: center;
+      background-size: calc(100% - 14px);
+      @include size(45px, 45px);
+      border: none;
+      border-radius: 6px;
+      background-color: color(skin-tone);
+      position: absolute;
+      top: -16px;
+      right: -9px;
+      cursor: pointer;
+    }
   }
 }
 </style>

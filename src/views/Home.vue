@@ -1,9 +1,10 @@
 <template>
   <div :class="$style.home">
-    <Header 
+    <Header
       :Title="[{text:'تخصصی'},{text:'ترین سایت', class:$style.light},{text:'مشارکت', class:$style.skin_tone},{text:'در', class:$style.light},{text:'ساخت'}]"
       :subtitle="[{text:'اخبار روز مسکن',class:$style.skin_tone}]"
-      :image="require('@/assets/icons/slide1.svg')"/>
+      :image="require('@/assets/icons/slide1.svg')"
+    />
     <Searchcard></Searchcard>
     <section :class="$style.one">
       <Title title="دسترسی سریع به امکانات سایت" style="margin-top:90px"/>
@@ -16,7 +17,7 @@
             استاد کار مورد نظر خود را با دیدن
             نمونه کار انتخاب کنید
           </p>
-          <button>
+          <button @click="goto('rules')">
             <img src="@/assets/icons/right-arrow (2).svg">
             <span>نمایش</span>
           </button>
@@ -29,7 +30,7 @@
             و طراحان ساختمانی
             به آسانی یک کلیک دریافت کنید
           </p>
-          <button>
+          <button @click="Alert('به زودی...')">
             <img src="@/assets/icons/right-arrow (2).svg">
             <span>نمایش</span>
           </button>
@@ -42,7 +43,7 @@
             شهرداری تهران را ما جمع آوردی
             و در اختیار شما قرار داده ایم
           </p>
-          <button>
+          <button @click="openModal('dafater-khadamat-shahri')">
             <img src="@/assets/icons/right-arrow (2).svg">
             <span>نمایش</span>
           </button>
@@ -55,7 +56,7 @@
             استاد کار مورد نظر خود را با دیدن
             نمونه کار انتخاب کنید
           </p>
-          <button>
+          <button @click="goto('masters')">
             <img src="@/assets/icons/right-arrow (2).svg">
             <span>نمایش</span>
           </button>
@@ -65,108 +66,30 @@
     <section :class="$style.two">
       <Title title="لوازم ساختمانی" style="margin-top:80px"/>
       <div :class="$style.posts">
-        <div :class="$style.post">
+        <div :class="$style.post" v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i">
           <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
           <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="[$style.post,$style.expanded]">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
-        </div>
-        <div :class="$style.post">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button>
+            <button @click="openModal('postDetail')">
               <img src="@/assets/icons/diagonal-resize.svg">
             </button>
           </div>
         </div>
       </div>
+      <Modal ref="postDetail" :class="$style.postDetail">
+        <div :class="$style.imageContainer">
+          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
+          <button :class="$style.more">برای نمایش اطلاعات تکمیلی کلیک کنید</button>
+          <section>
+            <p>لوزارم ساختمانی برادران بیژن بجز قاسم</p>
+            <button>نمایش آدرس</button>
+          </section>
+        </div>
+      </Modal>
     </section>
     <section :class="$style.three">
       <Title title="املاک طلایی این هفته" style="margin-top:50px"/>
       <div :class="$style.goldenPosts">
-        <a href="#" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+        <a href="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
           <div :class="$style.ribbonContainer">
             <div :class="$style.ribbon">
               <img src="@/assets/icons/star.svg">
@@ -229,13 +152,14 @@
       </div>
     </section>
     <Footer/>
-    <Modal>
-      <form>
-        <input type="text">
-        <input type="text">
-        <input type="text">
-        <input type="submit">
-      </form>
+    <Modal :class="$style.dafater_khadamat_shahri" ref="dafater-khadamat-shahri">
+      <h3>لیست دفاتر خدمات شهرداری</h3>
+      <h4>لطفا منطقه مور نظر خود را انتخاب کنید</h4>
+      <ul>
+        <li v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]" :key="i">
+          <a href="#">منطقه {{i}}</a>
+        </li>
+      </ul>
     </Modal>
   </div>
 </template>
@@ -256,6 +180,17 @@ export default {
     CardSlider,
     Footer,
     Modal
+  },
+  methods: {
+    goto(name) {
+      this.$router.push(name);
+    },
+    openModal(name) {
+      this.$refs[name].display = true;
+    },
+    Alert(text) {
+      alert(text);
+    }
   }
 };
 </script>
@@ -387,8 +322,8 @@ export default {
       .post {
         position: relative;
         text-decoration: none;
-        transition: all .2s;
-        &:hover{
+        transition: all 0.2s;
+        &:hover {
           transform: scale(1.05);
         }
         .ribbonContainer {
@@ -656,6 +591,87 @@ export default {
       a {
         img {
           @include size(100%, 100%);
+        }
+      }
+    }
+  }
+  .dafater_khadamat_shahri {
+    direction: rtl;
+    text-align: center;
+    h3 {
+      font-size: 30px;
+      font-weight: normal;
+    }
+    h4 {
+      font-size: 20px;
+      font-weight: normal;
+      color: color(chocolate);
+      margin-bottom: 15px;
+    }
+    ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-gap: 12px;
+      a {
+        display: block;
+        background-color: color(skin-tone);
+        color: color(chocolate);
+        height: 50px;
+        line-height: 50px;
+        font-size: 20px;
+        text-decoration: none;
+        border-radius: 6px;
+        box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+      }
+      li:last-of-type {
+        grid-column: span 3;
+      }
+    }
+  }
+  .postDetail {
+    .imageContainer {
+      position: relative;
+      img {
+        width: 100%;
+      }
+      .more {
+        border: 1px solid color(skin-tone);
+        background-color: rgba($color: #fff, $alpha: 0.95);
+        position: absolute;
+        top: 25%;
+        left: 0;
+        cursor: pointer;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 15px;
+        padding-right: 35px;
+        font-size: 16px;
+      }
+      section {
+        background-color: rgba($color: #000000, $alpha: .85);
+        border: 2px solid color(skin-tone);
+        direction: rtl;
+        position: absolute;
+        left: auto;
+        top: 75%;
+        right: 0;
+        *{
+          display: inline-block;
+          height: 50px;
+          line-height: 50px;
+          font-size: 16px;
+          padding: 0 20px;
+        }
+        p {
+          color: white;
+          font-weight: 100;
+        }
+        button {
+          border: none;
+          background-color: color(skin-tone);
+          color: color(chocolate);
+          cursor: pointer;
         }
       }
     }

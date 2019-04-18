@@ -20,16 +20,7 @@
         <span>نمایش آگهی بیشتر</span>
       </button>
     </section>
-    <section :class="$style.two">
-      <h1>اگر شما هم یک استاد کار هستید</h1>
-      <p>
-        با استفاده از پارسیان آتی ساز دیده شوید ، پارسیان آتی ساز یک سایت تخصصی در زمینه مشارکت در ساخت و املاک کلنگی می باشد و در این راستا اکثر سازندگان مناطق 22 گانه
-        تهران با ما در ارتباط هستند .
-      </p>
-      <p>شما میتواند با قراردادن آگهی از خود و به نمایش گذاشتن نمونه کار های خود دیده شوید و پروژه های جدید بگیرید</p>
-      <p>برای ثبت آگهی از کلید زیر استفاده کنید</p>
-      <button>ثبت آگهی</button>
-    </section>
+    <AreYouAMasterWorker/>
     <Footer/>
   </div>
 </template>
@@ -42,6 +33,7 @@ import Title from "@/components/Title.vue";
 import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
+import AreYouAMasterWorker from "@/components/AreYouAMasterWorker.vue";
 export default {
   components: {
     Header,
@@ -49,7 +41,8 @@ export default {
     Title,
     CardSlider,
     Footer,
-    Modal
+    Modal,
+    AreYouAMasterWorker
   }
 };
 </script>
