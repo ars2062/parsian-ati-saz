@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.modal" :style="this.displayModal" @click="this.close">
-    <div :class="$style.container">
+    <div :class="$style.container" :style="this.displayImage">
       <button :class="$style.close" @click="this.close"></button>
       <div :class="$style.scroller">
         <slot/>
@@ -15,18 +15,28 @@ export default {
     display: {
       type: Boolean,
       default: false
+    },
+    imageView: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     displayModal() {
       if (this.display) return "display: flex";
       else return "display: none";
+    },
+    displayImage(){
+      if (this.imageView) return "width: 80% !important";
+      else return "";
     }
   },
   methods: {
     close($event) {
-      if ($event.target.classList.contains(this.$style.modal) ||
-          $event.target.classList.contains(this.$style.close)) {
+      if (
+        $event.target.classList.contains(this.$style.modal) ||
+        $event.target.classList.contains(this.$style.close)
+      ) {
         this.display = false;
         this.$emit("closed", true);
       }
@@ -49,6 +59,7 @@ export default {
   display: flex;
   padding-top: 230px;
   justify-content: center;
+  z-index: 99;
   .container {
     width: 560px;
     max-height: calc(100vh - 200px);
@@ -57,9 +68,9 @@ export default {
     border-radius: 6px;
     padding: 20px 25px;
     position: relative;
-    .scroller{
+    .scroller {
       height: 100%;
-    overflow: auto;
+      overflow: auto;
     }
     .close {
       background: image(cancel) no-repeat;
@@ -74,6 +85,9 @@ export default {
       right: -9px;
       cursor: pointer;
     }
+  }
+  img{
+    width: 100%;
   }
 }
 </style>

@@ -17,7 +17,7 @@
             استاد کار مورد نظر خود را با دیدن
             نمونه کار انتخاب کنید
           </p>
-          <button @click="goto('rules')">
+          <button @click="openLink('rules')">
             <img src="@/assets/icons/right-arrow (2).svg">
             <span>نمایش</span>
           </button>
@@ -78,10 +78,10 @@
       <Modal ref="postDetail" :class="$style.postDetail">
         <div :class="$style.imageContainer">
           <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <button :class="$style.more">برای نمایش اطلاعات تکمیلی کلیک کنید</button>
+          <button @click="goto('building-equipment-detail')" :class="$style.more">برای نمایش اطلاعات تکمیلی کلیک کنید</button>
           <section>
             <p>لوزارم ساختمانی برادران بیژن بجز قاسم</p>
-            <button>نمایش آدرس</button>
+            <button @click="goto('building-equipment-detail')">نمایش آدرس</button>
           </section>
         </div>
       </Modal>
@@ -190,6 +190,16 @@ export default {
     },
     Alert(text) {
       alert(text);
+    },
+    openLink(name){
+      switch (name) {
+        case 'rules':
+          window.open('http://82.99.242.34/Portal/home/?240980/%D9%82%D9%88%D8%A7%D9%86%DB%8C%D9%86-%D9%88-%D8%AF%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%84%D8%B9%D9%85%D9%84-%D9%87%D8%A7')
+          break;
+      
+        default:
+          break;
+      }
     }
   }
 };

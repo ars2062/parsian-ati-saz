@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul>
-      <li>
+      <li @click="goto('advertisement-registration')">
         <span>ارسال آگهی</span>
         <img src="@/assets/icons/deployment.svg">
       </li>
@@ -75,7 +75,10 @@ export default {
     },
     toggleAccountOptions() {
       this.displayaccountoptions = !this.displayaccountoptions;
-    }
+    },
+    goto(name) {
+      this.$router.push(name);
+    },
   },
   computed: {
     displayMenu() {

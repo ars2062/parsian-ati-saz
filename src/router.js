@@ -2,8 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Masterworkers from "./views/Masterworkers.vue";
-import NezamRules from "./views/NezamRules.vue";
 import PropertyDetail from "./views/PropertyDetail.vue";
+import BuildingEquipmentDetail from "./views/BuildingEquipmentDetail.vue";
+import AdvertisementRegistration from "./views/AdvertisementRegistration.vue";
 
 Vue.use(Router);
 
@@ -21,14 +22,19 @@ export default new Router({
       component: Masterworkers
     },
     {
-      path: "/rules",
-      name: "rules",
-      component: NezamRules
-    },
-    {
       path: "/property-detail",
       name: "property-detail",
       component: PropertyDetail
+    },
+    {
+      path: "/building-equipment-detail",
+      name: "building-equipment-detail",
+      component: BuildingEquipmentDetail
+    },
+    {
+      path: "/advertisement-registration",
+      name: "advertisement-registration",
+      component: AdvertisementRegistration
     }
   ]
 });
