@@ -6,6 +6,8 @@ import PropertyDetail from "./views/PropertyDetail.vue";
 import BuildingEquipmentDetail from "./views/BuildingEquipmentDetail.vue";
 import AdvertisementRegistration from "./views/AdvertisementRegistration.vue";
 import PhoneConfirmation from "./views/PhoneConfirmation.vue";
+import SupervisorConfirmation from "./views/SupervisorConfirmation.vue";
+import YourAccount from "./views/YourAccount.vue";
 
 Vue.use(Router);
 
@@ -41,6 +43,16 @@ export default new Router({
       path: "/phone-confirmation",
       name: "phone-confirmation",
       component: PhoneConfirmation
+    },
+    {
+      path: "/supervisor-confirmation",
+      name: "supervisor-confirmation",
+      component: SupervisorConfirmation
+    },
+    {
+      path: "/your-account",
+      name: "your-account",
+      component: YourAccount
     }
   ]
 });

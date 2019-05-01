@@ -1,34 +1,34 @@
 <template>
   <div>
     <Header
-      :Title="[{ text: 'تایید شماره' },{ text: 'تماس', class: this.$style.skin_tone }]"
+      :Title="[{ text: 'صفحه پرداخت' },{ text: 'هزینه', class: this.$style.skin_tone },{text:'آگهی'}]"
       :image="require('@/assets/icons/slide1.svg')"
     />
     <section :class="$style.one">
-      <Title title="تایید شماره"/>
+      <Title title="هزینه ثبت"/>
       <p
         :class="$style.message"
-      >آگهی شما ثبت و در صف بررسی قرار گرفت بعد از تایید ناظر شما به صورت خودکار به صفحه ای پرداخت منتقل می شوید</p>
+      >توجه داشته باشید که تا زمانی که آگهی توسط ناظر تایید نشود به صفحه پرداخت انتقال پیدا نمیکنید</p>
       <section>
         <ProgressSteps :steps="steps"/>
-        <p>
-          یک پیام حاوی کد تایید به شماره
-          <span :class="$style.bold">09121234567</span> ارسال گردید
-        </p>
-        <label>کد را وارد کنید</label>
-        <MaskedInput mask="1 1 1 1 1 1" placeholder-char="-"/>
-        <button id="confirm" @click="goto('supervisor-confirmation')">تایید شماره</button>
+        <label>مبلغ قابل پرداخت</label>
+        <input type="text" value="10,000 تومان" disabled>
+        <div :class="$style.checkbox_container">
+          <Checkbox/>
+          <span>ثبت آگهی در صفحه اصلی و به صورت آماده به امضاء</span>
+        </div>
+        <button id="confirm" @click="openModal('error_alert')">انتقال به صفحه ای پرداخت</button>
         <button @click="goto(-1)">بازگشت به صفحه قبل</button>
-        <button>ویرایش شماره تماس</button>
-        <button
-          v-if="sendAgainTime>0"
-          :class="$style.sendAgain"
-          disabled
-        >{{sendAgainTime}} تا ارسال دوباره کد</button>
-        <button v-if="sendAgainTime==0" :class="$style.sendAgain">ارسال دوباره کد</button>
       </section>
     </section>
     <Footer/>
+    <Modal ref="error_alert">
+        <div :class="$style.error_alert" >
+            <img src="@/assets/icons/cancel.svg">
+            <p>آگهی شما هنوز توسط ناظر تایید نشده</p>
+            <span>این پروسه 1 الی 12 ساعت به طول می انجامد لطفا منتظر بمایند</span>
+        </div>
+    </Modal>
   </div>
 </template>
 
@@ -61,8 +61,8 @@ export default {
     return {
       steps: [
         { text: "ثبت کردن آگهی", class: this.$style.done },
-        { text: "تایید شماره", class: this.$style.current_step },
-        { text: "تایید ناظر" },
+        { text: "تایید شماره", class: this.$style.done },
+        { text: "تایید ناظر", class: this.$style.current_step },
         { text: "پرداخت" },
         { text: "تایید نهایی" }
       ],
@@ -121,17 +121,22 @@ section.one {
     padding: 20px;
     padding-bottom: 80px;
     position: relative;
-    p {
-      font-size: 25px;
-      font-weight: 100;
-      margin-top: 20px;
-      .bold {
-        font-size: 28px;
-        font-weight: normal;
-      }
-    }
     label {
-      font-size: 18px;
+      font-size: 30px;
+      margin-top: 15px;
+    }
+    .checkbox_container {
+      width: fit-content;
+      display: flex;
+      flex-direction: row;
+      justify-items: center;
+      right: 50%;
+      position: relative;
+      transform: translateX(50%);
+      margin-bottom: 10px;
+      label{
+          margin: 0 10px;
+      }
     }
     input {
       width: 300px;
@@ -144,7 +149,8 @@ section.one {
       position: relative;
       transform: translateX(50%);
       text-align: center;
-      direction: ltr;
+      direction: rtl;
+      font-size: 30px;
     }
     button {
       border: none;
@@ -169,30 +175,26 @@ section.one {
       width: auto;
       padding: 0 30px;
     }
-
-    button:nth-of-type(3) {
-      position: absolute;
-      bottom: 6px;
-      left: 6px;
-      transform: none;
-      font-size: 16px;
-      line-height: 40px;
-      width: auto;
-      padding: 0 30px;
-    }
-
-    button:nth-of-type(4),
-    button:nth-of-type(5) {
-      position: absolute;
-      margin: auto;
-      bottom: 6px;
-      right: 0;
-      left: 0;
-      transform: none;
-      font-size: 16px;
-      line-height: 40px;
-      padding: 0 30px;
-    }
   }
+}
+.error_alert{
+    p,span{
+        text-align: center;
+        margin: 5px 0;
+    }
+    p{
+        font-size: 25px;
+    }
+    span{
+        font-size: 18px;
+        font-weight: 100;
+        width: 100%;
+        display: block;
+    }
+    img{
+        @include size(140px,140px);
+        @include HorizontalCenter();
+        margin-top: 12vh;
+    }
 }
 </style>
