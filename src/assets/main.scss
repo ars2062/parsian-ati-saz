@@ -5,6 +5,7 @@ dimm-black: rgba(#000, .56),
 chocolate:#704C00,
 grullo:#A49679,
 red:#D52004,
+green:#A2C64D,
 jelly-bean: #E2574C);
 $mobile-width:650px;
 $fonts-path:'@/assets/fonts/';
@@ -132,6 +133,15 @@ $fonts-path:'@/assets/fonts/';
 
 .skin_tone {
     color: color(skin-tone);
+}
+
+.done {
+    background-color: color(green) !important;
+}
+
+.current_step {
+    background-color: #E2574C !important;
+    color: white !important;
 }
 
 @mixin ripple {

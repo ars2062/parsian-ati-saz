@@ -16,7 +16,8 @@
             @click="display('choose_category','reqister_product',[{text:'ثبت'},{text:'آگهی محصولات', class:$style.skin_tone}])"
           >ثبت آگهی محصولات ساختمانی</button>
           <button
-            @click="display('choose_category','reqister_masterworker',[{text:'ثبت'},{text:'آگهی استاد کار', class:$style.skin_tone}])">ثبت آگهی استاد کار</button>
+            @click="display('choose_category','reqister_masterworker',[{text:'ثبت'},{text:'آگهی استاد کار', class:$style.skin_tone}])"
+          >ثبت آگهی استاد کار</button>
           <button
             @click="display('choose_category','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
           >املاک</button>
@@ -34,9 +35,11 @@
       <div :class="$style.options">
         <div :class="$style.grid">
           <button
-            @click="display('choose_property_category','reqister_partnership',[{text:'ثبت'},{text:'آگهی املاک مشارکتی', class:$style.skin_tone}])">املاک مشارکتی</button>
+            @click="display('choose_property_category','reqister_partnership',[{text:'ثبت'},{text:'آگهی املاک مشارکتی', class:$style.skin_tone}])"
+          >املاک مشارکتی</button>
           <button
-            @click="display('choose_property_category','reqister_clutter',[{text:'ثبت'},{text:'آگهی املاک فروش کلنگی', class:$style.skin_tone}])">املاک فروش کلنگی</button>
+            @click="display('choose_property_category','reqister_clutter',[{text:'ثبت'},{text:'آگهی املاک فروش کلنگی', class:$style.skin_tone}])"
+          >املاک فروش کلنگی</button>
         </div>
         <p>توجه داشته باشید که پارسیان آتی ساز فقط در این دو زمینه به صورت تخصصی فعالت می کند</p>
         <button
@@ -94,7 +97,7 @@
           <label>زمینه کاری</label>
           <input type="text">
           <div :class="$style.checkbox_container">
-            <input type="checkbox">
+            <Checkbox/>
             <span>ایمیل در آگهی نمایش داده نشود</span>
           </div>
         </div>
@@ -108,14 +111,14 @@
           <span>یک توضیحات تکمیلی از برند خود</span>
           <textarea rows="10"></textarea>
         </div>
-        <button type="submit" :class="$style.full">ارسال آگهی</button>
+        <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
           :class="$style.back"
           @click="display('reqister_product','choose_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
         >بازگشت به صفحه قبل</button>
       </div>
     </section>
-    
+
     <section
       :class="[$style.reqister_masterworker,$style.sec]"
       ref="reqister_masterworker"
@@ -172,7 +175,7 @@
           <label>ایمیل شما</label>
           <input type="email">
           <div :class="$style.checkbox_container">
-            <input type="checkbox">
+            <Checkbox/>
             <span>ایمیل در آگهی نمایش داده نشود</span>
           </div>
         </div>
@@ -186,14 +189,14 @@
           <span>یک توضیحات تکمیلی از برند خود</span>
           <textarea rows="10"></textarea>
         </div>
-        <button type="submit" :class="$style.full">ارسال آگهی</button>
+        <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
           :class="$style.back"
           @click="display('reqister_masterworker','choose_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
         >بازگشت به صفحه قبل</button>
       </div>
     </section>
-    
+
     <section
       :class="[$style.reqister_clutter,$style.sec]"
       ref="reqister_clutter"
@@ -201,7 +204,7 @@
     >
       <div
         :class="$style.message"
-      >شما دسته ثبت آگهی برای فروش کلنگی را انتخاب کرده اید لطفا اطلاعات زیر را تکمیل کنید و کلید ارسال را بزنید </div>
+      >شما دسته ثبت آگهی برای فروش کلنگی را انتخاب کرده اید لطفا اطلاعات زیر را تکمیل کنید و کلید ارسال را بزنید</div>
       <div :class="$style.form">
         <div :class="[$style.form_group,$style.full]">
           <label>محله</label>
@@ -237,7 +240,7 @@
           <label>ایمیل شما</label>
           <input type="email">
           <div :class="$style.checkbox_container">
-            <input type="checkbox">
+            <Checkbox/>
             <span>ایمیل در آگهی نمایش داده نشود</span>
           </div>
         </div>
@@ -251,14 +254,14 @@
           <span>جزئیات و نکات قابل توجه آگهی خود را کامل و دقیق بنویسید تا شانس موفقیت آگهی شما بیشتر شود</span>
           <textarea rows="10"></textarea>
         </div>
-        <button type="submit" :class="$style.full">ارسال آگهی</button>
+        <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
           :class="$style.back"
           @click="display('reqister_clutter','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
         >بازگشت به صفحه قبل</button>
       </div>
     </section>
-    
+
     <section
       :class="[$style.reqister_partnership,$style.sec]"
       ref="reqister_partnership"
@@ -266,7 +269,7 @@
     >
       <div
         :class="$style.message"
-      >شما دسته ثبت آگهی برای فروش کلنگی را انتخاب کرده اید لطفا اطلاعات زیر را تکمیل کنید و کلید ارسال را بزنید </div>
+      >شما دسته ثبت آگهی برای فروش کلنگی را انتخاب کرده اید لطفا اطلاعات زیر را تکمیل کنید و کلید ارسال را بزنید</div>
       <div :class="$style.form">
         <div :class="[$style.form_group,$style.full]">
           <label>محله</label>
@@ -310,7 +313,7 @@
           <label>ایمیل شما</label>
           <input type="email">
           <div :class="$style.checkbox_container">
-            <input type="checkbox">
+            <Checkbox/>
             <span>ایمیل در آگهی نمایش داده نشود</span>
           </div>
         </div>
@@ -324,7 +327,7 @@
           <span>جزئیات و نکات قابل توجه آگهی خود را کامل و دقیق بنویسید تا شانس موفقیت آگهی شما بیشتر شود</span>
           <textarea rows="10"></textarea>
         </div>
-        <button type="submit" :class="$style.full">ارسال آگهی</button>
+        <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
           :class="$style.back"
           @click="display('reqister_partnership','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
@@ -345,6 +348,7 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import ImageSelector from "@/components/form/ImageSelector.vue";
+import Checkbox from "@/components/form/Checkbox.vue";
 export default {
   components: {
     Header,
@@ -353,7 +357,8 @@ export default {
     CardSlider,
     Footer,
     Modal,
-    ImageSelector
+    ImageSelector,
+    Checkbox
   },
   data() {
     return {
@@ -498,6 +503,17 @@ export default {
       }
       textarea {
         resize: vertical;
+      }
+      .checkbox_container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+        span {
+          margin: 0;
+          margin-right: 10px;
+          line-height: 30px;
+          font-size: 16px;
+        }
       }
     }
     button[type="submit"] {

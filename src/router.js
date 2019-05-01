@@ -5,6 +5,7 @@ import Masterworkers from "./views/Masterworkers.vue";
 import PropertyDetail from "./views/PropertyDetail.vue";
 import BuildingEquipmentDetail from "./views/BuildingEquipmentDetail.vue";
 import AdvertisementRegistration from "./views/AdvertisementRegistration.vue";
+import PhoneConfirmation from "./views/PhoneConfirmation.vue";
 
 Vue.use(Router);
 
@@ -35,6 +36,11 @@ export default new Router({
       path: "/advertisement-registration",
       name: "advertisement-registration",
       component: AdvertisementRegistration
+    },
+    {
+      path: "/phone-confirmation",
+      name: "phone-confirmation",
+      component: PhoneConfirmation
     }
   ]
 });
