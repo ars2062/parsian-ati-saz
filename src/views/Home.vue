@@ -87,7 +87,7 @@
       </Modal>
     </section>
     <section :class="$style.three">
-      <Title title="املاک طلایی این هفته" style="margin-top:50px"/>
+      <Title title="املاک آماده به امضاء" style="margin-top:50px"/>
       <div :class="$style.goldenPosts">
         <a href="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
           <div :class="$style.ribbonContainer">

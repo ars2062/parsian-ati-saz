@@ -7,7 +7,7 @@ import BuildingEquipmentDetail from "./views/BuildingEquipmentDetail.vue";
 import AdvertisementRegistration from "./views/AdvertisementRegistration.vue";
 import PhoneConfirmation from "./views/PhoneConfirmation.vue";
 import SupervisorConfirmation from "./views/SupervisorConfirmation.vue";
-import YourAccount from "./views/YourAccount.vue";
+import MyAccount from "./views/MyAccount.vue";
 
 Vue.use(Router);
 
@@ -50,9 +50,9 @@ export default new Router({
       component: SupervisorConfirmation
     },
     {
-      path: "/your-account",
-      name: "your-account",
-      component: YourAccount
+      path: "/my-account",
+      name: "my-account",
+      component: MyAccount
     }
   ]
 });
