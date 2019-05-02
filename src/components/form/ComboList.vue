@@ -1,23 +1,30 @@
 <template>
-  <div :class="$style.combolist" dir="rtl">
-    <div @click="toggleDisplay">
-      <span>{{choosen||title}}</span>
-      <img src="@/assets/icons/right-arrow.svg">
-    </div>
-    <ul :style="{display:this.display}">
-      <li v-for="item in this.items" :key="item.id" @click="choose(item.id)">{{item.text}}</li>
-    </ul>
+    <div :class="$style.combolist" dir="rtl">
+      <div @click="toggleDisplay">
+        <span>{{choosen||title}}</span>
+        <img src="@/assets/icons/right-arrow.svg">
+      </div>
+      <ul :style="{display:this.display}">
+        <li v-for="(item,index) in this.items" :key="item.id" @click="choose(item.id)">
+          <Checkbox :value="item.id" v-model="CheckedItems" :dark="(index % 2 == 0)?true:false"/>
+          <span>{{item.text}}</span>
+        </li>
+      </ul>
+      {{CheckedItems}}
   </div>
 </template>
 
 <script>
+import Checkbox from '@/components/form/Checkbox.vue';
 export default {
   name: "Combolist",
+  components:{Checkbox},
   props: { items: { type: Array }, title: { type: String } },
   data() {
     return {
       display: "none",
-      choosen: ""
+      choosen: "",
+      CheckedItems: []
     };
   },
   methods: {
@@ -39,7 +46,7 @@ export default {
 @import "@/assets/main.scss";
 .combolist {
   margin: auto;
-  
+
   position: relative;
   user-select: none;
   div {
@@ -62,6 +69,7 @@ export default {
     top: calc(100% + 10px);
     list-style: none;
     width: 100%;
+    z-index: 40;
     li {
       text-align: center;
       display: block;

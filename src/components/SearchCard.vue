@@ -13,8 +13,7 @@
         <Combolist
           :style="this.typeStyle"
           title="نوع ملک مد نظرتون رو انتخاب کنید"
-          :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
-          @value="chooseType($event)"
+          :items="[{id: 1, text: 'a'},{id: 2, text: 'a'},{id: 3, text: 'a'},{id: 4, text: 'a'},{id: 5, text: 'a'}]"
         />
         <input
           type="number"

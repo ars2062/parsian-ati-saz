@@ -1,12 +1,27 @@
 <template>
   <div :class="$style.checkbox">
-    <input type="checkbox" :name="this._uid" :id="this._uid" hidden>
-    <label :for="this._uid"></label>
+    <input
+      type="checkbox"
+      :name="this._uid"
+      :value="value"
+      :id="this._uid"
+      @change="changed"
+      hidden
+    >
+    <label :for="this._uid" :class="dark?$style.dark:''"></label>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: { value:{}, dark: { type: Boolean, default: false } },
+  methods: {
+    changed($event) {
+      this.$emit("input", this.value.concat($event.target.checked));
+      console.log($event.target.checked);
+    }
+  }
+};
 </script>
 
 <style lang="scss" module>
@@ -34,6 +49,12 @@ export default {};
       border-color: color(skin-tone);
       border-style: solid;
       border-width: 0;
+    }
+    &.dark {
+      border: 3px solid black;
+      &::after {
+        border-color: black;
+      }
     }
   }
 
