@@ -1,12 +1,8 @@
 <template>
-<<<<<<< HEAD
   <div>
     <Navbar></Navbar>
     <Main></Main>
   </div>
-=======
-  <div></div>
->>>>>>> 189af4f767c20fa6ce1118770ba3dd9dde5b6062
 </template>
 
 <script>
@@ -17,7 +13,7 @@ import router from '@/admin_router'
 
 export default {
   router,
-  name:'admin',
+  name:'Admin',
   components:{
     Navbar,
     Main
@@ -26,10 +22,7 @@ export default {
 </script>
 
 <style scoped>
-body{
-  height: 100vh;
-  background-color: red;
-}
+
 </style>
 
 
