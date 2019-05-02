@@ -1,8 +1,12 @@
 <template>
+<<<<<<< HEAD
   <div>
     <Navbar></Navbar>
     <Main></Main>
   </div>
+=======
+  <div></div>
+>>>>>>> 189af4f767c20fa6ce1118770ba3dd9dde5b6062
 </template>
 
 <script>

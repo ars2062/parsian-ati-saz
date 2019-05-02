@@ -2,20 +2,58 @@
   <div>
     <Header :Title="[{ text: 'حساب شما' }]" :image="require('@/assets/icons/slide1.svg')"/>
     <Title title="حساب کاربری آگهی ها" style="margin:60px 0;"/>
-    <div :class="$style.tabs">
-      <button :class="$style.tab" @click="displayTab('confirmed')">گهی های ثبت شده</button>
-      <button :class="$style.tab" @click="displayTab('notconfirmed')">گهی های در دست تایید</button>
+    <div :class="$style.ads">
+      <div :class="$style.tabs">
+        <button :class="[$style.tab,this.displayConfirmed?$style.active:'']" @click="displayTab('confirmed')">آگهی های ثبت شده</button>
+        <button :class="[$style.tab,this.displayNotconfirmed?$style.active:'']" @click="displayTab('notconfirmed')">آگهی های در دست تایید</button>
+      </div>
+      <section
+        ref="confirmed"
+        :class="[$style.tab_view,$style.confirmed]"
+        :style="this.displayConfirmedStyle"
+      >
+        <div :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+          <div :class="[$style.type,$style.green]">ثبت شده</div>
+          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
+          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
+          <ul>
+            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
+            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
+            <li>پهنه طرح تفصيلي : r122</li>
+            <li>تعداد مالك :٢مالك</li>
+          </ul>
+          <hr>
+          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
+          <div :class="$style.actions">
+            <button>ویرایش آگهی</button>
+            <button :class="$style.red">حذف آگهی</button>
+          </div>
+        </div>
+      </section>
+      <section
+        ref="notconfirmed"
+        :class="[$style.tab_view,$style.notconfirmed]"
+        :style="this.displayNotconfirmedStyle"
+      >
+        <div :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+          <div :class="[$style.type,$style.red]">در انتظار تایید ناظر</div>
+          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
+          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
+          <ul>
+            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
+            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
+            <li>پهنه طرح تفصيلي : r122</li>
+            <li>تعداد مالك :٢مالك</li>
+          </ul>
+          <hr>
+          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
+          <div :class="$style.actions">
+            <button>ویرایش آگهی</button>
+            <button :class="$style.red">حذف آگهی</button>
+          </div>
+        </div>
+      </section>
     </div>
-    <section
-      ref="confirmed"
-      :class="[$style.tab_view,$style.confirmed]"
-      :style="this.displayConfirmedStyle"
-    >confirmed</section>
-    <section
-      ref="notconfirmed"
-      :class="[$style.tab_view,$style.notconfirmed]"
-      :style="this.displayNotconfirmedStyle"
-    >notconfirmed</section>
     <Footer/>
   </div>
 </template>
@@ -52,27 +90,25 @@ export default {
   },
   computed: {
     displayNotconfirmedStyle() {
-      return this.displayNotconfirmed == true
-        ? "display:block"
-        : "display:none";
+      return this.displayNotconfirmed == true ? "display:grid" : "display:none";
     },
     displayConfirmedStyle() {
       console.log(this.displayConfirmed);
-      return this.displayConfirmed == true ? "display:block" : "display:none";
+      return this.displayConfirmed == true ? "display:grid" : "display:none";
     }
   },
   methods: {
     displayTab(name) {
       switch (name) {
-        case 'confirmed':
-          this.displayNotconfirmed=false;
-          this.displayConfirmed=true;
+        case "confirmed":
+          this.displayNotconfirmed = false;
+          this.displayConfirmed = true;
           break;
-        case 'notconfirmed':
-          this.displayNotconfirmed=true;
-          this.displayConfirmed=false;
+        case "notconfirmed":
+          this.displayNotconfirmed = true;
+          this.displayConfirmed = false;
           break;
-      
+
         default:
           break;
       }
@@ -82,14 +118,103 @@ export default {
 </script>
 
 <style lang="scss" module>
-.tabs {
-  .tab {
+@import "@/assets/main.scss";
+.red {
+  background-color: color(red) !important;
+  color: white !important;
+}
+.green {
+  background-color: color(green) !important;
+  color: white !important;
+}
+.ads {
+  padding: 0 140px;
+  margin-bottom: 90px;
+  direction: rtl;
+  .tabs {
+    border-bottom: 1px solid color(chocolate);
+    .tab {
+      border: none;
+      background-color: color(skin-tone);
+      font-size: 18px;
+      margin-left: 10px;
+      padding: 5px 20px;
+      cursor: pointer;
+      outline: none;
+      &.active{
+        background-color: color(chocolate);
+        color:white;
+      }
+    }
   }
-}
-.tab_view {
-}
-.confirmed {
-}
-.notconfirmed {
+  .tab_view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 320px);
+    grid-gap: 30px;
+    padding: 20px 0;
+    justify-content: center;
+    .post {
+      position: relative;
+      text-decoration: none;
+      transition: all 0.2s;
+      .mainImage {
+        @include size(100%, 220px);
+      }
+      .type {
+        position: absolute;
+        top: -5px;
+        left: -10px;
+        padding: 5px 15px;
+        font-size: 14px;
+        font-weight: 100;
+        background-color: color(skin-tone);
+        &::after {
+          @include content();
+          top: 100%;
+          @include size(10px, 10px);
+          background-color: black;
+          clip-path: polygon(100% 0, 0 0, 100% 100%);
+        }
+      }
+      h3 {
+        font-size: 20px;
+        color: rgba(black, 0.5);
+      }
+      ul {
+        list-style: none;
+        font-size: 14px;
+        font-weight: 100;
+        color: rgba(black, 0.7);
+        li {
+          direction: rtl;
+          text-align: right;
+        }
+      }
+      hr {
+        margin: 5px 0;
+        border: 1px solid color(skin-tone);
+      }
+      .price {
+        font-size: 20px;
+        font-weight: 100;
+      }
+      .actions {
+        margin-top: 15px;
+        button {
+          border: none;
+          border-radius: 6px;
+          background-color: color(skin-tone);
+          font-size: 18px;
+          padding: 5px 20px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  .confirmed {
+  }
+  .notconfirmed {
+  }
 }
 </style>
