@@ -1,18 +1,31 @@
 <template>
-  <Layout></Layout>
+  <div>
+    <Navbar></Navbar>
+    <Main></Main>
+  </div>
 </template>
 
 <script>
 
-import Layout from "@/components/Admin/Layout.vue";
+import Navbar from "@/components/Admin/Navbar.vue";
+import Main from "@/components/Admin/Main.vue";
 import router from '@/admin_router'
 
 export default {
   router,
   name:'admin',
   components:{
-    Layout
+    Navbar,
+    Main
   }
 }
 </script>
+
+<style scoped>
+body{
+  height: 100vh;
+  background-color: red;
+}
+</style>
+
 
