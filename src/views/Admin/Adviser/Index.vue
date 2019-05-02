@@ -3,11 +3,8 @@
     <center>
       <div class="box" style="display:flex; flex-direction:column; justify-content: center;">
         <div class="flex-container" style="flex-direction:row; flex-wrap:5px;">
-          <div class="button" style="width:50%;"> افزودن املاک فروش کلنگی</div>
-          <div class="button" style="width:50%;">افزودن املاک مشارکت کلنگی</div>
-        </div>
-        <div>
-          <div class="button" style="background-color:#F0F366; color:black;">بررسی اگهی ها</div>
+          <div class="button" style="width:50%;">مشاوران شبت شده</div>
+          <div class="button" style="width:50%;">افزودن مشاور</div>
         </div>
       </div>
     </center>
@@ -39,7 +36,7 @@ export default {
   border-radius: 5px;
   color: white;
   transition-property: opacity;
-  transition-delay: .1s;
+  transition-delay: 0.1s;
 }
 
 .button:hover {
@@ -58,5 +55,6 @@ export default {
   border: #ffe1a0 solid;
   border-radius: 5px;
 }
+
 </style>
 

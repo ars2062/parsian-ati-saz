@@ -1,5 +1,5 @@
 
-import { axios } from "axios";
+import axios from "axios";
 import consts from "../../consts";
 
 export default {
@@ -7,9 +7,7 @@ export default {
     state:{
         loading:false
     },
-    getters:{
-
-    },
+    getters:{},
     mutations:{},
     actions:{
         login:function({ commit } , {phone}){
