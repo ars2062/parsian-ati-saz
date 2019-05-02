@@ -11,9 +11,13 @@ export default {
     mutations:{},
     actions:{
         login:function({ commit } , {phone}){
-            axios.post(
+      axios.post(
                 consts.api_url+'account/login',{
                     phone:phone
+                },{
+          validateStatus: () => {
+            return true;
+          }
                 }
             ).then(res => {
                 alert(res.data.message);
@@ -26,6 +30,12 @@ export default {
                 consts.api_url+'account/verify',{
                     phone:phone,
                     code:code
+                },
+                {
+           
+          validateStatus: () => {
+            return true;
+          }
                 }
             ).then(res => {
                 alert(res.data.message);

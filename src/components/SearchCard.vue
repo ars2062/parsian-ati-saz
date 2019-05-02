@@ -10,7 +10,7 @@
     />
     <form>
       <div v-if="this.showMosharekat">
-        <vSelect :options="['Canada', 'United States']"/>
+        /////////////////
         <input
           type="number"
           name="maxMetrazh"
@@ -42,7 +42,6 @@
 
 <script>
 import Combolist from "./form/ComboList.vue";
-import vSelect from 'vue-select'
 export default {
   name: "Searchcard",
   data() {
@@ -62,8 +61,7 @@ export default {
     }
   },
   components: {
-    Combolist,
-    vSelect
+    Combolist
   },
   methods: {
     chooseType($event) {
