@@ -9,7 +9,7 @@ import PhoneConfirmation from "./views/PhoneConfirmation.vue";
 import SupervisorConfirmation from "./views/SupervisorConfirmation.vue";
 import MyAccount from "./views/MyAccount.vue";
 import Admin from "./views/Admin.vue";
-
+import ComboList from "./components/form/ComboList.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -59,6 +59,11 @@ export default new Router({
       path: "/admin",
       name: "admin",
       component: Admin
+    },
+    {
+      path: "/combo",
+      name: "combo",
+      component: ComboList
     }
   ]
 });
