@@ -8,6 +8,7 @@ import AdvertisementRegistration from "./views/AdvertisementRegistration.vue";
 import PhoneConfirmation from "./views/PhoneConfirmation.vue";
 import SupervisorConfirmation from "./views/SupervisorConfirmation.vue";
 import MyAccount from "./views/MyAccount.vue";
+import Admin from "./views/Admin.vue";
 
 Vue.use(Router);
 
@@ -53,6 +54,11 @@ export default new Router({
       path: "/my-account",
       name: "my-account",
       component: MyAccount
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: Admin
     }
   ]
 });
