@@ -1,25 +1,39 @@
 <template>
-    <div :class="$style.combolist" dir="rtl">
-      <div @click="toggleDisplay">
-        <span>{{choosen||title}}</span>
-        <img src="@/assets/icons/right-arrow.svg">
-      </div>
-      <ul :style="{display:this.display}">
-        <li v-for="(item,index) in this.items" :key="item.id" @click="choose(item.id)">
-          <Checkbox :value="item.id" v-model="CheckedItems" :dark="(index % 2 == 0)?true:false"/>
-          <span>{{item.text}}</span>
-        </li>
-      </ul>
-      {{CheckedItems}}
+  <div :class="$style.combolist" dir="rtl">
+    <div @click="toggleDisplay">
+      <span>{{choosen||title}}</span>
+      <img src="@/assets/icons/right-arrow.svg">
+    </div>
+    <ul :style="{display:this.display}">
+      <li v-for="(item,index) in this.items" :key="item.id" @click="choose(item.id)">
+        <div v-if="checkbox" :class="$style.checkbox">
+          <input
+            type="checkbox"
+            v-model="CheckedItems"
+            :name="index"
+            :id="index"
+            :value="item.id"
+            @change="change()"
+            hidden
+          >
+          <label :for="index" :class="(index % 2 == 0)?$style.dark:''"></label>
+        </div>
+        <span>{{item.text}}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import Checkbox from '@/components/form/Checkbox.vue';
+import Checkbox from "@/components/form/Checkbox.vue";
 export default {
   name: "Combolist",
-  components:{Checkbox},
-  props: { items: { type: Array }, title: { type: String } },
+  components: { Checkbox },
+  props: {
+    items: { type: Array },
+    title: { type: String },
+    checkbox: { type: Boolean, default: false }
+  },
   data() {
     return {
       display: "none",
@@ -32,11 +46,23 @@ export default {
       this.display = this.display === "block" ? "none" : "block";
     },
     choose(id) {
-      this.choosen = this.items.find(item => {
-        return item.id == id;
-      }).text;
-      this.$emit("value", id);
+      if (!this.checkbox) {
+        this.choosen = this.items.find(item => {
+          return item.id == id;
+        }).text;
+        this.$emit("value", id);
+      }
       this.toggleDisplay();
+    },
+    change() {
+      let text = "";
+      this.CheckedItems.map(i => {
+        text +="\""+ this.items.find(item => {
+          return item.id == i;
+        }).text+"\" ";
+      });
+      this.$emit("value",this.CheckedItems);
+      this.choosen = text;
     }
   }
 };
@@ -46,7 +72,6 @@ export default {
 @import "@/assets/main.scss";
 .combolist {
   margin: auto;
-
   position: relative;
   user-select: none;
   div {
@@ -72,9 +97,14 @@ export default {
     z-index: 40;
     li {
       text-align: center;
-      display: block;
+      display: flex;
+      flex-direction: row;
       border: 1px solid white;
+      text-align: right;
       cursor: pointer;
+      span {
+        margin-right: 10px;
+      }
       &:nth-child(odd) {
         background-color: color(skin-tone);
         color: black;
@@ -87,6 +117,44 @@ export default {
         text-shadow: 0 0 10px rgba($color: #fff, $alpha: 0.1);
       }
     }
+  }
+}
+.checkbox {
+  width: fit-content !important;
+  label {
+    position: relative;
+    @include size(24px, 24px);
+    background-color: transparent;
+    display: block;
+    border-radius: 6px;
+    border: 3px solid color(skin-tone);
+    cursor: pointer;
+    &::after {
+      @include content();
+      right: 0;
+      bottom: 0;
+      top: -5px;
+      margin: auto;
+      @include size(7px, 12px);
+      transform: rotate(45deg);
+      display: none;
+      transition: all 0.2s;
+      display: block;
+      border-color: color(skin-tone);
+      border-style: solid;
+      border-width: 0;
+    }
+    &.dark {
+      border: 3px solid black;
+      &::after {
+        border-color: black;
+      }
+    }
+  }
+
+  input:checked ~ label::after {
+    border-bottom-width: 3px;
+    border-right-width: 3px;
   }
 }
 </style>

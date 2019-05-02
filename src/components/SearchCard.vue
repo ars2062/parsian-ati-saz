@@ -10,11 +10,7 @@
     />
     <form>
       <div v-if="this.showMosharekat">
-        <Combolist
-          :style="this.typeStyle"
-          title="نوع ملک مد نظرتون رو انتخاب کنید"
-          :items="[{id: 1, text: 'a'},{id: 2, text: 'a'},{id: 3, text: 'a'},{id: 4, text: 'a'},{id: 5, text: 'a'}]"
-        />
+        <Multiselect :options="['a']"/>
         <input
           type="number"
           name="maxMetrazh"
@@ -46,6 +42,7 @@
 
 <script>
 import Combolist from "./form/ComboList.vue";
+import Multiselect from 'vue-multiselect'
 export default {
   name: "Searchcard",
   data() {
@@ -58,14 +55,15 @@ export default {
   computed: {
     typeStyle() {
       if (this.displayType) {
-        return "display: flex; width: 20vw";
+        return "display: flex; width: 30vw";
       } else {
-        return "display: none; width: 20vw";
+        return "display: none; width: 30vw";
       }
     }
   },
   components: {
-    Combolist
+    Combolist,
+    Multiselect
   },
   methods: {
     chooseType($event) {
@@ -108,7 +106,7 @@ export default {
       width: 100%;
     }
     input {
-      width: 20vw;
+      width: 30vw;
       color: color(grullo);
       margin-left: 30px;
       background-color: transparent;

@@ -3,9 +3,8 @@
     <input
       type="checkbox"
       :name="this._uid"
-      :value="value"
       :id="this._uid"
-      @change="changed"
+      @input="changed"
       hidden
     >
     <label :for="this._uid" :class="dark?$style.dark:''"></label>
@@ -14,11 +13,10 @@
 
 <script>
 export default {
-  props: { value:{}, dark: { type: Boolean, default: false } },
+  props: ['value', 'dark'],
   methods: {
     changed($event) {
-      this.$emit("input", this.value.concat($event.target.checked));
-      console.log($event.target.checked);
+      this.$emit("input", this.value.concat($event.target.checked))
     }
   }
 };
@@ -27,6 +25,7 @@ export default {
 <style lang="scss" module>
 @import "@/assets/main.scss";
 .checkbox {
+  width: fit-content !important;
   label {
     position: relative;
     @include size(24px, 24px);
