@@ -12,6 +12,9 @@ export default {
 
 <style scoped>
 
+div{
+    width:100%;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

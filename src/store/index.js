@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import account from "../store/modules/account";
+import consts from "../consts";
+import axios from "axios";
+import contact from "./modules/contact";
 
 Vue.use(Vuex);
 
@@ -8,9 +10,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules:{
-      account:account
+    contact:contact,
   },
   state:{
       authenticated:false,
+  },
+  actions:{
+    
   }
 });

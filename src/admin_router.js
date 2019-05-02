@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from "@/views/Admin/Index.vue";
+import ProductsIndex from "@/views/Admin/Product/Index.vue";
+import MastersIndex from "@/views/Admin/Master/Index.vue";
+import AdviserIndex from "@/views/Admin/Adviser/Index.vue";
+import ContactIndex from "@/views/Admin/Contact/Index.vue";
 
 Vue.use(Router)
 
@@ -26,34 +30,22 @@ const router = new Router({
             }
         },
         {
-            path:'/admin/products',
-            component:{
-                created(){
-                    alert('scscscscsc');
-                }
-            },
+            path:'/admin/product',
+            component:ProductsIndex,
             meta:{
                 requireAuth:true
             }
         },
         {
-            path:'/admin/masters',
-            component:{
-                created(){
-                    alert('scscscscsc');
-                }
-            },
+            path:'/admin/master',
+            component:MastersIndex,
             meta:{
                 requireAuth:true
             }
         },
         {
-            path:'/admin/advisers',
-            component:{
-                created(){
-                    alert('scscscscsc');
-                }
-            },
+            path:'/admin/adviser',
+            component:AdviserIndex,
             meta:{
                 requireAuth:true
             }
@@ -65,6 +57,13 @@ const router = new Router({
                     alert('scscscscsc');
                 }
             },
+            meta:{
+                requireAuth:true
+            }
+        },
+        {
+            path:'/admin/contact',
+            component:ContactIndex,
             meta:{
                 requireAuth:true
             }
