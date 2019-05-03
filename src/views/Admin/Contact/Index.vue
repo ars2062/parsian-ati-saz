@@ -1,11 +1,9 @@
 <template>
-  <div id="test">
-    <div class="contact-container">
-      <Contact name="محمد" phone="09114648556" email="mohk1379@gmail.com"/>
-      <Contact name="محمد" phone="09385916615" email="mohk1379@gmail.com"/>
-      <Contact name="محمد" phone="09102716733" email="mohk1379@gmail.com"/>
-      <Contact name="محمد" phone="09102716733" email="mohk1379@gmail.com"/>
-    </div>
+  <div class="contact-container">
+    <Contact name="محمد" phone="09114648556" email="mohk1379@gmail.com" @click="this.fetchAllContacts"/>
+    <Contact name="محمد" phone="09385916615" email="mohk1379@gmail.com"/>
+    <Contact name="محمد" phone="09102716733" email="mohk1379@gmail.com"/>
+    <Contact name="محمد" phone="09102716733" email="mohk1379@gmail.com"/>
   </div>
 </template>
 
@@ -17,10 +15,12 @@ export default {
   components: {
     Contact
   },
-  computed() {},
+  computed() {
+      },
   created() {
-    this.$store.dispatch("contact/fetchAllContacts");
-  }
+      this.$store.dispatch("contact/fetchAllContacts");
+    },
+  methods:{}
 };
 </script>
 
@@ -28,7 +28,6 @@ export default {
 * {
   box-sizing: border-box;
 }
-
 </style>
 
 

@@ -77,6 +77,11 @@ const router = new Router({
                 },
             ]
         },
+        {
+            path:'/admin/contact',
+            name:'contact',
+            component:ContactIndex
+        }
         
     ]
 })
