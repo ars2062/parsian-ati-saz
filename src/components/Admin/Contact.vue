@@ -21,13 +21,14 @@
 <script>
 export default {
     name:'Contact',
-    props:['id','name','phone','email'],
+    props:['id','name','subject','phone','description'],
     data:function(){
         return {
             id:this.id,
             name:this.name,
+            subject:this.subject,
             phone:this.phone,
-            email:this.email
+            desc:this.description
         }
     },
     methods:{}
