@@ -1,21 +1,34 @@
 <template>
   <div class="contact-container">
-
+    <div v-if="this.loading">
+        <center>
+          <span>درحال بارگذاری</span>
+        </center>
+      </div>
+    <div v-else>
+      <div v-if="this.contacts.length <= 0">
       <center>
-          <span v-show="this.loading">Loading</span>
+        <span>هیچ موردی یافت نشد</span>
       </center>
-        <Contact :v-=!this.loading v-for="c in this.contacts" :key="c.id"
-        :id='c.id' 
-        :name='c.name'
-        :subject='c.subject'
-        :phone='c.phone'
-        :description='c.description' />
+    </div>
+      <div v-else>
+        <Contact
+          v-for="c in this.contacts"
+          :key="c.id"
+          :id="c.id"
+          :name="c.name"
+          :subject="c.subject"
+          :phone="c.phone"
+          :description="c.description"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Contact from "@/components/Admin/Contact.vue";
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 import { mapGetters } from "vuex";
 
 export default {
@@ -26,27 +39,33 @@ export default {
   mounted() {
     this.$store.dispatch("contact/fetchAllContacts");
   },
-  computed:{
-      contacts:function(){
-          return this.$store.getters['contact/contacts'];
-      },
-      loading:function () {
-          return this.$store.getters['contact/loading'];
-      }
+  computed: {
+    contacts: function() {
+      return this.$store.getters["contact/contacts"];
+    },
+    loading: function() {
+      return this.$store.getters["contact/loading"];
+    }
   },
-  methods:{
-      
-  }
+  methods: {}
 };
 </script>
 
 <style>
+
+@font-face {
+  font-family: "MJ Two";
+  src: url("~@/assets/fonts/Mj_Dinar Two Light.ttf") format("ttf");
+}
+
 * {
+  font-family: "MJ Two",Roboto;
+  font-size:20px;
   box-sizing: border-box;
 }
-.contact-container{
-    height: 90vh;
-    overflow-y: auto;
+.contact-container {
+  height: 90vh;
+  overflow-y: auto;
 }
 </style>
 

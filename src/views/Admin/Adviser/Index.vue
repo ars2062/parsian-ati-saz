@@ -3,7 +3,9 @@
     <center>
       <div class="box" style="display:flex; flex-direction:column; justify-content: center;">
         <div class="flex-container" style="flex-direction:row; flex-wrap:5px;">
-          <div class="button" style="width:50%;">مشاوران شبت شده</div>
+          <div class="button" style="width:50%;">
+            <router-link to="/admin/advisers">مشاوران ثبت شده</router-link>
+          </div>
           <div class="button" style="width:50%;">افزودن مشاور</div>
         </div>
       </div>
@@ -17,6 +19,18 @@ export default {
 </script>
 
 <style scoped>
+
+a:active{
+  color: white;
+}
+
+a:visited{
+  color: white;
+}
+a{
+  text-decoration: none;
+}
+
 .flex-container {
   display: flex;
   flex-direction: row-reverse;

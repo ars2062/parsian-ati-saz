@@ -4,23 +4,24 @@ import Axios from "axios";
 export default {
     namespaced: true,
     state: {
-        contacts: [],
+        advisers: [],
         isLoading:true
     },
     getters: {
-        contacts: state => {
-            return state.contacts
+        advisers: state => {
+            return state.advisers
         },
         loading:state=>{
             return state.isLoading;
         }
     },
     mutations: {
-        set_contacts(state, contacts) {
-            state.contacts = contacts;
+        set_advisers(state, advisers) {
+            state.advisers = advisers;
+            alert(state.advisers[0].id);
         },
-        del_contact(state,id){
-            state.contacts=state.contacts.filter(item => item.id !== id);
+        del_advisers(state,id){
+            state.advisers=state.advisers.filter(item => item.id !== id);
         },
         stop_loading(state){
             state.isLoading=false;
@@ -33,14 +34,15 @@ export default {
         }
     },
     actions: {
-        fetchAllContacts: ({ commit }) => {
-            Axios.get(consts.api_url+'contact', {
+        fetchAllAdvisers: ({ commit }) => {
+            Axios.get(consts.api_url+'admin/adviser', {
                 headers: {
                     'Authorization':consts.auth_header
                 },
             }).then(function (response) {
+                console.log(response.data);
                 commit('stop_loading');
-                commit('set_contacts',response.data);
+                commit('set_advisers',response.data);
             }).catch(function (error) {
                 commit('stop_loading');
             });
@@ -51,7 +53,7 @@ export default {
             // set loading true
             commit('start_loading');
 
-            Axios.delete(consts.api_url+'contact/'+id, {
+            Axios.delete(consts.api_url+'admin/contact/'+id, {
                 headers: {
                     'Authorization':consts.auth_header
                 },

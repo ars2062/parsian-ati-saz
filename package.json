@@ -11,6 +11,8 @@
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.19",
     "jquery": "^3.4.0",
     "vue": "^2.6.6",
     "vue-masked-input": "^0.5.2",

@@ -4,6 +4,7 @@ import Index from "@/views/Admin/Index.vue";
 import ProductsIndex from "@/views/Admin/Product/Index.vue";
 import MastersIndex from "@/views/Admin/Master/Index.vue";
 import AdviserIndex from "@/views/Admin/Adviser/Index.vue";
+import AdviserList from "@/views/Admin/Adviser/List.vue";
 import ContactIndex from "@/views/Admin/Contact/Index.vue";
 
 Vue.use(Router)
@@ -50,6 +51,14 @@ const router = new Router({
             path: '/admin/adviser',
             name: 'adviser',
             component: AdviserIndex,
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path: '/admin/advisers',
+            name: 'advisers',
+            component: AdviserList,
             meta: {
                 requireAuth: true
             }
