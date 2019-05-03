@@ -13,6 +13,7 @@ const router = new Router({
     routes: [
         {
             path:'/admin',
+            name:'admin',
             component:Index,
             meta:{
                 requireAuth:true
@@ -20,6 +21,7 @@ const router = new Router({
             children:[
                 {
                     path:'/clutter',
+                    name:'clutter',
                     component:{
                         created(){
                             alert('scscscscsc');
@@ -31,6 +33,7 @@ const router = new Router({
                 },
                 {
                     path:'/product',
+                    name:'product',
                     component:ProductsIndex,
                     meta:{
                         requireAuth:true
@@ -38,6 +41,7 @@ const router = new Router({
                 },
                 {
                     path:'/master',
+                    name:'master',
                     component:MastersIndex,
                     meta:{
                         requireAuth:true
@@ -45,6 +49,7 @@ const router = new Router({
                 },
                 {
                     path:'/adviser',
+                    name:'adviser',
                     component:AdviserIndex,
                     meta:{
                         requireAuth:true
@@ -52,6 +57,7 @@ const router = new Router({
                 },
                 {
                     path:'/ads',
+                    name:'ads',
                     component:{
                         created(){
                             alert('scscscscsc');
@@ -63,6 +69,7 @@ const router = new Router({
                 },
                 {
                     path:'/contact',
+                    name:'contact',
                     component:ContactIndex,
                     meta:{
                         requireAuth:true
