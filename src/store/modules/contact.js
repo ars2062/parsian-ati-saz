@@ -15,11 +15,21 @@ export default {
     },
     actions: {
         fetchAllContacts: ({ commit }) => {
-            Axios.get(consts.api_url+'contact',{
-                headers:{
-                    Authorization:consts.auth_header
-                }
-            })
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', consts.api_url+'contact', true);
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                var text = xhr.responseText;
+                var title = getTitle(text);
+                alert('Response from CORS request to ' + url + ': ' + title);
+              };
+            
+              xhr.onerror = function() {
+                alert('Woops, there was an error making the request.');
+              };
+
+              xhr.send();
+            
         }
     }
 }

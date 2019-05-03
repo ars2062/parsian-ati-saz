@@ -84,15 +84,15 @@ export default {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .contact-card{
-        width: 100%;
+        width: 93%;
     }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .contact-card{
-        width: 45%;
-        margin: 8px;
+        width: 48%;
+        margin: 5px;
     }
 } 
 
@@ -100,13 +100,16 @@ export default {
 @media only screen and (min-width: 768px) {
     .contact-card{
         width: 30%;
-        margin: 16px;
+        margin: 5px;
     }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-
+    .contact-card{
+        width: 30%;
+        margin: 12px;
+    }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
