@@ -20,7 +20,20 @@
       <button :class="$style.location">
         <i class="fas fa-map-marker"></i>
       </button>
-      <img src="@/assets/icons/post10-lg.jpg">
+      <!--
+      <Carousel>
+        <Slide v-for="i in [1,2,3]" :key="i">
+          <img src="@/assets/icons/post10-lg.jpg">
+        </Slide>
+      </Carousel>
+      -->
+      <ImageSlider 
+        :images="[
+          {src:require('@/assets/icons/post10-lg.jpg'),id:0},
+          {src:require('@/assets/icons/post10-lg.jpg'),id:1},
+          {src:require('@/assets/icons/post10-lg.jpg'),id:2}
+        ]"
+        speed="8000"/>
       <button :class="$style.getPhone" @click="openModal('contactInfo')">دریافت شماره تماس</button>
       <div :class="$style.actions">
         <button>برای مشارکت</button>
@@ -76,6 +89,8 @@ import Title from "@/components/Title.vue";
 import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
+import ImageSlider from "@/components/ImageSlider.vue";
+
 export default {
   components: {
     Header,
@@ -83,7 +98,8 @@ export default {
     Title,
     CardSlider,
     Footer,
-    Modal
+    Modal,
+    ImageSlider
   },
   methods: {
     goto(name) {
@@ -164,10 +180,6 @@ export default {
     background-color: color(skin-tone);
     font-size: 17px;
     margin: 20px;
-  }
-  img {
-    width: 100%;
-    border-radius: 6px;
   }
   button.getPhone {
     float: right;
@@ -264,9 +276,9 @@ export default {
     display: block;
     font-size: 20px;
     span {
-      color: darken(color(grullo),20%);
+      color: darken(color(grullo), 20%);
     }
-    &:last-of-type{
+    &:last-of-type {
       position: absolute;
       bottom: 0;
       left: 0;

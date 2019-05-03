@@ -5,7 +5,7 @@
         <span>ارسال آگهی</span>
         <img src="@/assets/icons/deployment.svg">
       </li>
-      <li @click="this.toggleAccountOptions">
+      <li v-if="loggedin" @click="this.toggleAccountOptions">
         <span>حساب من</span>
         <img src="@/assets/icons/avatar.svg">
         <ul :style="this.displayAccountOptions">
@@ -16,6 +16,10 @@
             <a href="#">خروج از حساب</a>
           </li>
         </ul>
+      </li>
+      <li v-if="!loggedin" @click="openModal('LoginRegister')">
+        <span>ورود / ثبتنام</span>
+        <img src="@/assets/icons/avatar.svg">
       </li>
       <li @click="this.openMenu">
         <span>منو</span>
@@ -52,23 +56,54 @@
         </li>
       </ul>
     </div>
+    <Modal ref="LoginRegister" display>
+      <div :class="$style.LoginRegister">
+        <Label>شماره موبایل</Label>
+        <MaskedInput mask="\+98 911 111 1111" placeholder-char="*"/>
+        <button v-if="!LoginRegisterSent" @click="loginRegister">ورود / ثبتنام</button>
+        <div v-if="LoginRegisterSent">
+          <Label>کد</Label>
+          <p>یک کد برای شما ارسال شد</p>
+          <MaskedInput mask="1 1 1 1 1 1" placeholder-char="-"/>
+          <button
+            v-if="sendAgainTime>0"
+            :class="$style.sendAgain"
+            disabled
+          >{{sendAgainTime}} تا ارسال دوباره کد</button>
+          <button v-if="sendAgainTime==0" :class="$style.sendAgain">ارسال دوباره کد</button>
+        </div>
+        <button v-if="LoginRegisterSent" @click="verify">ورود / ثبتنام</button>
+      </div>
+    </Modal>
   </nav>
 </template>
 
 <script>
-import { setTimeout } from "timers";
+import Modal from "@/components/Modal.vue";
+import MaskedInput from "vue-masked-input";
 export default {
   name: "Nav",
+  components: {
+    Modal,
+    MaskedInput
+  },
   data() {
     return {
       displaymenu: false,
-      displayaccountoptions: false
+      displayaccountoptions: false,
+      loggedin: false,
+      LoginRegisterSent: false,
+      sendAgainTime: 120,
+      interval: null
     };
   },
   methods: {
     closeMenu($event) {
       if ($event.target.classList.contains(this.$style.menuContainer))
         this.displaymenu = false;
+    },
+    openModal(name) {
+      this.$refs[name].display = true;
     },
     openMenu() {
       this.displaymenu = true;
@@ -79,6 +114,10 @@ export default {
     goto(name) {
       this.$router.push(name);
     },
+    loginRegister() {
+      this.LoginRegisterSent = true;
+    },
+    verify() {}
   },
   computed: {
     displayMenu() {
@@ -96,6 +135,14 @@ export default {
         return "height: 0";
       }
     }
+  },
+  created() {
+    this.interval = setInterval(() => {
+      if (this.LoginRegisterSent) this.sendAgainTime--;
+      if (this.sendAgainTime == 0) {
+        clearInterval(this.interval);
+      }
+    }, 1000);
   }
 };
 </script>
@@ -291,6 +338,57 @@ nav {
       to {
         height: 100vh;
       }
+    }
+  }
+  .LoginRegister {
+    width: 100%;
+    direction: rtl;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    @include VerticalCenter();
+    div {
+      display: flex;
+
+      flex-direction: column;
+      justify-content: center;
+    }
+    input {
+      width: 80%;
+      position: relative;
+      right: 50%;
+      transform: translate(50%);
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: none;
+      line-height: 50px;
+      font-size: 20px;
+      box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+      padding: 0 20px;
+      direction: ltr;
+      outline: none;
+    }
+    button {
+      width: 80%;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: none;
+      background-color: color(skin-tone);
+      line-height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+      right: 50%;
+      transform: translate(50%);
+    }
+    label{
+      font-size: 25px;
+      text-align: center;
+    }
+    p{
+      text-align: center;
     }
   }
 }
