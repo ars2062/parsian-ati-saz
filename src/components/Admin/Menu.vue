@@ -1,7 +1,7 @@
 <template>
     <aside>
         <MenuItem title="ثبت آگهی ملک" path="/admin"/>
-        <MenuItem title="ثبت آگهی محصولات" path="admin/product"/>
+        <MenuItem title="ثبت آگهی محصولات" path="/admin/product"/>
         <MenuItem title="ثبت استادکار" path="/admin/master"/>
         <MenuItem title="افزودن شماره تلفن" path="/admin/adviser"/>
         <MenuItem title="مدیریت بنر های تبلیغاتی" path="/admin/ad"/>
