@@ -26,7 +26,7 @@ export default {
       if (this.display) return "display: flex";
       else return "display: none";
     },
-    displayImage(){
+    displayImage() {
       if (this.imageView) return "width: 80% !important";
       else return "";
     }
@@ -71,6 +71,7 @@ export default {
     .scroller {
       height: 100%;
       overflow: auto;
+      width: 100%;
     }
     .close {
       background: image(cancel) no-repeat;
@@ -86,7 +87,7 @@ export default {
       cursor: pointer;
     }
   }
-  img{
+  img {
     width: 100%;
   }
 }
