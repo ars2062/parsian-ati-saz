@@ -10,74 +10,70 @@ Vue.use(Router)
 
 const router = new Router({
     mode: "history",
-    routes: [
-        {
-            path:'/admin',
-            name:'admin',
-            component:Index,
-            meta:{
-                requireAuth:true
-            },
-            children:[
-                {
-                    path:'/clutter',
-                    name:'clutter',
-                    component:{
-                        created(){
-                            alert('scscscscsc');
-                        }
-                    },
-                    meta:{
-                        requireAuth:true
-                    }
-                },
-                {
-                    path:'/product',
-                    name:'product',
-                    component:ProductsIndex,
-                    meta:{
-                        requireAuth:true
-                    }
-                },
-                {
-                    path:'/master',
-                    name:'master',
-                    component:MastersIndex,
-                    meta:{
-                        requireAuth:true
-                    }
-                },
-                {
-                    path:'/adviser',
-                    name:'adviser',
-                    component:AdviserIndex,
-                    meta:{
-                        requireAuth:true
-                    }
-                },
-                {
-                    path:'/ads',
-                    name:'ads',
-                    component:{
-                        created(){
-                            alert('scscscscsc');
-                        }
-                    },
-                    meta:{
-                        requireAuth:true
-                    }
-                },
-                {
-                    path:'/contact',
-                    name:'contact',
-                    component:ContactIndex,
-                    meta:{
-                        requireAuth:true
-                    }
-                },
-            ]
+    routes: [{
+            path: '/admin',
+            name: 'admin',
+            component: Index,
+            meta: {
+                requireAuth: true
+            }
         },
-        
+        {
+            path: '/admin/clutter',
+            name: 'clutter',
+            component: {
+                created() {
+                    alert('scscscscsc');
+                }
+            },
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path: '/admin/product',
+            name: 'product',
+            component: ProductsIndex,
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path: '/admin/master',
+            name: 'master',
+            component: MastersIndex,
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path: '/admin/adviser',
+            name: 'adviser',
+            component: AdviserIndex,
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path: '/admin/ads',
+            name: 'ads',
+            component: {
+                created() {
+                    alert('scscscscsc');
+                }
+            },
+            meta: {
+                requireAuth: true
+            }
+        },
+        {
+            path: '/admin/contact',
+            name: 'contact',
+            component: ContactIndex,
+            meta: {
+                requireAuth: true
+            }
+        }
     ]
 })
 
