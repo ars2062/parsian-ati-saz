@@ -155,7 +155,7 @@
       </div>
     </section>
     <Footer/>
-    <Modal display :class="$style.dafater_khadamat_shahri" ref="dafater-khadamat-shahri">
+    <Modal :class="$style.dafater_khadamat_shahri" ref="dafater-khadamat-shahri">
       <div ref="selectorPanel">
         <h3>لیست دفاتر خدمات شهرداری</h3>
         <h4>لطفا منطقه مور نظر خود را انتخاب کنید</h4>
