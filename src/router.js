@@ -4,12 +4,15 @@ import Home from "./views/Home.vue";
 import Masterworkers from "./views/Masterworkers.vue";
 import PropertyDetail from "./views/PropertyDetail.vue";
 import BuildingEquipmentDetail from "./views/BuildingEquipmentDetail.vue";
+import MasterWorkerDetail from "./views/MasterWorkerDetail.vue";
 import AdvertisementRegistration from "./views/AdvertisementRegistration.vue";
 import PhoneConfirmation from "./views/PhoneConfirmation.vue";
 import SupervisorConfirmation from "./views/SupervisorConfirmation.vue";
 import MyAccount from "./views/MyAccount.vue";
 import Admin from "./views/Admin.vue";
-import ComboList from "./components/form/ComboList.vue";
+import PartnershipList from "./views/PartnershipList.vue";
+import SellList from "./views/SellList.vue";
+import ProductList from "./views/ProductList.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -21,8 +24,8 @@ export default new Router({
       component: Home
     },
     {
-      path: "/masters",
-      name: "masters",
+      path: "/masters-workers",
+      name: "masters-workers",
       component: Masterworkers
     },
     {
@@ -31,9 +34,14 @@ export default new Router({
       component: PropertyDetail
     },
     {
-      path: "/building-equipment-detail",
-      name: "building-equipment-detail",
+      path: "/product-detail",
+      name: "product-detail",
       component: BuildingEquipmentDetail
+    },
+    {
+      path: "/master-worker-detail",
+      name: "master-worker-detail",
+      component: MasterWorkerDetail
     },
     {
       path: "/advertisement-registration",
@@ -61,9 +69,19 @@ export default new Router({
       component: Admin
     },
     {
-      path: "/combo",
-      name: "combo",
-      component: ComboList
+      path: "/partnerships",
+      name: "partnerships",
+      component: PartnershipList
+    },
+    {
+      path: "/sells",
+      name: "sells",
+      component: SellList
+    },
+    {
+      path: "/product-list",
+      name: "product-list",
+      component: ProductList
     }
   ]
 });

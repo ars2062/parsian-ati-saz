@@ -21,7 +21,7 @@
         <i class="fas fa-map-marker"></i>
       </button>
       <img src="@/assets/icons/post10-lg.jpg">
-      <button :class="$style.getPhone">دریافت شماره تماس</button>
+      <button :class="$style.getPhone" @click="openModal('contactInfo')">دریافت شماره تماس</button>
       <div :class="$style.actions">
         <button>برای مشارکت</button>
         <button>نشان کردن آگهی</button>
@@ -51,6 +51,20 @@
       </div>
     </section>
     <Footer/>
+
+    <Modal ref="contactInfo">
+      <div :class="$style.contactInfo">
+        <img src="@/assets/icons/slide1.svg">
+        <h1>میلاد شهرایی</h1>
+        <a href="tel:+9891240892313">
+          <span>شماره تماس:</span> 091240892313
+        </a>
+        <a href="mailto:shahray@gmail.com">
+          <span>ایمیل:</span> shahray@gmail.com
+        </a>
+        <a href="tel:+9891240892313">برای تماس کلیک کنید</a>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -81,8 +95,8 @@ export default {
     Alert(text) {
       alert(text);
     },
-    goback(){
-        this.$router.go(-1);
+    goback() {
+      this.$router.go(-1);
     }
   }
 };
@@ -218,6 +232,50 @@ export default {
     p {
       font-weight: 100;
       font-size: 20px;
+    }
+  }
+}
+.contactInfo {
+  direction: rtl;
+  min-height: 100%;
+  position: relative;
+  img {
+    margin: auto;
+    text-align: center;
+    @include size(172px, 172px);
+    position: relative;
+    right: 50%;
+    transform: translateX(50%);
+    margin-top: 30px;
+    box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+    border: 8px solid white;
+    border-radius: 172px;
+    object-fit: cover;
+  }
+  h1 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+  a {
+    text-decoration: none;
+    color: color(grullo);
+    display: block;
+    font-size: 20px;
+    span {
+      color: darken(color(grullo),20%);
+    }
+    &:last-of-type{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      background-color: color(grullo);
+      line-height: 50px;
+      color: white;
+      border-radius: 6px;
     }
   }
 }

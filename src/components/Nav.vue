@@ -33,7 +33,7 @@
         <img src="@/assets/icons/logo.svg">
         <h1>پارسیان آتی ساز</h1>
         <li>
-          <a href="#">خانه</a>
+          <a href="/">خانه</a>
         </li>
         <li>
           <a href="#">املاک مشارکت در ساخت</a>

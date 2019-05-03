@@ -38,7 +38,7 @@
             @click="display('choose_property_category','reqister_partnership',[{text:'ثبت'},{text:'آگهی املاک مشارکتی', class:$style.skin_tone}])"
           >املاک مشارکتی</button>
           <button
-            @click="display('choose_property_category','reqister_clutter',[{text:'ثبت'},{text:'آگهی املاک فروش کلنگی', class:$style.skin_tone}])"
+            @click="display('choose_property_category','register_sell',[{text:'ثبت'},{text:'آگهی املاک فروش کلنگی', class:$style.skin_tone}])"
           >املاک فروش کلنگی</button>
         </div>
         <p>توجه داشته باشید که پارسیان آتی ساز فقط در این دو زمینه به صورت تخصصی فعالت می کند</p>
@@ -96,6 +96,14 @@
         <div :class="$style.form_group">
           <label>زمینه کاری</label>
           <input type="text">
+        </div>
+        <div :class="$style.form_group">
+          <label>تاریخ تاسیس (سال)</label>
+          <input type="number">
+        </div>
+        <div :class="$style.form_group">
+          <label>ایمیل شما</label>
+          <input type="text">
           <div :class="$style.checkbox_container">
             <Checkbox/>
             <span>ایمیل در آگهی نمایش داده نشود</span>
@@ -104,6 +112,11 @@
         <div :class="[$style.form_group, $style.full]">
           <label>آدرس شما</label>
           <span>آدرس خود را به طور دقیق وارد کنید</span>
+          <input type="text">
+        </div>
+        <div :class="[$style.form_group, $style.full]">
+          <label>عنوان آگهی</label>
+          <span>در عنوان آگهی از مطالب مهم و چشمگیر استفاده کنید</span>
           <input type="text">
         </div>
         <div :class="[$style.form_group, $style.full]">
@@ -168,7 +181,7 @@
           <input type="text">
         </div>
         <div :class="$style.form_group">
-          <label>تاریخ تاسیس</label>
+          <label>تاریخ تاسیس (سال)</label>
           <input type="text">
         </div>
         <div :class="$style.form_group">
@@ -198,8 +211,8 @@
     </section>
 
     <section
-      :class="[$style.reqister_clutter,$style.sec]"
-      ref="reqister_clutter"
+      :class="[$style.register_sell,$style.sec]"
+      ref="register_sell"
       style="display:none"
     >
       <div
@@ -257,7 +270,7 @@
         <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
           :class="$style.back"
-          @click="display('reqister_clutter','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
+          @click="display('register_sell','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
         >بازگشت به صفحه قبل</button>
       </div>
     </section>

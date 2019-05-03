@@ -57,12 +57,12 @@ export default {
   bottom: 0;
   margin: auto;
   display: flex;
-  padding-top: 230px;
+  padding-top: 110px;
   justify-content: center;
   z-index: 99;
   .container {
     width: 560px;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 130px);
     background-color: #fff;
     box-shadow: 0 0 12px rgba($color: #000000, $alpha: 0.39);
     border-radius: 6px;
