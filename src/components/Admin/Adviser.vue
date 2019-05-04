@@ -4,13 +4,13 @@ export default {
   props: ["id", "name", "phone", "email", "pic"],
   data: {
     function() {
-      return {
-        id: this.id,
-        name: this.name,
-        phone: this.phone,
-        email: this.email,
-        pic: this.pic
-      };
+      return [
+        this.id,
+        this.name,
+        this.phone,
+        this.email,
+        this.pic
+      ];
     }
   },
   methods:{
@@ -19,6 +19,8 @@ export default {
           if (res) {
             this.$store.dispatch('adviser/delete',this.id);
           }
+      },
+      edit(){
       }
   }
 };
@@ -92,6 +94,7 @@ export default {
       <div
         class="button"
         style="background-color:#FFFFFF; color:black;"
+        @click="this.edit"
       >ویرایش</div>
     </div>
     <div>

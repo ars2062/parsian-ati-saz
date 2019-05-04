@@ -1,38 +1,46 @@
 <script>
-import Adviser from '@/components/Admin/Adviser.vue';
+import Adviser from "@/components/Admin/Adviser.vue";
+import Modal from "@/components/Admin/Modal.vue";
 export default {
-    name:'List',
-    components:{
-        Adviser
+  name: "List",
+  components: {
+    Adviser,
+    Modal
+  },
+  mounted() {
+    this.$store.dispatch("adviser/fetchAllAdvisers");
+  },
+  computed: {
+    advisers: function() {
+      return this.$store.getters["adviser/advisers"];
     },
-    mounted(){
-        this.$store.dispatch('adviser/fetchAllAdvisers');
-    },
-    computed:{
-        advisers: function() {
-            return this.$store.getters["adviser/advisers"];
-        },
-        loading: function() {
-            return this.$store.getters["adviser/loading"];
-        }
+    loading: function() {
+      return this.$store.getters["adviser/loading"];
     }
-}
+  },
+  methods(){
+    edit:()=> {
+      this.$store.commit('modal/showModal');
+    }
+  }
+};
 </script>
 
 <template>
   <div class="adviser-container">
     <div v-if="this.loading">
-        <center>
-          <span>درحال بارگذاری</span>
-        </center>
-      </div>
-    <div v-else>
-      <div v-if="this.advisers.length <= 0">
       <center>
-        <span>هیچ موردی یافت نشد</span>
+        <span>درحال بارگذاری</span>
       </center>
     </div>
+    <div v-else>
+      <div v-if="this.advisers.length <= 0">
+        <center>
+          <span>هیچ موردی یافت نشد</span>
+        </center>
+      </div>
       <div v-else>
+        <Modal title="hello world" id="myModal"/>
         <Adviser
           v-for="adviser in this.advisers"
           :key="adviser.id"
@@ -54,8 +62,8 @@ export default {
 }
 
 * {
-  font-family: "MJ Two",Roboto;
-  font-size:20px;
+  font-family: "MJ Two", Roboto;
+  font-size: 20px;
   box-sizing: border-box;
 }
 .adviser-container {

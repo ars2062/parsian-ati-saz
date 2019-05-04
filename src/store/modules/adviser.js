@@ -18,7 +18,6 @@ export default {
     mutations: {
         set_advisers(state, advisers) {
             state.advisers = advisers;
-            alert(state.advisers[0].id);
         },
         del_advisers(state,id){
             state.advisers=state.advisers.filter(item => item.id !== id);
