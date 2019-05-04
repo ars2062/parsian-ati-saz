@@ -60,12 +60,6 @@ export default {
   font-family: "MJ Two";
   src: url("~@/assets/fonts/Mj_Dinar Two Light.ttf") format("ttf");
 }
-
-* {
-  font-family: "MJ Two", Roboto;
-  font-size: 20px;
-  box-sizing: border-box;
-}
 .adviser-container {
   display: flex;
   flex-direction: column;

@@ -3,14 +3,14 @@
     <p>همین امروز ملک مورد نظر خودتون رو پیدا کنید</p>
     <p>فیلد های زیر را پر کنید طبق معیار های مد نظرتون سپس دکمه جستجو بزنید</p>
     <Combolist
-      style="width:300px;margin-bottom: 120px;"
+      style="width:400px;margin-bottom: 120px;"
       title="نوع ملک مد نظرتون رو انتخاب کنید"
       :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
       @value="chooseType($event)"
     />
     <form>
-      <div v-if="this.showMosharekat">
-        /////////////////
+      <div v-if="this.showMosharekat" style="text-align:center">
+        <ComboListMultiselect placeholder="محله های مورد نظر خود را انتخاب کنید" style="width:30vw;text-align:center;margin:auto" :keywords="[{id:0,name:'a'},{id:1,name:'b'},{id:2,name:'c'},{id:3,name:'d'}]"/>
         <input
           type="number"
           name="maxMetrazh"
@@ -26,7 +26,23 @@
           placeholder="حداحقل متراژ مورد نظر خود را وارد کنید"
         >
       </div>
-      <div v-if="this.showForoosh">فروش</div>
+      <div v-if="this.showForoosh">
+        <ComboListMultiselect placeholder="محله های مورد نظر خود را انتخاب کنید" style="width:30vw;text-align:center;margin:auto" :keywords="[{id:0,name:'a'},{id:1,name:'b'},{id:2,name:'c'},{id:3,name:'d'}]"/>
+        <input
+          type="number"
+          name="maxMetrazh"
+          id="maxMetrazh"
+          min="1"
+          placeholder="حداکثر متراژ مورد نظر خود را وارد کنید"
+        >
+        <input
+          type="number"
+          name="minMetrazh"
+          id="minMetrazh"
+          min="1"
+          placeholder="حداحقل متراژ مورد نظر خود را وارد کنید"
+        >
+      </div>
       <div :class="$style.submitContainer">
         <button>
           <span>جستجو</span>
@@ -42,6 +58,7 @@
 
 <script>
 import Combolist from "./form/ComboList.vue";
+import ComboListMultiselect from "./form/ComboListMultiselect.vue";
 export default {
   name: "Searchcard",
   data() {
@@ -61,7 +78,8 @@ export default {
     }
   },
   components: {
-    Combolist
+    Combolist,
+    ComboListMultiselect
   },
   methods: {
     chooseType($event) {

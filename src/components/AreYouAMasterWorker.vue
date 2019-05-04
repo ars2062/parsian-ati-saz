@@ -7,12 +7,18 @@
     </p>
     <p>شما میتواند با قراردادن آگهی از خود و به نمایش گذاشتن نمونه کار های خود دیده شوید و پروژه های جدید بگیرید</p>
     <p>برای ثبت آگهی از کلید زیر استفاده کنید</p>
-    <button>ثبت آگهی</button>
+    <button @click="goto('advertisement-registration')">ثبت آگهی</button>
   </section>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goto(name) {
+      this.$router.push(name);
+    }
+  }
+};
 </script>
 
 <style lang="scss" module>

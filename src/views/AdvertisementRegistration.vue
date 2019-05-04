@@ -91,7 +91,7 @@
         </div>
         <div :class="$style.form_group">
           <label>شماره تماس</label>
-          <input type="text" placeholder="09*********">
+          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr"/>
         </div>
         <div :class="$style.form_group">
           <label>زمینه کاری</label>
@@ -174,7 +174,7 @@
         </div>
         <div :class="$style.form_group">
           <label>شماره تماس</label>
-          <input type="text" placeholder="09*********">
+          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr"/>
         </div>
         <div :class="$style.form_group">
           <label>زمینه کاری</label>
@@ -247,7 +247,7 @@
         </div>
         <div :class="$style.form_group">
           <label>شماره تماس</label>
-          <input type="text" placeholder="09*********">
+          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr"/>
         </div>
         <div :class="$style.form_group">
           <label>ایمیل شما</label>
@@ -320,7 +320,7 @@
         </div>
         <div :class="$style.form_group">
           <label>شماره تماس</label>
-          <input type="text" placeholder="09*********">
+          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr"/>
         </div>
         <div :class="$style.form_group">
           <label>ایمیل شما</label>
@@ -362,6 +362,7 @@ import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import ImageSelector from "@/components/form/ImageSelector.vue";
 import Checkbox from "@/components/form/Checkbox.vue";
+import MaskedInput from "vue-masked-input";
 export default {
   components: {
     Header,
@@ -371,7 +372,8 @@ export default {
     Footer,
     Modal,
     ImageSelector,
-    Checkbox
+    Checkbox,
+    MaskedInput
   },
   data() {
     return {
@@ -499,6 +501,7 @@ export default {
         margin-top: -16px;
         margin-bottom: 8px;
       }
+      input,
       select,
       input[type="text"],
       textarea,

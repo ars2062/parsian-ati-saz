@@ -79,12 +79,12 @@
         <div :class="$style.imageContainer">
           <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
           <button
-            @click="goto('building-equipment-detail')"
+            @click="goto('product-detail')"
             :class="$style.more"
           >برای نمایش اطلاعات تکمیلی کلیک کنید</button>
           <section>
             <p>لوزارم ساختمانی برادران بیژن بجز قاسم</p>
-            <button @click="goto('building-equipment-detail')">نمایش آدرس</button>
+            <button @click="goto('product-detail')">نمایش آدرس</button>
           </section>
         </div>
       </Modal>
@@ -774,6 +774,7 @@ export default {
           font-size: 14px;
           font-weight: 100;
           background-color: color(skin-tone);
+          color: black;
           &::after {
             @include content();
             top: 100%;
@@ -803,6 +804,7 @@ export default {
         .price {
           font-size: 20px;
           font-weight: 100;
+          color: black;
         }
       }
     }
