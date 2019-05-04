@@ -6,6 +6,7 @@
       <div :class="$style.tabs">
         <button :class="[$style.tab,this.displayConfirmed?$style.active:'']" @click="displayTab('confirmed')">آگهی های ثبت شده</button>
         <button :class="[$style.tab,this.displayNotconfirmed?$style.active:'']" @click="displayTab('notconfirmed')">آگهی های در دست تایید</button>
+        <button :class="[$style.tab,this.displayStars?$style.active:'']" @click="displayTab('stars')">آگهی های در دست تایید</button>
       </div>
       <section
         ref="confirmed"
@@ -53,6 +54,28 @@
           </div>
         </div>
       </section>
+      <section
+        ref="stars"
+        :class="[$style.tab_view,$style.stars]"
+        :style="this.starsStyle"
+      >
+        <div :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+          <div :class="$style.type">مشارکت در ساخت</div>
+          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
+          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
+          <ul>
+            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
+            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
+            <li>پهنه طرح تفصيلي : r122</li>
+            <li>تعداد مالك :٢مالك</li>
+          </ul>
+          <hr>
+          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
+          <div :class="$style.actions">
+            <button :class="$style.red">حذف آگهی</button>
+          </div>
+        </div>
+      </section>
     </div>
     <Footer/>
   </div>
@@ -85,7 +108,8 @@ export default {
   data() {
     return {
       displayNotconfirmed: false,
-      displayConfirmed: true
+      displayConfirmed: true,
+      displayStars: false
     };
   },
   computed: {
@@ -93,8 +117,10 @@ export default {
       return this.displayNotconfirmed == true ? "display:grid" : "display:none";
     },
     displayConfirmedStyle() {
-      console.log(this.displayConfirmed);
       return this.displayConfirmed == true ? "display:grid" : "display:none";
+    },
+    starsStyle() {
+      return this.displayStars == true ? "display:grid" : "display:none";
     }
   },
   methods: {
@@ -103,10 +129,17 @@ export default {
         case "confirmed":
           this.displayNotconfirmed = false;
           this.displayConfirmed = true;
+          this.displayStars = false;
           break;
         case "notconfirmed":
           this.displayNotconfirmed = true;
           this.displayConfirmed = false;
+          this.displayStars = false;
+          break;
+        case "stars":
+          this.displayNotconfirmed = false;
+          this.displayConfirmed = false;
+          this.displayStars = true;
           break;
 
         default:

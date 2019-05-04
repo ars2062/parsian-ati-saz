@@ -56,7 +56,7 @@
         </li>
       </ul>
     </div>
-    <Modal ref="LoginRegister" display>
+    <Modal ref="LoginRegister">
       <div :class="$style.LoginRegister">
         <Label>شماره موبایل</Label>
         <MaskedInput mask="\+98 911 111 1111" placeholder-char="*"/>
@@ -368,6 +368,7 @@ nav {
       padding: 0 20px;
       direction: ltr;
       outline: none;
+      background-color: #f5f5f5;
     }
     button {
       width: 80%;

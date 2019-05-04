@@ -75,7 +75,7 @@ header {
       }
       &.first {
         color: white;
-        font-size: 40px;
+        font-size: 40px !important;
         border-bottom: 80px solid rgba($color: #000000, $alpha: 0.65);
         border-left: 54px solid transparent;
         border-right: 54px solid transparent;
@@ -85,7 +85,7 @@ header {
       }
 
       &.last {
-        font-size: 20px;
+        font-size: 20px !important;
         position: relative;
         line-height: 54px;
         margin-top: 5px;
