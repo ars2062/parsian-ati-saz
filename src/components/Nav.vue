@@ -37,16 +37,16 @@
         <img src="@/assets/icons/logo.svg">
         <h1>پارسیان آتی ساز</h1>
         <li>
-          <a href="/">خانه</a>
+          <a href='/'>خانه</a>
         </li>
         <li>
-          <a href="/partnerships">املاک مشارکت در ساخت</a>
+          <a href='/partnerships'>املاک مشارکت در ساخت</a>
         </li>
         <li>
-          <a href="/sells">املاک فروش کلنگی</a>
+          <a href='/sells'>املاک فروش کلنگی</a>
         </li>
         <li>
-          <a href="/advertisement-registration">ثبت آگهی استادکار</a>
+          <a href='/advertisement-registration'>ثبت آگهی استادکار</a>
         </li>
         <li>
           <a href="#">درباره ما</a>
@@ -155,7 +155,7 @@ nav {
   width: 100%;
   height: 90px;
   border-bottom: 1px solid color(skin-tone);
-  z-index: 9999;
+  z-index: 99;
   * {
     float: right;
   }

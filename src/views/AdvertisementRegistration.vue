@@ -451,6 +451,9 @@ export default {
         &:active {
           transform: scale(1.02);
         }
+        &:hover{
+          background-color: darken(color(skin-tone),10%);
+        }
       }
     }
     p {

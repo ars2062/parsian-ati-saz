@@ -29,12 +29,10 @@
 
 <script>
 
-import Modal from '@/components/Admin/Modal.vue';
 
 export default {
   name: "Contact",
   components:{
-    Modal
   },
   props: ["id", "name", "subject", "phone", "description"],
   data: function() {

@@ -127,6 +127,7 @@ export default {
       font-size: 14px;
       font-weight: 100;
       background-color: color(skin-tone);
+      color: black;
       &::after {
         @include content();
         top: 100%;
@@ -156,6 +157,7 @@ export default {
     .price {
       font-size: 20px;
       font-weight: 100;
+      color: black;
     }
   }
 }

@@ -1,20 +1,20 @@
 <template>
     <div>
     <Header
-      :Title="[{text:'خرید'}]"
+      :Title="[{text:'جدیدترین ها'}]"
       :image="require('@/assets/icons/slide1.svg')"
     />
     <Searchcard></Searchcard>
     <div :class="$style.list_container">
-      <a href="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+      <a href="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14]" :key="i">
         <div :class="$style.ribbonContainer">
           <div :class="$style.ribbon">
             <img src="@/assets/icons/star.svg">
           </div>
         </div>
-        <div :class="$style.type">فروش</div>
+        <div :class="$style.type">{{i%2==0?"فروش":"درخواست مشارکت"}}</div>
         <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-        <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
+        <h3>ملک {{i%2==0?"فروش":"مشارکت در ساخت"}} در سعادت آباد</h3>
         <ul>
           <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
           <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
