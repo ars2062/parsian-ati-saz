@@ -129,7 +129,7 @@
       </p>
       <section :class="$style.left">
         <img src="@/assets/icons/252945-P46MBA-946.png">
-        <button>ثبت آگهی</button>
+        <button @click="goto('advertisement-registration')">ثبت آگهی</button>
       </section>
     </section>
     <section :class="$style.five">

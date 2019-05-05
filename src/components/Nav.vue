@@ -40,13 +40,13 @@
           <a href="/">خانه</a>
         </li>
         <li>
-          <a href="#">املاک مشارکت در ساخت</a>
+          <a href="/partnerships">املاک مشارکت در ساخت</a>
         </li>
         <li>
-          <a href="#">املاک فروش کلنگی</a>
+          <a href="/sells">املاک فروش کلنگی</a>
         </li>
         <li>
-          <a href="#">ثبت آگهی استادکار</a>
+          <a href="/advertisement-registration">ثبت آگهی استادکار</a>
         </li>
         <li>
           <a href="#">درباره ما</a>

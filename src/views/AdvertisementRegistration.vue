@@ -61,14 +61,14 @@
         <div :class="[$style.form_group,$style.full]">
           <label>محله</label>
           <select>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
+            <option value="a">نظام آباد</option>
+            <option value="a">سبلان</option>
+            <option value="a">نیاوران</option>
+            <option value="a">زعفرانیه</option>
+            <option value="a">افسریه</option>
+            <option value="a">یافت آباد</option>
+            <option value="a">دهکده المپیک</option>
+            <option value="a">پاسداران</option>
           </select>
         </div>
         <div :class="$style.form_group">
@@ -144,14 +144,14 @@
         <div :class="[$style.form_group,$style.full]">
           <label>محله</label>
           <select>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
+            <option value="a">نظام آباد</option>
+            <option value="a">سبلان</option>
+            <option value="a">نیاوران</option>
+            <option value="a">زعفرانیه</option>
+            <option value="a">افسریه</option>
+            <option value="a">یافت آباد</option>
+            <option value="a">دهکده المپیک</option>
+            <option value="a">پاسداران</option>
           </select>
         </div>
         <div :class="$style.form_group">
@@ -222,14 +222,14 @@
         <div :class="[$style.form_group,$style.full]">
           <label>محله</label>
           <select>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
+            <option value="a">نظام آباد</option>
+            <option value="a">سبلان</option>
+            <option value="a">نیاوران</option>
+            <option value="a">زعفرانیه</option>
+            <option value="a">افسریه</option>
+            <option value="a">یافت آباد</option>
+            <option value="a">دهکده المپیک</option>
+            <option value="a">پاسداران</option>
           </select>
         </div>
         <div :class="[$style.form_group,$style.full]">
@@ -287,14 +287,14 @@
         <div :class="[$style.form_group,$style.full]">
           <label>محله</label>
           <select>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
-            <option value="a">a</option>
+            <option value="a">نظام آباد</option>
+            <option value="a">سبلان</option>
+            <option value="a">نیاوران</option>
+            <option value="a">زعفرانیه</option>
+            <option value="a">افسریه</option>
+            <option value="a">یافت آباد</option>
+            <option value="a">دهکده المپیک</option>
+            <option value="a">پاسداران</option>
           </select>
         </div>
         <div :class="[$style.form_group,$style.full]">
