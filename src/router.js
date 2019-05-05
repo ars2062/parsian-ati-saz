@@ -13,9 +13,9 @@ import Admin from "./views/Admin.vue";
 import PartnershipList from "./views/PartnershipList.vue";
 import SellList from "./views/SellList.vue";
 import ProductList from "./views/ProductList.vue";
+import ClutterList from "./views/ClutterList.vue";
 Vue.use(Router);
-
-export default new Router({
+let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [{
@@ -79,9 +79,20 @@ export default new Router({
       component: SellList
     },
     {
+      path: "/clutters",
+      name: "clutters",
+      component: ClutterList
+    },
+    {
       path: "/product-list",
       name: "product-list",
       component: ProductList
     }
   ]
 });
+
+router.afterEach((to, from) => {
+  window.scrollTo(0,0);
+});
+
+export default router;

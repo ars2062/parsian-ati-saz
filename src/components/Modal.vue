@@ -59,7 +59,7 @@ export default {
   display: flex;
   padding-top: 110px;
   justify-content: center;
-  z-index: 99;
+  z-index: 100;
   .container {
     width: 560px;
     max-height: calc(100vh - 130px);

@@ -56,7 +56,7 @@
             استاد کار مورد نظر خود را با دیدن
             نمونه کار انتخاب کنید
           </p>
-          <button @click="goto('masters')">
+          <button @click="goto('masters-workers')">
             <img src="@/assets/icons/right-arrow (2).svg">
             <span>نمایش</span>
           </button>
@@ -75,6 +75,9 @@
           </div>
         </div>
       </div>
+      <button :class="$style.more" @click="goto('product-list')">
+        <span>نمایش محصولات بیشتر</span>
+      </button>
       <Modal ref="postDetail" :class="$style.postDetail">
         <div :class="$style.imageContainer">
           <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
@@ -111,7 +114,7 @@
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
         </a>
       </div>
-      <button :class="$style.more">
+      <button :class="$style.more"  @click="goto('clutters')">
         <span>نمایش آگهی بیشتر</span>
       </button>
     </section>
@@ -142,7 +145,7 @@
           <button>نمایش نمونه کارها</button>
         </div>
       </CardSlider>
-      <button :class="$style.more">
+      <button :class="$style.more" @click="goto('masters')">
         <span>نمایش به صورت کامل</span>
       </button>
     </section>
@@ -720,6 +723,39 @@ export default {
             }
           }
         }
+      }
+    }
+    
+    .more {
+      font-size: 20px;
+      position: relative;
+      line-height: 54px;
+      margin-top: 45px;
+      margin-bottom: 100px;
+      text-align: center;
+      width: 620px;
+      border: none;
+      @include HorizontalCenter();
+      cursor: pointer;
+      transition: all 0.1s;
+      outline: none;
+      &:active::before {
+        border-top: 54px solid darken(color(skin-tone), 5%);
+      }
+      &::before {
+        content: "";
+        height: 0;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: -54px;
+        /* stick out into margined area */
+        z-index: -1;
+        /* make it the background */
+        border: 54px solid transparent;
+        /* left/right diagonals */
+        border-top: 54px solid color(skin-tone);
+        border-bottom: 0px solid transparent;
       }
     }
   }
