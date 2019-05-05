@@ -16,11 +16,7 @@ export default {
       return this.$store.getters["adviser/loading"];
     }
   },
-  methods(){
-    edit:()=> {
-      this.$store.commit('modal/showModal');
-    }
-  }
+  methods(){}
 };
 </script>
 
@@ -38,7 +34,6 @@ export default {
         </center>
       </div>
       <div v-else>
-        <Modal title="hello world" id="myModal"/>
         <Adviser
           v-for="adviser in this.advisers"
           :key="adviser.id"

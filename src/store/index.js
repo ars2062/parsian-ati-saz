@@ -14,8 +14,22 @@ export default new Vuex.Store({
   },
   state:{
       authenticated:false,
+      loading:true
   },
   actions:{
     
+  },
+  getters:{
+    loading:state=>{
+      return state.loading;
+    }
+  },
+  mutations:{
+    stop_loading(state){
+      state.loading=false;
+    },
+    start_loading(state){
+      state.loading=true;
+    }
   }
 });
