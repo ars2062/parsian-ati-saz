@@ -1,11 +1,9 @@
 <script>
 import Adviser from "@/components/Admin/Adviser.vue";
-import Modal from "@/components/Admin/Modal.vue";
 export default {
   name: "List",
   components: {
-    Adviser,
-    Modal
+    Adviser
   },
   mounted() {
     this.$store.dispatch("adviser/fetchAllAdvisers");
