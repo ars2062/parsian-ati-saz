@@ -2,6 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import contact from "./modules/contact";
 import adviser from "./modules/adviser";
+import home from "./modules/home";
+import account from "./modules/account";
 
 Vue.use(Vuex);
 
@@ -10,7 +12,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules:{
     contact:contact,
-    adviser:adviser
+    adviser:adviser,
+    home:home,
+    account:account
   },
   state:{
       authenticated:false,
