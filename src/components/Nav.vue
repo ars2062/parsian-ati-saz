@@ -37,22 +37,22 @@
         <img src="@/assets/icons/logo.svg">
         <h1>پارسیان آتی ساز</h1>
         <li>
-          <router-link to='/'>خانه</router-link>
+          <router-link @click.native="close" to='/'>خانه</router-link>
         </li>
         <li>
-          <router-link to='/partnerships'>املاک مشارکت در ساخت</router-link>
+          <router-link @click.native="close" to='/partnerships'>املاک مشارکت در ساخت</router-link>
         </li>
         <li>
-          <router-link to='/sells'>املاک فروش کلنگی</router-link>
+          <router-link @click.native="close" to='/sells'>املاک فروش کلنگی</router-link>
         </li>
         <li>
-          <router-link to='/advertisement-registration'>ثبت آگهی استادکار</router-link>
+          <router-link @click.native="close" to='/advertisement-registration'>ثبت آگهی استادکار</router-link>
         </li>
         <li>
-          <router-link to="#">درباره ما</router-link>
+          <router-link @click.native="close" to="#">درباره ما</router-link>
         </li>
         <li>
-          <router-link to="#">ارتباط با ما</router-link>
+          <router-link @click.native="close" to="#">ارتباط با ما</router-link>
         </li>
       </ul>
     </div>
@@ -100,6 +100,9 @@ export default {
   methods: {
     closeMenu($event) {
       if ($event.target.classList.contains(this.$style.menuContainer))
+        this.displaymenu = false;
+    },
+    close(){
         this.displaymenu = false;
     },
     openModal(name) {
