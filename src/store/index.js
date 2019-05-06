@@ -10,30 +10,38 @@ Vue.use(Vuex);
 // load modules from folder and save this file
 
 export default new Vuex.Store({
-  modules:{
-    contact:contact,
-    adviser:adviser,
-    home:home,
-    account:account
+  modules: {
+    contact: contact,
+    adviser: adviser,
+    home: home,
+    account: account
   },
-  state:{
-      authenticated:false,
-      loading:true
+  state: {
+    loading: true,
+    // this object is for property pages
+    detail_object: {}
   },
-  actions:{
+  getters: {
+    loading: state => {
+      return state.loading;
+    },
+    detail_object: state => {
+      return state.detail_object;
+    }
+  },
+  mutations: {
+    stop_loading(state) {
+      state.loading = false;
+    },
+    start_loading(state) {
+      state.loading = true;
+    },
+    set_detail_object(state, obj) {
+      state.detail_object = obj;
+    },
     
   },
-  getters:{
-    loading:state=>{
-      return state.loading;
-    }
-  },
-  mutations:{
-    stop_loading(state){
-      state.loading=false;
-    },
-    start_loading(state){
-      state.loading=true;
-    }
+  actions: {
+
   }
 });
