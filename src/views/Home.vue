@@ -567,6 +567,7 @@ import Title from "@/components/Title.vue";
 import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
+import Loading from "@/components/Loading.vue";
 export default {
   components: {
     Header,
@@ -574,7 +575,8 @@ export default {
     Title,
     CardSlider,
     Footer,
-    Modal
+    Modal,
+    Loading
   },
   methods: {
     goto(name) {
