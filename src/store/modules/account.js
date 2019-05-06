@@ -3,45 +3,129 @@ import axios from "axios";
 import consts from "../../consts";
 
 export default {
-    namespaced:true,
-    state:{
-        loading:false
+    namespaced: true,
+    state: {
+        isAuth:localStorage.getItem('user.token') ? true:false,
+        loginMsg:'',
+        user:{
+            token:localStorage.getItem('user.token') ? localStorage.getItem('user.token') : '',
+            phone:localStorage.getItem('user.phone') ? localStorage.getItem('user.phone') : '',
+            isAdmin:false
+        }
     },
-    getters:{},
-    mutations:{},
-    actions:{
-        login:function({ commit } , {phone}){
-      axios.post(
-                consts.api_url+'account/login',{
-                    phone:phone
-                },{
-          validateStatus: () => {
-            return true;
-          }
+    getters: {
+        login_message: state => {
+            return state.loginMsg;
+        },
+        user_phone: state =>{
+            return state.user.phone;
+        },
+        user_token: state =>{
+            return state.user.phone;
+        },
+        isAuth:state => {
+            return state.isAuth;
+        },
+        isAdmin:state=>{
+            return state.user.isAdmin;
+        },
+        user:state => {
+            return state.user;
+        }
+    },
+    mutations: {
+        set_loginMsg(state,msg){
+            state.loginMsg = msg;
+        },
+        set_user_phone(state,phone){
+            state.user.phone = phone;
+            localStorage.setItem('user.phone',phone);
+        },
+        set_user_token(state,t){
+            state.user.token = t;
+            localStorage.setItem('user.token',t);
+        },
+        set_isAuth: (state,value)=>{
+            state.isAuth = value;
+        },
+        set_isAdmin: (state,value)=>{
+            state.user.isAdmin = value;
+            localStorage.setItem('user.isAdmin',t);
+        },
+        logout:(state)=>{
+            state.user.isAdmin = false;
+            state.user.phone = null;
+            state.user.token = null;
+
+            localStorage.removeItem('user.phone');
+            localStorage.removeItem('user.token');
+            localStorage.removeItem('user.isAdmin');
+        },
+        error: state => {
+            // set message later
+        }
+    },
+    actions: {
+        login: function ({ commit }, phone) {
+            axios.post(
+                consts.api_urls.login, {
+                    'phone': phone
+                }, {
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
                 }
             ).then(res => {
-                alert(res.data.message);
-            }).catch(r => {
-                alert('error');
+
+                commit('set_loginMsg',res.data.message);
+
+                if (res.data.result) {
+                    commit('set_user_phone',phone);
+                }
+
+            }).catch(error => {
+                
             });
         },
-        verify:function ({commit},{phone,code}) {
+        verify: function ({ commit }, { phone, code }) {
             axios.post(
-                consts.api_url+'account/verify',{
-                    phone:phone,
-                    code:code
+                consts.api_urls.verify, {
+                    phone: phone,
+                    code: code
                 },
                 {
-           
-          validateStatus: () => {
-            return true;
-          }
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
                 }
             ).then(res => {
-                alert(res.data.message);
-                localStorage.setItem('token',res.data.token);
+                
+                commit('set_loginMsg',res.data.message);
+
+                if (res.data.result) {
+                    commit('set_user_token',res.data.token);
+                    commit('set_isAdmin',res.data.isAdmin);
+                }
+
             }).catch(r => {
-                alert('error');
+                commit('error');
+            });
+        },
+        logout: ({commit}) => {
+            axios.post(consts.api_urls.logout,{},{
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization' :localStorage.getItem('user.token')
+                }
+            }).then(response => {
+                if (response.data.result) {
+                    // clear user data from state and local storage
+                    commit('logout');
+                } else{
+                    commit('error');
+                }
+            }).error(error =>{
+                commit('error');
             });
         }
     },

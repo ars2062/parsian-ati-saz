@@ -29,11 +29,9 @@
 
 <script>
 
-
 export default {
   name: "Contact",
-  components:{
-  },
+  components:{},
   props: ["id", "name", "subject", "phone", "description"],
   data: function() {
     return {

@@ -14,6 +14,9 @@ import PartnershipList from "./views/PartnershipList.vue";
 import SellList from "./views/SellList.vue";
 import ProductList from "./views/ProductList.vue";
 import ClutterList from "./views/ClutterList.vue";
+import Test from "./views/Test.vue";
+
+
 Vue.use(Router);
 let router = new Router({
   mode: "history",
@@ -79,6 +82,7 @@ let router = new Router({
       component: SellList
     },
     {
+      // for gold melks
       path: "/clutters",
       name: "clutters",
       component: ClutterList
@@ -87,6 +91,11 @@ let router = new Router({
       path: "/product-list",
       name: "product-list",
       component: ProductList
+    },
+    {
+      path: "/test",
+      name: "test",
+      component: Test
     }
   ]
 });
