@@ -10,10 +10,10 @@
         <h2 :class="$style.title">شبکه ها</h2>
         <ul>
           <li>
-            <a href="#">تلگرام</a>
+            <router-link to="#">تلگرام</router-link>
           </li>
           <li>
-            <a href="#">اینستاگرام</a>
+            <router-link to="#">اینستاگرام</router-link>
           </li>
         </ul>
       </div>
@@ -21,12 +21,12 @@
         <h2 :class="$style.title">
           <span :class="$style.gold">فایل</span> های اخیر
         </h2>
-        <a href="#" :class="$style.card" v-for="i in [1,2]" :key="i">
+        <router-link to="#" :class="$style.card" v-for="i in [1,2]" :key="i">
           <div :class="$style.type">مشارکت در ساخت</div>
           <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
           <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </a>
+        </router-link>
       </div>
       <div :class="$style.col">
         <h2 :class="$style.title">

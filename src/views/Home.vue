@@ -95,7 +95,7 @@
     <section :class="$style.three">
       <Title title="املاک آماده به امضاء" style="margin-top:50px"/>
       <div :class="$style.goldenPosts">
-        <a href="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+        <router-link to="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
           <div :class="$style.ribbonContainer">
             <div :class="$style.ribbon">
               <img src="@/assets/icons/star.svg">
@@ -112,7 +112,7 @@
           </ul>
           <hr>
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </a>
+        </router-link>
       </div>
       <button :class="$style.more"  @click="goto('clutters')">
         <span>نمایش آگهی بیشتر</span>
@@ -152,9 +152,9 @@
     <section :class="$style.six">
       <Title title="سازنده گانی که باما کار میکنند"/>
       <div :class="$style.collaborators">
-        <a href="#" v-for="i in [1,2,3,4,5,6,7,8]" :key="i">
+        <router-link to="#" v-for="i in [1,2,3,4,5,6,7,8]" :key="i">
           <img src="@/assets/icons/Kamyar-Maroufzadeh-225x168.jpg">
-        </a>
+        </router-link>
       </div>
     </section>
     <Footer/>

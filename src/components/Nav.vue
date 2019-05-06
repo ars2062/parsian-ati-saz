@@ -10,10 +10,10 @@
         <img src="@/assets/icons/avatar.svg">
         <ul :style="this.displayAccountOptions">
           <li>
-            <a href="#">آگهی های من</a>
+            <router-link to="#">آگهی های من</router-link>
           </li>
           <li>
-            <a href="#">خروج از حساب</a>
+            <router-link to="#">خروج از حساب</router-link>
           </li>
         </ul>
       </li>
@@ -37,22 +37,22 @@
         <img src="@/assets/icons/logo.svg">
         <h1>پارسیان آتی ساز</h1>
         <li>
-          <a href='/'>خانه</a>
+          <router-link to='/'>خانه</router-link>
         </li>
         <li>
-          <a href='/partnerships'>املاک مشارکت در ساخت</a>
+          <router-link to='/partnerships'>املاک مشارکت در ساخت</router-link>
         </li>
         <li>
-          <a href='/sells'>املاک فروش کلنگی</a>
+          <router-link to='/sells'>املاک فروش کلنگی</router-link>
         </li>
         <li>
-          <a href='/advertisement-registration'>ثبت آگهی استادکار</a>
+          <router-link to='/advertisement-registration'>ثبت آگهی استادکار</router-link>
         </li>
         <li>
-          <a href="#">درباره ما</a>
+          <router-link to="#">درباره ما</router-link>
         </li>
         <li>
-          <a href="#">ارتباط با ما</a>
+          <router-link to="#">ارتباط با ما</router-link>
         </li>
       </ul>
     </div>

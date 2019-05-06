@@ -17,7 +17,7 @@ export default new Vuex.Store({
     account: account
   },
   state: {
-    loading: true,
+    loading: false,
     // this object is for property pages
     detail_object: {}
   },
@@ -38,10 +38,7 @@ export default new Vuex.Store({
     },
     set_detail_object(state, obj) {
       state.detail_object = obj;
-    },
-    
+    }
   },
-  actions: {
-
-  }
+  actions: {}
 });

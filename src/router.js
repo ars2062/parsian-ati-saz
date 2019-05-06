@@ -15,7 +15,7 @@ import SellList from "./views/SellList.vue";
 import ProductList from "./views/ProductList.vue";
 import ClutterList from "./views/ClutterList.vue";
 import Test from "./views/Test.vue";
-
+import store from './store';
 
 Vue.use(Router);
 let router = new Router({
@@ -98,10 +98,6 @@ let router = new Router({
       component: Test
     }
   ]
-});
-
-router.afterEach((to, from) => {
-  window.scrollTo(0,0);
 });
 
 export default router;

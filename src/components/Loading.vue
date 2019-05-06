@@ -16,15 +16,29 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  data(){
-    return{
-      display:false
-    }
+  data() {
+    return {
+      display: false
+    };
   },
-  computed:{
-    Display(){
-      return this.display?'display: flex':'display: none';
+  computed: {
+    Display() {
+      return this.display ? "display: flex" : "display: none";
+    },
+    ...mapGetters({
+      loading: "loading"
+    })
+  },
+  watch: {
+    loading(val, oldVal) {
+      if (val) {
+        this.display = true;
+        console.log("a");
+      } else {
+        this.display = false;
+      }
     }
   }
 };
@@ -38,7 +52,7 @@ export default {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background:radial-gradient(ellipse at center, #101010 0%,#060606 100%);
+  background: radial-gradient(ellipse at center, #101010 0%, #060606 100%);
   z-index: 101;
   display: flex;
   flex-direction: column;

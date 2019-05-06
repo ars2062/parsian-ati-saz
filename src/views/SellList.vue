@@ -6,7 +6,7 @@
     />
     <Searchcard></Searchcard>
     <div :class="$style.list_container">
-      <a href="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+      <router-link to="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
         <div :class="$style.ribbonContainer">
           <div :class="$style.ribbon">
             <img src="@/assets/icons/star.svg">
@@ -23,7 +23,7 @@
         </ul>
         <hr>
         <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-      </a>
+      </router-link>
     </div>
     <button :class="$style.more">
       <span>نمایش آگهی بیشتر</span>
