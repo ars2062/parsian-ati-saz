@@ -35,7 +35,6 @@ export default {
     loading(val, oldVal) {
       if (val) {
         this.display = true;
-        console.log("a");
       } else {
         this.display = false;
       }
