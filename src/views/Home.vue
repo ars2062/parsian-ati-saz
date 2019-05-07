@@ -9,7 +9,7 @@
     <section :class="$style.one">
       <Title title="دسترسی سریع به امکانات سایت" style="margin-top:90px"/>
       <div :class="$style.cards">
-        <div :class="$style.card">
+        <div :class="[$style.card,'slide-in-bottom']" data-scroll>
           <img src="@/assets/icons/stationery.svg">
           <h3>قوانین نظام مهندسی</h3>
           <p>
@@ -22,7 +22,7 @@
             <span>نمایش</span>
           </button>
         </div>
-        <div :class="$style.card">
+        <div :class="[$style.card,'slide-in-bottom']" data-scroll>
           <img src="@/assets/icons/stationery.svg">
           <h3>لیست تلفن</h3>
           <p>
@@ -35,7 +35,7 @@
             <span>نمایش</span>
           </button>
         </div>
-        <div :class="$style.card">
+        <div :class="[$style.card,'slide-in-bottom']" data-scroll>
           <img src="@/assets/icons/stationery.svg">
           <h3>لیست دفاتر خدمات</h3>
           <p>
@@ -48,8 +48,8 @@
             <span>نمایش</span>
           </button>
         </div>
-        <div :class="$style.card">
-          <img src="@/assets/icons/stationery.svg">
+        <div :class="[$style.card,$style.big,'slide-in-right']" data-scroll>
+          <img src="@/assets/icons/setting.svg">
           <h3>لیست استاد کاران</h3>
           <p>
             لیست استاد کاران درجه یک ساختمان
@@ -66,36 +66,27 @@
     <section :class="$style.two">
       <Title title="لوازم ساختمانی" style="margin-top:80px"/>
       <div :class="$style.posts">
-        <div :class="$style.post" v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i">
+        <div :class="[$style.post,'slide-in-bottom']" data-scroll v-for="i in [1,2,3]" :key="i">
           <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <div :class="$style.buttonContainer">
-            <button @click="openModal('postDetail')">
-              <img src="@/assets/icons/diagonal-resize.svg">
-            </button>
-          </div>
+          <h3>لوازم ساختمانی برادران بیژن</h3>
+          <h4>زمینه کاری : تولید لوازم پلاستیکی</h4>
+          <button @click="goto('product-detail')">نمایش کامل اطلاعات</button>
         </div>
       </div>
       <button :class="$style.more" @click="goto('product-list')">
         <span>نمایش محصولات بیشتر</span>
       </button>
-      <Modal ref="postDetail" :class="$style.postDetail">
-        <div :class="$style.imageContainer">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <button
-            @click="goto('product-detail')"
-            :class="$style.more"
-          >برای نمایش اطلاعات تکمیلی کلیک کنید</button>
-          <section>
-            <p>لوزارم ساختمانی برادران بیژن بجز قاسم</p>
-            <button @click="goto('product-detail')">نمایش آدرس</button>
-          </section>
-        </div>
-      </Modal>
     </section>
     <section :class="$style.three">
       <Title title="املاک آماده به امضاء" style="margin-top:50px"/>
       <div :class="$style.goldenPosts">
-        <router-link to="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+        <router-link
+          to="/property-detail"
+          :class="[$style.post,'slide-in-top']"
+          data-scroll
+          v-for=" i in [1,2,3,4,5,6]"
+          :key="i"
+        >
           <div :class="$style.ribbonContainer">
             <div :class="$style.ribbon">
               <img src="@/assets/icons/star.svg">
@@ -114,7 +105,7 @@
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
         </router-link>
       </div>
-      <button :class="$style.more"  @click="goto('clutters')">
+      <button :class="[$style.more,'slide-in-left']" data-scroll @click="goto('clutters')">
         <span>نمایش آگهی بیشتر</span>
       </button>
     </section>
@@ -125,12 +116,12 @@
           <i></i>
         </span>
       </h2>
-      <p>
+      <p class="slide-in-right" data-scroll>
         چنانچه مشاور املاک هستید به راحتی امکانات سایت استفاده کنید و آگهی بزنید
         این سایت تخصصی میباشد و در زمینه مشارکت و فروش املاک کلنگی فعالیت میکند
         با زدن آکهی در این زمینه نتیجه بی نظیر بگیرید
       </p>
-      <section :class="$style.left">
+      <section :class="[$style.left,'fade-in']" data-scroll>
         <img src="@/assets/icons/252945-P46MBA-946.png">
         <button @click="goto('advertisement-registration')">ثبت آگهی</button>
       </section>
@@ -138,21 +129,21 @@
     <section :class="$style.five">
       <Title title="استاد کاران برند منطقه" style="margin-top:65px"/>
       <CardSlider>
-        <div v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i" :class="$style.card">
+        <div v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i" :class="[$style.card]">
           <img src="@/assets/icons/450-3366-225x168.jpg">
           <h4>کنعان پاسبانی</h4>
           <span>کار {{i}}</span>
           <button>نمایش نمونه کارها</button>
         </div>
       </CardSlider>
-      <button :class="$style.more" @click="goto('masters')">
+      <button :class="[$style.more]" @click="goto('masters')">
         <span>نمایش به صورت کامل</span>
       </button>
     </section>
     <section :class="$style.six">
       <Title title="سازنده گانی که باما کار میکنند"/>
       <div :class="$style.collaborators">
-        <router-link to="#" v-for="i in [1,2,3,4,5,6,7,8]" :key="i">
+        <router-link to="#" v-for="i in [1,2,3,4,5,6,7,8]" :key="i" class="slide-in-bottom" data-scroll>
           <img src="@/assets/icons/Kamyar-Maroufzadeh-225x168.jpg">
         </router-link>
       </div>
@@ -218,47 +209,47 @@
             <p>خیابان ستارخان،خیابان پاتریس،نبش کوچه فیروزه</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۰۲ </span>
+            <span :class="$style.code">کد ۲۰۲</span>
             <span :class="$style.tel">تلفن : ۸۸۰۹۹۸۴۵و۸۸۰۹۹۸۷۹</span>
             <p>شهرک غرب بلوار دریا(بین پاکنژاد و مطهری)پلاک ۱۴۲</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۰۳ </span>
+            <span :class="$style.code">کد ۲۰۳</span>
             <span :class="$style.tel">تلفن : ۲۲۱۴۴۵۷۷</span>
             <p>بزرگراه یادگار امام شمال بعد از خروجی نیایش خيابان کوهستان پلاك ۱۰</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۰۴ </span>
+            <span :class="$style.code">کد ۲۰۴</span>
             <span :class="$style.tel">تلفن : ۲۲۰۷۰۲۵۰</span>
-            <p>سعادت اباد،بین میدان شهرداری و میدان سرو،خیابان بخشایش،نبش بهار چهارم،پلاک۴۷ </p>
+            <p>سعادت اباد،بین میدان شهرداری و میدان سرو،خیابان بخشایش،نبش بهار چهارم،پلاک۴۷</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۰۵ </span>
+            <span :class="$style.code">کد ۲۰۵</span>
             <span :class="$style.tel">تلفن : ۴۴۲۷۳۹۷۷</span>
             <p>خیابان سازمان آب،روبروی پارک شاهین،پلاک ۲۹</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۰۶ </span>
+            <span :class="$style.code">کد ۲۰۶</span>
             <span :class="$style.tel">تلفن : ۴۴۲۷۱۸۰۰</span>
             <p>ستارخان- بعد از پارک جوانه- روبروی برق آلستوم- پلاک ۸۴۶- طبقه اول</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۰۷ </span>
+            <span :class="$style.code">کد ۲۰۷</span>
             <span :class="$style.tel">تلفن : ۲۲۱۳۴۲۲۹</span>
-            <p>سعادت آباد،انتهای بلوار ۲۴ متری،خیابان دشت بهشت،نبش بن بست میربسطامی، پلاک ۱ </p>
+            <p>سعادت آباد،انتهای بلوار ۲۴ متری،خیابان دشت بهشت،نبش بن بست میربسطامی، پلاک ۱</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۰۸ </span>
+            <span :class="$style.code">کد ۲۰۸</span>
             <span :class="$style.tel">تلفن : ۴۴۲۶۶۹۱۷</span>
             <p>بزرگراه اشرفی اصفهانی، بالاتر از فلکه دوم صادقیه، خیابان سازمان آب شرقی، پلاک 14</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۰۹ </span>
+            <span :class="$style.code">کد ۲۰۹</span>
             <span :class="$style.tel">تلفن : ۶-۸۸۳۷۴۴۹۵</span>
             <p>ميدان صنعت،خیابان فلامك شمالي، نبش خيابان شانزدهم، پلاك ۲</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۲۱۰ </span>
+            <span :class="$style.code">کد ۲۱۰</span>
             <span :class="$style.tel">تلفن : ۶۶۵۵۹۳۰۷</span>
             <p>خیابان بهبودی، نرسیده به ستارخان، نبش کوچه بشیر، پلاک ۳۶۱</p>
           </li>
@@ -269,37 +260,37 @@
         <h3>لیست دفاتر خدمات شهرداری منطقه 3</h3>
         <ul>
           <li>
-            <span :class="$style.code">کد ۳۰۱ </span>
+            <span :class="$style.code">کد ۳۰۱</span>
             <span :class="$style.tel">تلفن : ۸۸۲۱۰۹۸۷</span>
             <p>خیابان شیراز شمالی، نرسیده به چهارراه ونک، نبش کوی نرگس، پلاک ۲</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۳۰۲ </span>
+            <span :class="$style.code">کد ۳۰۲</span>
             <span :class="$style.tel">تلفن : ۸۸۲۰۶۶۶۳- ۸۸۲۰۶۶۸۴</span>
             <p>خیابان افریقا،خیابان دامن افشار،پلاک ۱</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۳۰۳ </span>
+            <span :class="$style.code">کد ۳۰۳</span>
             <span :class="$style.tel">تلفن : ۲۲۲۲۶۶۴۹</span>
             <p>خیابان شریعتی بالاتر از بزررگراه همت خیابان کوشان نبش خیابان افتخاری</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۳۰۴ </span>
+            <span :class="$style.code">کد ۳۰۴</span>
             <span :class="$style.tel">تلفن : ۲۲۵۷۱۷۶۳</span>
             <p>خیابان دولت،نبش چهارراه کاوه، طبقه اول</p>
           </li>
           <li>
             <span :class="$style.code">کد ۳۰۵</span>
             <span :class="$style.tel">تلفن : ۲۲۸۶۸۵۹۵</span>
-            <p>خیابان شریعتی بالاتر از میرداماد ، تقاطع ظفر نبش پورمشکانی پلاک ۱۳۵۷ درب شمالی </p>
+            <p>خیابان شریعتی بالاتر از میرداماد ، تقاطع ظفر نبش پورمشکانی پلاک ۱۳۵۷ درب شمالی</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۳۰۶ </span>
+            <span :class="$style.code">کد ۳۰۶</span>
             <span :class="$style.tel">تلفن : ۲۲۲۵۹۱۳۸-۲۲۲۵۹۱۳۹</span>
             <p>خيابان ميرداماد بين ميدان مادر و خيابان شريعتي پلاك ۲۶ ط اول واحد۲</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۳۰۷ </span>
+            <span :class="$style.code">کد ۳۰۷</span>
             <span :class="$style.tel">تلفن : ۵- ۲۶۲۰۱۹۰۱</span>
             <p>خیابان ولیعصر، روبروی پارک ملت، نبش خیابان مهیار، پلاک ۹۸</p>
           </li>
@@ -310,22 +301,22 @@
         <h3>لیست دفاتر خدمات شهرداری منطقه 4</h3>
         <ul>
           <li>
-            <span :class="$style.code">کد ۴۰۱ </span>
+            <span :class="$style.code">کد ۴۰۱</span>
             <span :class="$style.tel">تلفن : ۲۲۹۷۶۹۷۱ – ۲۲۹۴۹۹۸۹</span>
             <p>میدان هروی ، خیابان وفامنش، نبش مکران شمالی، پلاک ۳۲</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۴۰۲ </span>
+            <span :class="$style.code">کد ۴۰۲</span>
             <span :class="$style.tel">تلفن : ۷۷۲۲۷۹۵۰-۷۷۴۴۸۳۸۶</span>
             <p>میدان رسالت خ هنگام بعداز تقاطع فرجام نبش کوچه باقری پ ۱۱۲ طبقه اول</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۴۰۳ </span>
+            <span :class="$style.code">کد ۴۰۳</span>
             <span :class="$style.tel">تلفن : ۲۲۳۲۴۷۳۶</span>
             <p>میدان ملت،ضلع شرقی میدان،داخل پارک</p>
           </li>
           <li>
-            <span :class="$style.code">کد ۴۰۴ </span>
+            <span :class="$style.code">کد ۴۰۴</span>
             <span :class="$style.tel">تلفن : ۷۷۹۶۹۸۰۶</span>
             <p>فلکه دوم تهرانپارس، جشنواره،بعدازچهارراه سیدالشهدا،جنب پارک معینی،پ۷۵/۱</p>
           </li>
@@ -619,6 +610,7 @@ export default {
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      padding: 40px;
       .card {
         text-align: center;
         padding: 60px 20px;
@@ -631,6 +623,7 @@ export default {
         }
         h3 {
           font-size: 30px;
+          font-weight: normal;
         }
         img {
           width: 60px;
@@ -672,62 +665,87 @@ export default {
           }
         }
       }
-    }
-  }
-  section.two {
-    .posts {
-      margin-top: 55px;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      position: relative;
-      .post {
-        padding-top: 100%;
-        position: relative;
-        overflow: hidden;
-        * {
-          position: absolute;
-          margin: auto;
+      .big {
+        background-color: #313131;
+        padding: 25px 20px;
+        p {
+          min-height: auto !important;
+          margin: 0;
+          color: #d4d4d4;
         }
-        img {
+        h3 {
+          background: linear-gradient(to bottom, #cf8a30 0%, #ffd581 100%);
+          line-height: 70px;
+          color: black;
           width: 100%;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+          font-weight: bold;
+          position: relative;
+          left: -40px;
+          border-radius: 0 15px 0 0;
+          text-shadow: 0 2px 0 white;
+          &::after {
+            @include content();
+            @include size(20px, 20px);
+            background-color: #636363;
+            top: 100%;
+            left: 0;
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+          }
         }
-        .buttonContainer {
-          @include size(105px, 105px);
-          background-color: rgba(color(coal), 0.5);
-          transform: rotate(-45deg);
-          top: 100%;
-          left: calc(100% - 52.5px);
-          right: 0;
-          bottom: 0;
-          button {
-            margin: 7.5px;
-            @include size(90px, 90px);
-            z-index: 2;
-            cursor: pointer;
-            position: relative;
-            background-color: color(skin-tone);
-            border: none;
-            transition: all 0.1s;
-            &:active {
-              transform: scale(1.05);
-            }
-            img {
-              @include size(15px, 15px);
-              top: 0;
-              margin: 7.5px auto;
-              position: absolute;
-              transform: rotate(45deg);
-            }
+        button {
+          background-color: transparent;
+          border: 1px solid white;
+          span {
+            display: none;
           }
         }
       }
     }
-    
+  }
+  section.two {
+    background-color: #F8F8F8;
+    .posts {
+      margin-top: 55px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 330px);
+      grid-gap: 30px;
+      padding: 50px 120px;
+      justify-content: center;
+      .post {
+        direction: rtl;
+        background-color: #fff;
+        border-radius: 6px;
+        box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.16);
+        img {
+          width: 100%;
+        }
+        h3 {
+          font-weight: normal;
+          font-size: 18px;
+          margin: 0 10px;
+        }
+        h4 {
+          font-weight: 100;
+          font-size: 17px;
+          margin: 0 10px;
+        }
+        button {
+          border: none;
+          border-radius: 0 0 6px 6px;
+          background-color: color(skin-tone);
+          width: 100%;
+          cursor: pointer;
+          font-size: 20px;
+          line-height: 50px;
+          margin-top: 17px;
+          outline: none;
+          &:active {
+            background-color: darken($color: color(skin-tone), $amount: 10%);
+          }
+        }
+      }
+    }
+
     .more {
       font-size: 20px;
       position: relative;
@@ -1089,8 +1107,8 @@ export default {
         display: block;
         li {
           display: block;
-          color:color(chocolate);
-          &:not(:last-of-type){
+          color: color(chocolate);
+          &:not(:last-of-type) {
             border-bottom: 1px solid #707070;
           }
           .code {
@@ -1103,17 +1121,17 @@ export default {
           }
           p {
             display: inline-block;
-        width: 100%;
+            width: 100%;
           }
         }
       }
-      button{
-        width:90%;
+      button {
+        width: 90%;
         border: none;
         border-radius: 6px;
         margin: 20px 0;
-        background-color: darken(color(chocolate),10%);
-        color:white;
+        background-color: darken(color(chocolate), 10%);
+        color: white;
         font-size: 20px;
         cursor: pointer;
         outline: none;
