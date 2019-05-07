@@ -20,9 +20,9 @@ let $ = JQuery;
 export default {
   data() {
     return {
-      index,
-      slideleft,
-      slideright
+      index:0,
+      slideleft:false,
+      slideright:false
     };
   },
   methods: {

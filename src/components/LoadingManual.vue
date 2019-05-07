@@ -16,33 +16,12 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
-  data() {
-    return {
-      display: false
-    };
-  },
+  props: { display: { type: Boolean, default: true } },
   computed: {
     Display() {
       return this.display ? "display: flex" : "display: none";
-    },
-    ...mapGetters({
-      loading: "loading"
-    })
-  },
-  watch: {
-    loading(val, oldVal) {
-      if (val) {
-        this.display = true;
-      } else {
-        this.display = false;
-      }
     }
-  },
-  created(){
-    console.log(10);
-    this.$forceUpdate();
   }
 };
 </script>

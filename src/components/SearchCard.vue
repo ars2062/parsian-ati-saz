@@ -90,7 +90,9 @@ export default {
 <style lang="scss" module>
 @import "@/assets/main.scss";
 .searchcard {
-  background-color: color(coal);
+  background: image("Radiant-Gradient");
+  background-size: cover;
+  background-position: center;
   text-align: center;
   padding: 15px;
   position: relative;
@@ -123,16 +125,19 @@ export default {
       padding: 0 15px;
       direction: rtl;
       outline: none;
+      width: calc(100% - 30px);
       &::placeholder {
         color: #cecece;
       }
     }
     input[type="number"]::-webkit-inner-spin-button {
       -webkit-appearance: none;
+      -moz-appearance: textfield;
       margin: 0;
     }
     input[type="number"]::-webkit-outer-spin-button {
       -webkit-appearance: none;
+      -moz-appearance: textfield;
       margin: 0;
     }
   }

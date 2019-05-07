@@ -11,7 +11,7 @@
         <input type="text" name="phone" id="phone" placeholder="شماره تماس">
         <input type="text" name="subject" id="subject" placeholder="عنوان پیام">
         <textarea name="description" id="description" rows="6" placeholder="توضیحات"></textarea>
-        <button>بازگشت به صفحه صلی</button>
+        <button @click="goto('home')">بازگشت به صفحه صلی</button>
         <button>ارسال پیام</button>
       </div>
     </section>

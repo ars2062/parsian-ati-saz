@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.home">
+  <div :class="$style.home" v-cloak>
     <Header
       :Title="[{text:'تخصصی'},{text:'ترین سایت', class:$style.light},{text:'مشارکت', class:$style.skin_tone},{text:'در', class:$style.light},{text:'ساخت'}]"
       :subtitle="[{text:'اخبار روز مسکن',class:$style.skin_tone}]"
@@ -48,7 +48,7 @@
             <span>نمایش</span>
           </button>
         </div>
-        <div :class="[$style.card,$style.big,'slide-in-right']" data-scroll>
+        <div :class="[$style.card,$style.big,'slide-in-left']" data-scroll>
           <img src="@/assets/icons/setting.svg">
           <h3>لیست استاد کاران</h3>
           <p>
@@ -116,7 +116,7 @@
           <i></i>
         </span>
       </h2>
-      <p class="slide-in-right" data-scroll>
+      <p class="slide-in-left" data-scroll>
         چنانچه مشاور املاک هستید به راحتی امکانات سایت استفاده کنید و آگهی بزنید
         این سایت تخصصی میباشد و در زمینه مشارکت و فروش املاک کلنگی فعالیت میکند
         با زدن آکهی در این زمینه نتیجه بی نظیر بگیرید
@@ -133,7 +133,7 @@
           <img src="@/assets/icons/450-3366-225x168.jpg">
           <h4>کنعان پاسبانی</h4>
           <span>کار {{i}}</span>
-          <button>نمایش نمونه کارها</button>
+          <button @click="goto('master-worker-detail')">نمایش نمونه کارها</button>
         </div>
       </CardSlider>
       <button :class="[$style.more]" @click="goto('masters')">
@@ -790,9 +790,8 @@ export default {
       .post {
         position: relative;
         text-decoration: none;
-        transition: all 0.2s;
         &:hover {
-          transform: scale(1.05);
+          background-color: #fcfcfc;
         }
         .ribbonContainer {
           overflow: hidden;

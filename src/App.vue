@@ -1,29 +1,34 @@
 <template>
   <div id="app">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <Nav v-if="!this.$route.path.includes('admin')"></Nav>
     <Loading/>
-    <router-view/>
+    <LoadingManual id="loadingmanual"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <Nav v-if="!this.$route.path.includes('admin')" v-cloak></Nav>
+    <router-view v-cloak/>
   </div>
 </template>
 
 <script>
 import Nav from "@/components/Nav.vue";
 import Loading from "@/components/Loading.vue";
+import LoadingManual from "@/components/LoadingManual.vue";
 import ScrollOut from "scroll-out";
-
+window.addEventListener('load',()=>{document.getElementById('loadingmanual').style.display='none'})
 export default {
   name: "App",
   components: {
     Nav,
-    Loading
+    Loading,
+    LoadingManual
   },
   mounted() {
+    this.$store.commit("stop_loading");
     this.so = ScrollOut({
       scope: this.$el,
-      once: false,
+      once: true,
       treshold: 1
     });
+    //this.$refs["loadingmanual"].display = false;
   },
   destroyed() {
     this.so.teardown();
@@ -32,8 +37,12 @@ export default {
 </script>
 
 <style lang='scss'>
+[v-cloak] {
+  display: none;
+}
+
 [data-scroll] {
-  transition: transform 1s,opacity 1s;
+  transition: transform 2s, opacity 2s;
 }
 
 .fade-in[data-scroll="in"] {
@@ -60,7 +69,7 @@ export default {
 }
 
 .slide-in-left[data-scroll="out"] {
-  transform: translateX(100px);
+  transform: translateX(-100px);
   opacity: 0;
 }
 

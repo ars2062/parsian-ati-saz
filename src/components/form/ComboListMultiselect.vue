@@ -2,7 +2,7 @@
   <div :class="$style.KeywordSelector">
     <div
       :class="$style.selected"
-      @click="show"
+      @click="toggle"
       :style="isVisible=='block'?'border-radius: 6px 6px 0 0; border-bottom:none':''"
     >
       <span v-for="(keyword,index) in selectedKeywords" :key="keyword.id">
@@ -16,7 +16,7 @@
       <li
         v-for="keyword in computedkeywords"
         :key="keyword.id"
-        @click="addKeyword(keyword)"
+        @click="addKeyword($event,keyword)"
       >{{keyword.name}}</li>
     </ul>
   </div>
@@ -52,11 +52,14 @@ export default {
     });
   },
   methods: {
-    show($event) {
+    toggle($event) {
       $event.stopPropagation();
-      this.isVisible = "block";
+      this.isVisible == "block"
+        ? (this.isVisible = "none")
+        : (this.isVisible = "block");
     },
-    async addKeyword(k) {
+    async addKeyword($event, k) {
+      $event.stopPropagation();
       await this.selectedKeywords.push(k);
       const input = document.getElementById("tagInput");
       input.blur();
