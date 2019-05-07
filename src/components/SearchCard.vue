@@ -2,48 +2,39 @@
   <section :class="$style.searchcard">
     <p>همین امروز ملک مورد نظر خودتون رو پیدا کنید</p>
     <p>فیلد های زیر را پر کنید طبق معیار های مد نظرتون سپس دکمه جستجو بزنید</p>
-    <Combolist
-      style="width:400px;margin-bottom: 120px;"
-      title="نوع ملک مد نظرتون رو انتخاب کنید"
-      :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
-      @value="chooseType($event)"
-    />
     <form>
-      <div v-if="this.showMosharekat" style="text-align:center">
-        <ComboListMultiselect placeholder="محله های مورد نظر خود را انتخاب کنید" style="width:30vw;text-align:center;margin:auto" :keywords="[{id:0,name:'a'},{id:1,name:'b'},{id:2,name:'c'},{id:3,name:'d'}]"/>
-        <input
-          type="number"
-          name="maxMetrazh"
-          id="maxMetrazh"
-          min="1"
-          placeholder="حداکثر متراژ مورد نظر خود را وارد کنید"
-        >
-        <input
-          type="number"
-          name="minMetrazh"
-          id="minMetrazh"
-          min="1"
-          placeholder="حداحقل متراژ مورد نظر خود را وارد کنید"
-        >
-      </div>
-      <div v-if="this.showForoosh">
-        <ComboListMultiselect placeholder="محله های مورد نظر خود را انتخاب کنید" style="width:30vw;text-align:center;margin:auto" :keywords="[{id:0,name:'a'},{id:1,name:'b'},{id:2,name:'c'},{id:3,name:'d'}]"/>
-        <input
-          type="number"
-          name="maxMetrazh"
-          id="maxMetrazh"
-          min="1"
-          placeholder="حداکثر متراژ مورد نظر خود را وارد کنید"
-        >
-        <input
-          type="number"
-          name="minMetrazh"
-          id="minMetrazh"
-          min="1"
-          placeholder="حداحقل متراژ مورد نظر خود را وارد کنید"
-        >
-      </div>
-      <div :class="$style.submitContainer">
+      <Combolist
+        title="نوع ملک مد نظرتون رو انتخاب کنید"
+        :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
+        @value="chooseType($event)"
+        class="fade-in"
+        data-scroll
+      />
+      <ComboListMultiselect
+        placeholder="محله های مورد نظر خود را انتخاب کنید"
+        :keywords="[{id:0,name:'a'},{id:1,name:'b'},{id:2,name:'c'},{id:3,name:'d'}]"
+        class="fade-in"
+        data-scroll
+      />
+      <input
+        type="number"
+        name="maxMetrazh"
+        id="maxMetrazh"
+        min="1"
+        placeholder="حداکثر متراژ مورد نظر خود را وارد کنید"
+        class="fade-in"
+        data-scroll
+      >
+      <input
+        type="number"
+        name="minMetrazh"
+        id="minMetrazh"
+        min="1"
+        placeholder="حداحقل متراژ مورد نظر خود را وارد کنید"
+        class="fade-in"
+        data-scroll
+      >
+      <div :class="[$style.submitContainer,'slide-in-top']" data-scroll>
         <button>
           <span>جستجو</span>
           <i></i>
@@ -99,7 +90,9 @@ export default {
 <style lang="scss" module>
 @import "@/assets/main.scss";
 .searchcard {
-  background-color: color(coal);
+  background: image("Radiant-Gradient");
+  background-size: cover;
+  background-position: center;
   text-align: center;
   padding: 15px;
   position: relative;
@@ -114,27 +107,38 @@ export default {
     }
   }
   form {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 22vw);
+    grid-gap: 15px;
     width: 100%;
     margin-bottom: 100px;
-    div {
-      width: 100%;
-    }
+    justify-content: center;
+    direction: rtl;
     input {
-      width: 30vw;
-      color: color(grullo);
-      margin-left: 30px;
-      background-color: transparent;
-      border: none;
-      border-bottom: 2px solid color(skin-tone);
-      height: 30px;
-      font-size: 16px;
+      color: #cecece;
+      line-height: 40px;
+      height: 40px;
+      font-size: 14px;
+      background-color: #3b3b3b;
+      border: 1px solid color(skin-tone);
+      border-radius: 6px;
+      padding: 0 15px;
       direction: rtl;
       outline: none;
+      width: calc(100% - 30px);
       &::placeholder {
-        color: color(grullo);
+        color: #cecece;
       }
+    }
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+      margin: 0;
+    }
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+      margin: 0;
     }
   }
   .submitContainer {

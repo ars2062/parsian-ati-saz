@@ -15,7 +15,7 @@ import SellList from "./views/SellList.vue";
 import ProductList from "./views/ProductList.vue";
 import ClutterList from "./views/ClutterList.vue";
 import Test from "./views/Test.vue";
-import store from './store';
+import Contact from "./views/Contact.vue";
 
 Vue.use(Router);
 let router = new Router({
@@ -96,6 +96,11 @@ let router = new Router({
       path: "/test",
       name: "test",
       component: Test
+    },
+    {
+      path: "/contact",
+      name: "contact",
+      component: Contact
     }
   ]
 });

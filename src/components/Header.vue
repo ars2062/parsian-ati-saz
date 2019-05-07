@@ -2,10 +2,10 @@
   <header>
     <img :src="image">
     <div :class="$style.trapezoids">
-      <div v-if="Title" :class="[$style.trapezoid,this.titleS,$style.first]">
+      <div v-if="Title" :class="[$style.trapezoid,this.titleS,$style.first]" data-scroll>
         <span v-for="span in Title" :key="span.id" :class="span.class">{{span.text}}</span>
       </div>
-      <div v-if="subtitle" :class="[$style.trapezoid,this.subtitleS,$style.last]">
+      <div v-if="subtitle" :class="[$style.trapezoid,this.subtitleS,$style.last]" data-scroll>
         <span v-for="span in subtitle" :key="span.id" :class="span.class">{{span.text}}</span>
       </div>
     </div> 
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import ScrollOut from "scroll-out";
 export default {
   props: {
     Title: { type: Array, required: true },
@@ -123,4 +124,5 @@ header {
     }
   }
 }
+
 </style>

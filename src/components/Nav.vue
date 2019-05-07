@@ -52,7 +52,7 @@
           <router-link @click.native="close" to="#">درباره ما</router-link>
         </li>
         <li>
-          <router-link @click.native="close" to="#">ارتباط با ما</router-link>
+          <router-link @click.native="close" to="/contact">ارتباط با ما</router-link>
         </li>
       </ul>
     </div>

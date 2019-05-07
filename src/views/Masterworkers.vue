@@ -13,7 +13,7 @@
           <img src="@/assets/icons/450-3366-225x168.jpg">
           <h4>کنعان پاسبانی</h4>
           <span>کار {{i}}</span>
-          <button>نمایش نمونه کارها</button>
+          <button @click="goto('master-worker-detail')">نمایش نمونه کارها</button>
         </div>
       </div>
       <button :class="$style.more">
@@ -43,6 +43,11 @@ export default {
     Footer,
     Modal,
     AreYouAMasterWorker
+  },
+  methods: {
+    goto(name) {
+      this.$router.push(name);
+    }
   }
 };
 </script>

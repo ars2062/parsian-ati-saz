@@ -1,34 +1,24 @@
 <template>
   <div>
-    <Header :Title="[{text:'خرید'}]" :image="require('@/assets/icons/slide1.svg')"/>
+    <Header 
+      :Title="[{text:'لیست کامل محصولات ساختمانی'}]"
+      :subtitle="[{text:'ثبت آگهی'}]"
+      :image="require('@/assets/icons/3246.jpg')"
+      subtitleC/>
+    <Title title="لیست محصولات برند منظقه" style="margin-top:50px;"/>
     <div :class="$style.products">
       <div :class="$style.post" v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i">
         <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-        <div :class="$style.buttonContainer">
-          <button @click="openModal('postDetail')">
-            <img src="@/assets/icons/diagonal-resize.svg">
-          </button>
-        </div>
+        <h3>لوازم ساختمانی برادران بیژن </h3>
+        <h4>زمینه کاری : تولید لوازم پلاستیکی</h4>
+        <button @click="goto('product-detail')">نمایش کامل اطلاعات</button>
       </div>
     </div>
     <button :class="$style.more">
       <span>نمایش آگهی بیشتر</span>
     </button>
+    <AreYouAMasterWorker/>
     <Footer/>
-
-    <Modal ref="postDetail" :class="$style.postDetail">
-      <div :class="$style.imageContainer">
-        <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-        <button
-          @click="goto('building-equipment-detail')"
-          :class="$style.more"
-        >برای نمایش اطلاعات تکمیلی کلیک کنید</button>
-        <section>
-          <p>لوزارم ساختمانی برادران بیژن بجز قاسم</p>
-          <button @click="goto('building-equipment-detail')">نمایش آدرس</button>
-        </section>
-      </div>
-    </Modal>
   </div>
 </template>
 
@@ -40,6 +30,7 @@ import Title from "@/components/Title.vue";
 import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
+import AreYouAMasterWorker from "@/components/AreYouAMasterWorker.vue";
 export default {
   components: {
     Header,
@@ -47,7 +38,8 @@ export default {
     Title,
     CardSlider,
     Footer,
-    Modal
+    Modal,
+    AreYouAMasterWorker
   },
   methods: {
     goto(name) {
@@ -79,52 +71,40 @@ export default {
 @import "@/assets/main.scss";
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 210px);
-  grid-gap: 10px;
-  padding: 50px;
+  grid-template-columns: repeat(auto-fit, 330px);
+  grid-gap: 30px;
+  padding: 50px 120px;
   justify-content: center;
   .post {
-    padding-top: 100%;
-    position: relative;
-    overflow: hidden;
-    * {
-      position: absolute;
-      margin: auto;
-    }
-    img {
+    direction: rtl;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba($color: #000000, $alpha: .16);
+    img{
       width: 100%;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
     }
-    .buttonContainer {
-      @include size(105px, 105px);
-      background-color: rgba(color(coal), 0.5);
-      transform: rotate(-45deg);
-      top: 100%;
-      left: calc(100% - 52.5px);
-      right: 0;
-      bottom: 0;
-      button {
-        margin: 7.5px;
-        @include size(90px, 90px);
-        z-index: 2;
-        cursor: pointer;
-        position: relative;
-        background-color: color(skin-tone);
-        border: none;
-        transition: all 0.1s;
-        &:active {
-          transform: scale(1.05);
-        }
-        img {
-          @include size(15px, 15px);
-          top: 0;
-          margin: 7.5px auto;
-          position: absolute;
-          transform: rotate(45deg);
-        }
+    h3{
+      font-weight: normal;
+      font-size: 18px;
+      margin: 0 10px;
+    }
+    h4{
+      font-weight: 100;
+      font-size: 17px;
+      margin: 0 10px;
+    }
+    button{
+      border: none;
+      border-radius: 0 0 6px 6px;
+      background-color: color(skin-tone);
+      width: 100%;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 50px;
+      margin-top: 17px;
+      outline: none;
+      &:active{
+        background-color: darken($color: color(skin-tone), $amount: 10%);
       }
     }
   }

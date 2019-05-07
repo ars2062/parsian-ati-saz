@@ -1,25 +1,14 @@
 <template>
   <div :class="$style.combolist" dir="rtl">
-    <div @click="toggleDisplay">
+    <div
+      @click="toggleDisplay"
+      :style="display=='block'?'border-radius: 6px 6px 0 0; border-bottom:none':''"
+    >
       <span>{{choosen||title}}</span>
       <img src="@/assets/icons/right-arrow.svg">
     </div>
     <ul :style="{display:this.display}">
-      <li v-for="(item,index) in this.items" :key="item.id" @click="choose(item.id)">
-        <div v-if="checkbox" :class="$style.checkbox">
-          <input
-            type="checkbox"
-            v-model="CheckedItems"
-            :name="index"
-            :id="index"
-            :value="item.id"
-            @change="change()"
-            hidden
-          >
-          <label :for="index" :class="(index % 2 == 0)?$style.dark:''"></label>
-        </div>
-        <span>{{item.text}}</span>
-      </li>
+      <li v-for="item in this.items" :key="item.id" @click="choose(item.id)">{{item.text}}</li>
     </ul>
   </div>
 </template>
@@ -41,8 +30,14 @@ export default {
       CheckedItems: []
     };
   },
+  mounted() {
+    window.addEventListener("click", e => {
+      if (this.display === "block") this.display = "none";
+    });
+  },
   methods: {
-    toggleDisplay() {
+    toggleDisplay($event) {
+      $event.stopPropagation();
       this.display = this.display === "block" ? "none" : "block";
     },
     choose(id) {
@@ -74,17 +69,20 @@ export default {
 <style lang='scss' module>
 @import "@/assets/main.scss";
 .combolist {
-  margin: auto;
   position: relative;
   user-select: none;
   div {
-    color: color(grullo);
-    height: 30px;
-    font-size: 16px;
+    color: #cecece;
+    height: 40px;
+    font-size: 14px;
     cursor: pointer;
-    border-bottom: 2px solid color(skin-tone);
+    background-color: #3b3b3b;
+    border: 1px solid color(skin-tone);
+    border-radius: 6px;
+    padding: 0 15px;
     span {
       float: right;
+      line-height: 40px;
     }
     img {
       width: 17px;
@@ -94,30 +92,28 @@ export default {
   }
   ul {
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% - 1px);
     list-style: none;
-    width: 100%;
+    width: calc(100% - 2px);
     z-index: 40;
+    border: 1px solid color(skin-tone);
+    background-color: #3b3b3b;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
     li {
-      text-align: center;
-      display: flex;
-      flex-direction: row;
-      border: 1px solid white;
       text-align: right;
+      flex-direction: row;
+      text-align: right;
+      line-height: 36px;
+      font-size: 15px;
       cursor: pointer;
-      span {
-        margin-right: 10px;
-      }
-      &:nth-child(odd) {
-        background-color: color(skin-tone);
-        color: black;
-      }
-      &:nth-child(even) {
-        background-color: black;
-        color: white;
-      }
+      color: white;
+      padding: 0 10px;
       &:hover {
-        text-shadow: 0 0 10px rgba($color: #fff, $alpha: 0.1);
+        background-color: #000000;
+      }
+      &:last-of-type {
+        border-radius: 0 0 6px 6px;
       }
     }
   }

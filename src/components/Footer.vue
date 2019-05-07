@@ -10,10 +10,10 @@
         <h2 :class="$style.title">شبکه ها</h2>
         <ul>
           <li>
-            <router-link to="#">تلگرام</router-link>
+            <a target="_blank" href="https://www.t.me/parsianatisaz" class="fade-in" data-scroll>تلگرام</a>
           </li>
           <li>
-            <router-link to="#">اینستاگرام</router-link>
+            <a target="_blank" href="https://www.instagram.com/parsian.atisaz" class="fade-in" data-scroll>اینستاگرام</a>
           </li>
         </ul>
       </div>
@@ -21,7 +21,7 @@
         <h2 :class="$style.title">
           <span :class="$style.gold">فایل</span> های اخیر
         </h2>
-        <router-link to="#" :class="$style.card" v-for="i in [1,2]" :key="i">
+        <router-link to="#" :class="[$style.card,'fade-in']" v-for="i in [1,2]" :key="i"  data-scroll>
           <div :class="$style.type">مشارکت در ساخت</div>
           <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
           <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
@@ -32,7 +32,7 @@
         <h2 :class="$style.title">
           <span :class="$style.gold">درباره</span> پارسیان آتی ساز
         </h2>
-        <p>
+        <p class="fade-in" data-scroll>
           قطعا پیدا کردن یک ملک مشارکتی با شرایط ایده ال کار آسانی نیست آن هم در تهران اما
           پارسیان آتی ساز با در اختیار گذاشتن امکانات فوق العاده این کار را برای شما آسان کرده است .
           شما میتوانید به راحتی از طریق سایت ملک مد نظر خود را جستجو کنید و یا مستقیما با
@@ -46,7 +46,7 @@
         </p>
       </div>
     </div>
-    <div :class="$style.foot">
+    <div :class="[$style.foot,'fade-in']" data-scroll>
       <span>
         طراحی شده توسط تیم
         <span :class="$style.gold">TRIDEV</span> در سال 2019

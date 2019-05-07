@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.sliderContainer">
+  <div :class="[$style.sliderContainer,'scrollable-pane']">
     <button :class="$style.navBtn" @mousedown="this.slideLeft" @mouseup="this.stopLeft">
       <i class="fas fa-chevron-left"></i>
     </button>
@@ -20,9 +20,9 @@ let $ = JQuery;
 export default {
   data() {
     return {
-      index,
-      slideleft,
-      slideright
+      index:0,
+      slideleft:false,
+      slideright:false
     };
   },
   methods: {
