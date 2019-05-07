@@ -10,7 +10,7 @@ export default {
         user:{
             token:localStorage.getItem('user.token') ? localStorage.getItem('user.token') : '',
             phone:localStorage.getItem('user.phone') ? localStorage.getItem('user.phone') : '',
-            isAdmin:false
+            isAdmin:localStorage.getItem('user.isAdmin') ? localStorage.getItem('user.isAdmin') : false
         }
     },
     getters: {
@@ -63,6 +63,7 @@ export default {
         },
         error: state => {
             // set message later
+            state.loginMsg = 'خطا در برقراری ارتباط با سرور';
         }
     },
     actions: {
@@ -84,7 +85,7 @@ export default {
                 }
 
             }).catch(error => {
-                
+                commit('error');
             });
         },
         verify: function ({ commit }, { phone, code }) {

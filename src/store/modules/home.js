@@ -10,7 +10,9 @@ export default {
     master_adverts: [],
     gold_melks: [],
     search_results: [],
-    cities:[]
+    cities:[],
+    // this state field is for add contact to admin 
+    msg:'' 
   },
   getters: {
     product_adverts: state => {
@@ -36,6 +38,9 @@ export default {
     },
     cities: state => {
       return state.cities;
+    },
+    msg:state => {
+      return state.msg;
     }
   },
   mutations: {
@@ -48,7 +53,6 @@ export default {
 
       // set cities in rootstate
       state.cities = server_response.cities;
-      console.log(state.cities);
     },
     get_advert(state, { type, id }) {
       if (type == 1) {
@@ -72,6 +76,9 @@ export default {
     },
     set_cities(state,cities){
       state.cities = cities;
+    },
+    set_add_contatc_msg: (state,msg)=> {
+      state.msg = msg;
     }
   },
   actions: {
@@ -90,10 +97,7 @@ export default {
         });
     },
     // tested
-    search: (
-      { commit },
-      { min_metrazh, max_metrazh, cities = [], advert_type }
-    ) => {
+    search: ({ commit },{ min_metrazh, max_metrazh, cities = [], advert_type }) => {
       Axios.post(
         consts.api_urls.search + advert_type,
         {
@@ -115,6 +119,20 @@ export default {
         .catch(function(error) {
           commit("stop_loading", { root: true });
         });
+    },
+    send_contact:({commit},{name,subject,phone,description})=>{
+      Axios.post(consts.api_urls.add_contact,{
+        name:name,
+        subject:subject,
+        phone:phone,
+        description:description
+      },{
+        headers:{ 'Content-Type': 'application/json' }
+      }).then(response => {
+        commit('set_add_contatc_msg',response.data.message);
+      }).error(error => {
+        commit('error');
+      });
     }
   }
 };
