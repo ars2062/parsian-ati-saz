@@ -7,6 +7,7 @@ export default {
     state: {
         isAuth:localStorage.getItem('user.token') ? true:false,
         loginMsg:'',
+        loginStatus:'login',
         user:{
             token:localStorage.getItem('user.token') ? localStorage.getItem('user.token') : '',
             phone:localStorage.getItem('user.phone') ? localStorage.getItem('user.phone') : '',
@@ -31,6 +32,9 @@ export default {
         },
         user:state => {
             return state.user;
+        },
+        loginStatus:state =>{
+            return state.loginStatus;
         }
     },
     mutations: {
@@ -52,6 +56,9 @@ export default {
             state.user.isAdmin = value;
             localStorage.setItem('user.isAdmin',t);
         },
+        set_login_status: (state,value)=>{
+            state.loginStatus = value;
+        },
         logout:(state)=>{
             state.user.isAdmin = false;
             state.user.phone = null;
@@ -68,6 +75,9 @@ export default {
     },
     actions: {
         login: function ({ commit }, phone) {
+
+            commit('start_loading',{root:true});
+
             axios.post(
                 consts.api_urls.login, {
                     'phone': phone
@@ -77,11 +87,15 @@ export default {
                     }
                 }
             ).then(res => {
+                commit('stop_loading',{root:true});
 
                 commit('set_loginMsg',res.data.message);
 
                 if (res.data.result) {
                     commit('set_user_phone',phone);
+                    commit('set_login_status','verify')
+                } else {
+                    commit('error');
                 }
 
             }).catch(error => {
@@ -89,6 +103,9 @@ export default {
             });
         },
         verify: function ({ commit }, { phone, code }) {
+
+            commit('start_loading',{root:true});
+
             axios.post(
                 consts.api_urls.verify, {
                     phone: phone,
@@ -100,7 +117,7 @@ export default {
                     }
                 }
             ).then(res => {
-                
+                commit('stop_loading',{root:true});
                 commit('set_loginMsg',res.data.message);
 
                 if (res.data.result) {

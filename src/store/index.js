@@ -1,9 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import contact from "./modules/contact";
-import adviser from "./modules/adviser";
+import contact from "./modules/admin/contact";
+import adviser from "./modules/admin/adviser";
 import home from "./modules/home";
 import account from "./modules/account";
+import advert from "./modules/advert";
+import admin_advert from "./modules/admin/advert";
 
 Vue.use(Vuex);
 
@@ -14,10 +16,12 @@ export default new Vuex.Store({
     contact: contact,
     adviser: adviser,
     home: home,
-    account: account
+    account: account,
+    advert:advert,
+    admin_advert:admin_advert
   },
   state: {
-    loading: false,
+    loading: true,
     // this object is for property pages
     detail_object: {}
   },
