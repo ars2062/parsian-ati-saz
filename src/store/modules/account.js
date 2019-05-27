@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import consts from "../../consts";
+import consts from "@/consts";
 
 export default {
     namespaced: true,
