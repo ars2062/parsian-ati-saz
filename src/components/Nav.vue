@@ -18,7 +18,7 @@
         </ul>
       </li>
       <li v-if="!loggedin" @click="openModal('LoginRegister')">
-        <span>ورود / ثبتنام</span>
+        <span>ورود / ثبت نام</span>
         <img src="@/assets/icons/avatar.svg">
       </li>
       <li @click="this.openMenu">
@@ -40,13 +40,16 @@
           <router-link @click.native="close" to='/'>خانه</router-link>
         </li>
         <li>
-          <router-link @click.native="close" to='/partnerships'>املاک مشارکت در ساخت</router-link>
+          <router-link @click.native="close" to='/partnerships'>فایل های مشارکت در ساخت</router-link>
         </li>
         <li>
-          <router-link @click.native="close" to='/sells'>املاک فروش کلنگی</router-link>
+          <router-link @click.native="close" to='/sells'>فایل های املاک کلنگی</router-link>
         </li>
         <li>
-          <router-link @click.native="close" to='/advertisement-registration'>ثبت آگهی استادکار</router-link>
+          <router-link @click.native="close" to='/advertisement-registration'>ثبت/ارسال آگهی استادکاران</router-link>
+        </li>
+        <li>
+          <router-link @click.native="close" to='/advertisement-registration'>ثبت آگهی محصولات ساختمانی</router-link>
         </li>
         <li>
           <router-link @click.native="close" to="#">درباره ما</router-link>

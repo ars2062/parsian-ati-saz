@@ -23,7 +23,7 @@
           </button>
         </div>
         <div :class="[$style.card,'slide-in-bottom']" data-scroll>
-          <img src="@/assets/icons/stationery.svg">
+          <img src="@/assets/icons/customer-service.svg">
           <h3>لیست تلفن</h3>
           <p>
             لیستی تلفن مهندسان ، مشاوران
@@ -36,7 +36,7 @@
           </button>
         </div>
         <div :class="[$style.card,'slide-in-bottom']" data-scroll>
-          <img src="@/assets/icons/stationery.svg">
+          <img src="@/assets/icons/organize.svg">
           <h3>لیست دفاتر خدمات</h3>
           <p>
             لیستی بسیار قوی از دفاتر خدمات
@@ -56,7 +56,7 @@
             استاد کار مورد نظر خود را با دیدن
             نمونه کار انتخاب کنید
           </p>
-          <button @click="goto('masters-workers')">
+          <button @click="goto('master-workers')">
             <img src="@/assets/icons/right-arrow (2).svg">
             <span>نمایش</span>
           </button>
@@ -136,7 +136,7 @@
           <button @click="goto('master-worker-detail')">نمایش نمونه کارها</button>
         </div>
       </CardSlider>
-      <button :class="[$style.more]" @click="goto('masters')">
+      <button :class="[$style.more]" @click="goto('master-workers')">
         <span>نمایش به صورت کامل</span>
       </button>
     </section>
@@ -609,11 +609,12 @@ export default {
   section.one {
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      padding: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      padding: 70px 160px;
+      grid-gap: 10px;
       .card {
         text-align: center;
-        padding: 60px 20px;
+        padding: 20px 10px;
         color: color(chocolate);
         display: grid;
         grid-template-rows: repeat(4, auto);
@@ -622,7 +623,7 @@ export default {
           text-align: center;
         }
         h3 {
-          font-size: 30px;
+          font-size: 26px;
           font-weight: normal;
         }
         img {
@@ -630,9 +631,9 @@ export default {
         }
         p {
           margin: 10px 0;
-          min-height: 125px;
+          min-height: 85px;
           vertical-align: middle;
-          font-size: 20px;
+          font-size: 15px;
           font-weight: 100;
         }
         button {
@@ -668,6 +669,7 @@ export default {
       .big {
         background-color: #313131;
         padding: 25px 20px;
+        border-radius: 12px;
         p {
           min-height: auto !important;
           margin: 0;
@@ -900,17 +902,18 @@ export default {
     min-height: 445px;
     background: image(testimonials-bg, jpg) no-repeat;
     background-size: cover;
-    padding-top: 145px;
+    padding-top: 80px;
     display: grid;
     grid-template-areas:
       "title title"
       "left right";
+    border-top: 5px solid color(skin-tone);
     h2 {
       grid-area: title;
       text-align: center;
       color: color(skin-tone);
       position: relative;
-      font-size: 32px;
+      font-size: 29px;
       font-weight: 100;
       span {
         display: inline-block;
@@ -950,7 +953,7 @@ export default {
     }
     p {
       grid-area: right;
-      font-size: 25px;
+      font-size: 22px;
       font-weight: 100;
       color: white;
       text-align: right;
@@ -985,7 +988,7 @@ export default {
       background-color: white;
       position: relative;
       img {
-        width: calc((100vw - 340px) / 4);
+        width: 100%;
         border-radius: 6px;
         height: 195px;
       }

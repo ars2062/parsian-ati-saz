@@ -19,16 +19,16 @@
       <div :class="$style.con">
         <p
           :class="$style.address"
-        >آدرس: سعادت آباد چهار راه شهردای ، برج نارنجستان ، طبقه 5 ، واحد 1</p>
+        >آدرس: سعادت آباد چهار راه شهردای ، مجتمع اداری تجاری سرو (نارنجستان) ، طبقه 5 ، واحد 1</p>
         <a href="tel:+2122065332" :class="$style.phone">تلفن : 02122065332</a>
       </div>
       <div :class="$style.socials">
         <a href="https://www.instagram.com/parsian.atisaz" target="_blank">
-          <i class="fas fa-instagram"></i>
+          <i class="fab fa-instagram"></i>
           Instagram: @parsian.atisaz
         </a>
         <a href="https://www.t.me/parsianatisaz" target="_blank">
-          <i class="fas fa-telegram"></i>
+          <i class="fab fa-telegram"></i>
           Telegram: @parsianatisaz
         </a>
       </div>

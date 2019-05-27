@@ -1,68 +1,79 @@
 <template>
   <div>
-    <Header
-      :Title="[{text:'261 متری سعادت آباد'}]"
-      :subtitle="[{text:'ثبت شده در 22 بهمن 97'}]"
-      :image="require('@/assets/icons/slide1.svg')"
-    />
     <section :class="$style.detail">
-      <div :class="$style.head">
-        <button @click="goback">بازگشت به صفحه قبل</button>
-        <button>
-          <i class="fas fa-star"></i>آماده به امضا
-        </button>
-        <span>کد آگهی: 298</span>
+      <div :class="[$style.head,'slide-in-top']" data-scroll>
+        <span>خانه / نتیجه جستجو / 261 متری سعادت آباد خیابان صرافها</span>
+        <button @click="goback">بازگشت</button>
       </div>
-      <div :class="$style.introdoction">
-        <h1>تهران، سعادت آباد</h1>
-        <h2>صرافها خیابان 19 غربی</h2>
+      <div :class="$style.container">
+        <section>
+          <h1>261 متری سعادت آباد خیابان صرافها</h1>
+          <span :class="$style.address">
+            <i class="fas fa-map-marker-alt"></i>تهران ، سعادت آباد
+          </span>
+          <button @click="openModal('contactInfo')"  class="slide-in-left" data-scroll>دریافت شماره تماس</button>
+          <button class="slide-in-left" data-scroll>نشان کردن</button>
+          <button :class="[$style.left,'slide-in-left']" data-scroll>آماده امضاء</button>
+          <ul  class="slide-in-top" data-scroll>
+            <li>
+              <label>دسته بندی</label>
+              <span>مشارکت در ساخت</span>
+            </li>
+            <li>
+              <label>متراژ کل</label>
+              <span>1200 متر</span>
+            </li>
+            <li>
+              <label>موقعیت</label>
+              <span>شمالی ، شرقی</span>
+            </li>
+            <li>
+              <label>گذر</label>
+              <span>24 متر</span>
+            </li>
+            <li>
+              <label>بر ملک</label>
+              <span>90 متر</span>
+            </li>
+            <li>
+              <label>نوع سند</label>
+              <span>سند شخصی</span>
+            </li>
+            <li>
+              <label>پهنه طرح تفصیلی</label>
+              <span>R 212</span>
+            </li>
+            <li>
+              <label>مبلغ بلاعوض</label>
+              <span>12 میلیارد</span>
+            </li>
+            <li>
+              <label>مبلغ قرض الحسنه</label>
+              <span>12 میلیارد</span>
+            </li>
+          </ul>
+        </section>
+        <ImageSlider
+          :images="[
+            {src:require('@/assets/icons/post10-lg.jpg'),id:0},
+            {src:require('@/assets/icons/post10-lg.jpg'),id:1},
+            {src:require('@/assets/icons/post10-lg.jpg'),id:2},
+            {src:require('@/assets/icons/post10-lg.jpg'),id:3},
+            {src:require('@/assets/icons/post10-lg.jpg'),id:4},
+            {src:require('@/assets/icons/post10-lg.jpg'),id:5},
+            {src:require('@/assets/icons/post10-lg.jpg'),id:6}
+          ]"
+          :speed="6000"
+        />
       </div>
-      <button :class="$style.location">
-        <i class="fas fa-map-marker"></i>
-      </button>
-      <!--
-      <Carousel>
-        <Slide v-for="i in [1,2,3]" :key="i">
-          <img src="@/assets/icons/post10-lg.jpg">
-        </Slide>
-      </Carousel>
-      -->
-      <ImageSlider 
-        :images="[
-          {src:require('@/assets/icons/post10-lg.jpg'),id:0},
-          {src:require('@/assets/icons/post10-lg.jpg'),id:1},
-          {src:require('@/assets/icons/post10-lg.jpg'),id:2}
-        ]"
-        speed="8000"/>
-      <button :class="$style.getPhone" @click="openModal('contactInfo')">دریافت شماره تماس</button>
-      <div :class="$style.actions">
-        <button>برای مشارکت</button>
-        <button>نشان کردن آگهی</button>
-      </div>
-      <div :class="$style.detailHead">
-        <h1>261 متری سعادت آباد خیابان صرافها</h1>
-        <h3>مبلغ بلاعوض : 1.000.000.000</h3>
-      </div>
-      <div :class="$style.detailContent">
-        <span :class="$style.bar">
-          <span :class="$style.bold">بر:</span> 12 متر
-        </span>
-        <span :class="$style.gozar">
-          <span :class="$style.bold">گذر:</span> 12 متر
-        </span>
-        <p>
-          بهترین لوکیشن (24متری)
-          پلن بی نظیر
-          کم واحد
-          لابی وسرایداری
-          2پارکینگ سندی
-          نوساز کلیدنخورده
-          شرایط پرداخت عالی
-          روبه آفتاب غرق نور
-          املاک
-        </p>
-      </div>
+      <p :class="$style.description">
+        ملک 1200 متری در سعادت آباد واقع در صرافها
+        در بهترین لوکیشن آماده مشارکت
+      </p>
     </section>
+
+    <ContactCard/>
+
     <Footer/>
 
     <Modal ref="contactInfo">
@@ -90,6 +101,7 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import ImageSlider from "@/components/ImageSlider.vue";
+import ContactCard from "@/components/ContactCard.vue";
 
 export default {
   components: {
@@ -99,7 +111,8 @@ export default {
     CardSlider,
     Footer,
     Modal,
-    ImageSlider
+    ImageSlider,
+    ContactCard
   },
   methods: {
     goto(name) {
@@ -122,128 +135,97 @@ export default {
 @import "@/assets/main.scss";
 .detail {
   direction: rtl;
-  padding: 150px;
+  padding: 120px 150px;
   .head {
-    border-bottom: 1px solid #707070;
-    padding: 5px;
-    height: 40px;
+    line-height: 40px;
+    border: 1px solid #707070;
+    border-radius: 2px;
+    padding: 0 10px;
+    color: #202020;
+    position: relative;
+    overflow: hidden;
+    span {
+      font-size: 15px;
+    }
     button {
-      float: right;
-      margin-top: 5px;
-      margin-left: 10px;
-      border: none;
-      border-radius: 6px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
       font-size: 14px;
-      padding: 0 15px;
-      height: 30px;
-      line-height: 30px;
-      &:first-of-type {
-        background-color: color(skin-tone);
+      padding: 0 60px;
+      background-color: #f6f6f6;
+      border: none;
+      border-right: 1px solid #707070;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+  .container {
+    display: grid;
+    grid-template-columns: auto 430px;
+    grid-gap: 120px;
+    padding: 20px 0;
+      border-bottom: 1px solid #707070;
+    section {
+      h1 {
+        font-size: 30px;
+        font-weight: normal;
       }
-      &:last-of-type {
-        background-color: color(red);
-        color: white;
+      .address {
+        display: block;
+        margin-bottom: 17px;
+        font-size: 18px;
+        color: rgba($color: #000000, $alpha: 0.5);
         i {
+          color: color(chocolate);
           margin-left: 10px;
         }
       }
-    }
-    span {
-      float: left;
-      font-size: 14px;
-      height: 30px;
-      line-height: 30px;
-      margin-top: 5px;
-    }
-  }
-  .introdoction {
-    float: left;
-    display: flex;
-    flex-direction: column;
-    margin: 10px 5px;
-    h1 {
-      font-size: 20px;
-      font-weight: normal;
-      line-height: 20px;
-    }
-    h2 {
-      font-size: 14px;
-      font-weight: 100;
-    }
-  }
-  button.location {
-    float: right;
-    @include size(35px, 35px);
-    line-height: 35px;
-    border-radius: 35px;
-    border: none;
-    background-color: color(skin-tone);
-    font-size: 17px;
-    margin: 20px;
-  }
-  button.getPhone {
-    float: right;
-    border: none;
-    border-radius: 6px;
-    background-color: color(chocolate);
-    color: white;
-    padding: 10px 40px;
-    font-size: 20px;
-  }
-  .actions {
-    float: left;
-    display: flex;
-    flex-direction: column;
-    button {
-      border: none;
-      border-radius: 6px;
-      padding: 0 30px;
-      font-size: 14px;
-      margin-bottom: 5px;
-      &:first-of-type {
-        background-color: color(skin-tone);
+      button {
+        border-radius: 4px;
+        border: none;
+        line-height: 40px;
+        padding: 0 20px;
+        font-size: 14px;
+        cursor: pointer;
+        outline: none;
+        &.left {
+          float: left !important;
+        }
+        &:nth-of-type(1) {
+          background-color: color(skin-tone);
+          margin-left: 10px;
+        }
+        &:nth-of-type(2) {
+          background-color: #fff;
+          border: 1px solid black;
+        }
+        &:nth-of-type(3) {
+          background-color: #fff;
+          border: 1px solid color(red);
+          color: color(red);
+        }
       }
-      &:last-of-type {
-        background-color: white;
-        border: 1px solid #707070;
-        font-weight: 100;
+      ul {
+        margin: 18px 0;
+        list-style: none;
+        li {
+          line-height: 35px;
+          &:not(:last-of-type) {
+            border-bottom: 1px solid #707070;
+          }
+          label {
+            color: rgba($color: #202020, $alpha: 0.5);
+            font-size: 14px;
+          }
+          span {
+            float: left;
+            font-size: 17px;
+            color: #202020;
+          }
+        }
       }
-    }
-  }
-  .detailHead {
-    width: 100%;
-    float: right;
-    margin-top: 35px;
-    border-bottom: 1px solid #707070;
-    h1 {
-      font-size: 30px;
-      font-weight: normal;
-      float: right;
-    }
-    h3 {
-      font-size: 20px;
-      margin-top: 20px;
-      font-weight: 100;
-      float: left;
-    }
-  }
-  .detailContent {
-    width: 100%;
-    float: right;
-    margin-bottom: 50px;
-    .bold {
-      font-weight: normal;
-      font-size: 20px;
-    }
-    .bar {
-      font-weight: 100;
-    }
-    .gozar {
-      font-weight: 100;
-    }
-    p {
-      font-weight: 100;
-      font-size: 20px;
     }
   }
 }

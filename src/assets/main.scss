@@ -20,8 +20,8 @@ $fonts-path:'@/assets/fonts/';
     @return url('@/assets/icons/#{$svg-name}.#{$ext}')
 }
 
-@mixin desktop($width: $mobile-width) {
-    @media (min-width: #{$width}) {
+@mixin mobile($width: $mobile-width) {
+    @media (max-width: #{$width}) {
         @content;
     }
 }

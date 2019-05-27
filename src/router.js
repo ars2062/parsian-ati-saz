@@ -16,6 +16,7 @@ import ProductList from "./views/ProductList.vue";
 import ClutterList from "./views/ClutterList.vue";
 import Test from "./views/Test.vue";
 import Contact from "./views/Contact.vue";
+import SearchResult from "./views/SearchResult.vue";
 
 Vue.use(Router);
 let router = new Router({
@@ -27,8 +28,8 @@ let router = new Router({
       component: Home
     },
     {
-      path: "/masters-workers",
-      name: "masters-workers",
+      path: "/master-workers",
+      name: "master-workers",
       component: Masterworkers
     },
     {
@@ -101,6 +102,11 @@ let router = new Router({
       path: "/contact",
       name: "contact",
       component: Contact
+    },
+    {
+      path: "/search-result",
+      name: "search-result",
+      component: SearchResult
     }
   ]
 });

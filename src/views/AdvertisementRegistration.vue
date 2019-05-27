@@ -1,8 +1,9 @@
 <template>
   <div>
-    <Header :Title="this.headertitle" :image="require('@/assets/icons/slide1.svg')"/>
-
-    <Title title="ثبت آگهی" style="margin-top:60px;margin-bottom:35px;"/>
+    <Title
+      title="ثبت آگهی"
+      style="margin:100px auto 35px auto;display:inline-grid;position:relative;left:50%;transform:translateX(-50%)"
+    />
 
     <section
       :class="[$style.choose_category,$style.sec]"
@@ -13,14 +14,20 @@
       <div :class="$style.options">
         <div :class="$style.grid">
           <button
-            @click="display('choose_category','reqister_product',[{text:'ثبت'},{text:'آگهی محصولات', class:$style.skin_tone}])"
-          >ثبت آگهی محصولات ساختمانی</button>
+            @click="display('choose_category','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
+          >
+            <span :class="$style.light">ثبت آگهی</span> املاک کلنگی/مشارکت
+          </button>
           <button
             @click="display('choose_category','reqister_masterworker',[{text:'ثبت'},{text:'آگهی استاد کار', class:$style.skin_tone}])"
-          >ثبت آگهی استاد کار</button>
+          >
+            <span :class="$style.light">ثبت آگهی</span> استادکاران
+          </button>
           <button
-            @click="display('choose_category','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
-          >املاک</button>
+            @click="display('choose_category','reqister_product',[{text:'ثبت'},{text:'آگهی محصولات', class:$style.skin_tone}])"
+          >
+            <span :class="$style.light">ثبت آگهی</span> محصولات ساختمانی
+          </button>
         </div>
         <p>توجه داشته باشید که پارسیان آتی ساز فقط در این دو زمینه به صورت تخصصی فعالت می کند</p>
       </div>
@@ -45,7 +52,7 @@
         <button
           :class="$style.back"
           @click="display('choose_property_category','choose_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
-        >بازگشت به صفحه قبل</button>
+        >بازگشت</button>
       </div>
     </section>
 
@@ -126,7 +133,7 @@
         </div>
         <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
-          :class="$style.back"
+          :class="$style.back2"
           @click="display('reqister_product','choose_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
         >بازگشت به صفحه قبل</button>
       </div>
@@ -204,15 +211,15 @@
         </div>
         <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
-          :class="$style.back"
+          :class="$style.back2"
           @click="display('reqister_masterworker','choose_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
         >بازگشت به صفحه قبل</button>
       </div>
     </section>
 
-    <section
+    <section 
       :class="[$style.register_sell,$style.sec]"
-      ref="register_sell"
+      ref="register_sell" 
       style="display:none"
     >
       <div
@@ -221,16 +228,20 @@
       <div :class="$style.form">
         <div :class="[$style.form_group,$style.full]">
           <label>محله</label>
-          <select>
-            <option value="a">نظام آباد</option>
-            <option value="a">سبلان</option>
-            <option value="a">نیاوران</option>
-            <option value="a">زعفرانیه</option>
-            <option value="a">افسریه</option>
-            <option value="a">یافت آباد</option>
-            <option value="a">دهکده المپیک</option>
-            <option value="a">پاسداران</option>
-          </select>
+          <ComboList2
+            title="نوع سند"
+            :items="[
+              {id: 1, text: 'نظام آباد'},
+              {id: 2, text: 'سبلان'},
+              {id: 3, text: 'نیاوران'},
+              {id: 4, text: 'زعفرانیه'},
+              {id: 5, text: 'افسریه'},
+              {id: 6, text: 'یافت آباد'},
+              {id: 7, text: 'دهکده المپیک'},
+              {id: 8, text: 'پاسداران'}
+            ]"
+            @value="chooseType($event)"
+          />
         </div>
         <div :class="[$style.form_group,$style.full]">
           <label>عکس آگهی</label>
@@ -238,11 +249,41 @@
           <ImageSelector multiple v-model="images"/>
         </div>
         <div :class="$style.form_group">
-          <label>متراژ</label>
+          <label>متراژ کل</label>
           <input type="number">
         </div>
         <div :class="$style.form_group">
-          <label>مبلغ</label>
+          <label>موقعیت</label>
+          <ComboListMultiselect2
+            placeholder="محله های مورد نظر خود را انتخاب کنید"
+            :keywords="[{id:0,name:'شمالی'},{id:1,name:'جنوبی'},{id:2,name:'شرقی'},{id:3,name:'غربی'}]"
+          />
+        </div>
+        <div :class="$style.form_group">
+          <label>بر ملک</label>
+          <input type="number">
+        </div>
+        <div :class="$style.form_group">
+          <label>گذر</label>
+          <input type="number">
+        </div>
+        <div :class="$style.form_group">
+          <label>نوع سند</label>
+          <ComboList2
+            title="نوع سند"
+            :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
+            @value="chooseType($event)"
+          />
+        </div>
+        <div :class="$style.form_group">
+          <label>پهنه طرح تفضیلی</label>
+          <ComboList2
+            :items="[{id: 1, text: 'R212'},{id: 2, text: 'R213'}]"
+            @value="chooseType($event)"
+          />
+        </div>
+        <div :class="$style.form_group">
+          <label>قیمت کل</label>
           <input type="number">
         </div>
         <div :class="$style.form_group">
@@ -252,24 +293,20 @@
         <div :class="$style.form_group">
           <label>ایمیل شما</label>
           <input type="email">
-          <div :class="$style.checkbox_container">
-            <Checkbox/>
-            <span>ایمیل در آگهی نمایش داده نشود</span>
-          </div>
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>عنوان آگهی</label>
           <span>در عنوان آگهی از مطالب مهم و چشمگیر استفاده کنید</span>
-          <input type="text">
+          <input type="text" placeholder="ملک 20 متری مشارک در سعادت آباد صرافها">
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>توضیحات آگهی</label>
           <span>جزئیات و نکات قابل توجه آگهی خود را کامل و دقیق بنویسید تا شانس موفقیت آگهی شما بیشتر شود</span>
-          <textarea rows="10"></textarea>
+          <textarea rows="10" placeholder="ملک 20 متری مشارک در سعادت آباد صرافها"></textarea>
         </div>
         <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
-          :class="$style.back"
+          :class="$style.back2"
           @click="display('register_sell','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
         >بازگشت به صفحه قبل</button>
       </div>
@@ -286,16 +323,20 @@
       <div :class="$style.form">
         <div :class="[$style.form_group,$style.full]">
           <label>محله</label>
-          <select>
-            <option value="a">نظام آباد</option>
-            <option value="a">سبلان</option>
-            <option value="a">نیاوران</option>
-            <option value="a">زعفرانیه</option>
-            <option value="a">افسریه</option>
-            <option value="a">یافت آباد</option>
-            <option value="a">دهکده المپیک</option>
-            <option value="a">پاسداران</option>
-          </select>
+          <ComboList2
+            title="نوع سند"
+            :items="[
+              {id: 1, text: 'نظام آباد'},
+              {id: 2, text: 'سبلان'},
+              {id: 3, text: 'نیاوران'},
+              {id: 4, text: 'زعفرانیه'},
+              {id: 5, text: 'افسریه'},
+              {id: 6, text: 'یافت آباد'},
+              {id: 7, text: 'دهکده المپیک'},
+              {id: 8, text: 'پاسداران'}
+            ]"
+            @value="chooseType($event)"
+          />
         </div>
         <div :class="[$style.form_group,$style.full]">
           <label>عکس آگهی</label>
@@ -303,19 +344,45 @@
           <ImageSelector multiple v-model="images"/>
         </div>
         <div :class="$style.form_group">
-          <label>متراژ بر</label>
+          <label>متراژ کل</label>
           <input type="number">
         </div>
         <div :class="$style.form_group">
-          <label>متراژ گذر</label>
+          <label>موقعیت</label>
+          <ComboListMultiselect2
+            placeholder="محله های مورد نظر خود را انتخاب کنید"
+            :keywords="[{id:0,name:'شمالی'},{id:1,name:'جنوبی'},{id:2,name:'شرقی'},{id:3,name:'غربی'}]"
+          />
+        </div>
+        <div :class="$style.form_group">
+          <label>بر ملک</label>
           <input type="number">
+        </div>
+        <div :class="$style.form_group">
+          <label>گذر</label>
+          <input type="number">
+        </div>
+        <div :class="$style.form_group">
+          <label>نوع سند</label>
+          <ComboList2
+            title="نوع سند"
+            :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
+            @value="chooseType($event)"
+          />
+        </div>
+        <div :class="$style.form_group">
+          <label>پهنه طرح تفضیلی</label>
+          <ComboList2
+            :items="[{id: 1, text: 'R212'},{id: 2, text: 'R213'}]"
+            @value="chooseType($event)"
+          />
         </div>
         <div :class="$style.form_group">
           <label>مبلغ بلاعوض</label>
           <input type="number">
         </div>
         <div :class="$style.form_group">
-          <label>متراژ کل</label>
+          <label>مبلغ قرض الحسنه</label>
           <input type="number">
         </div>
         <div :class="$style.form_group">
@@ -325,24 +392,20 @@
         <div :class="$style.form_group">
           <label>ایمیل شما</label>
           <input type="email">
-          <div :class="$style.checkbox_container">
-            <Checkbox/>
-            <span>ایمیل در آگهی نمایش داده نشود</span>
-          </div>
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>عنوان آگهی</label>
           <span>در عنوان آگهی از مطالب مهم و چشمگیر استفاده کنید</span>
-          <input type="text">
+          <input type="text" placeholder="ملک 20 متری مشارک در سعادت آباد صرافها">
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>توضیحات آگهی</label>
           <span>جزئیات و نکات قابل توجه آگهی خود را کامل و دقیق بنویسید تا شانس موفقیت آگهی شما بیشتر شود</span>
-          <textarea rows="10"></textarea>
+          <textarea rows="10" placeholder="ملک 20 متری مشارک در سعادت آباد صرافها"></textarea>
         </div>
         <button type="submit" @click="goto('register-confirmation')" :class="$style.full">ارسال آگهی</button>
         <button
-          :class="$style.back"
+          :class="$style.back2"
           @click="display('reqister_partnership','choose_property_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"
         >بازگشت به صفحه قبل</button>
       </div>
@@ -363,6 +426,8 @@ import Modal from "@/components/Modal.vue";
 import ImageSelector from "@/components/form/ImageSelector.vue";
 import Checkbox from "@/components/form/Checkbox.vue";
 import MaskedInput from "vue-masked-input";
+import ComboListMultiselect2 from "@/components/form/ComboListMultiselect2.vue";
+import ComboList2 from "@/components/form/ComboList2.vue";
 export default {
   components: {
     Header,
@@ -373,7 +438,9 @@ export default {
     Modal,
     ImageSelector,
     Checkbox,
-    MaskedInput
+    MaskedInput,
+    ComboListMultiselect2,
+    ComboList2
   },
   data() {
     return {
@@ -422,11 +489,11 @@ export default {
   direction: rtl;
   transition: all 0.1s;
   .message {
-    line-height: 65px;
+    line-height: 35px;
     display: block;
     background-color: rgba(color(skin-tone), 0.57);
-    border-radius: 6px;
-    font-size: 20px;
+    border-radius: 3px;
+    font-size: 14px;
     padding: 0 25px;
     margin: 22px 0;
   }
@@ -434,34 +501,36 @@ export default {
     padding: 20px;
     border: 1px solid color(skin-tone);
     background-color: rgba($color: #f2f2f2, $alpha: 0.48);
-    border-radius: 6px;
+    border-radius: 4px;
     margin-bottom: 70px;
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       grid-gap: 25px;
       button {
-        font-size: 25px;
-        background-color: rgba(color(skin-tone), 0.57);
+        font-size: 16px;
+        background-color: color(skin-tone);
+        height: 40px;
+        line-height: 40px;
         border: none;
-        border-radius: 6px;
+        border-radius: 3px;
         cursor: pointer;
         transition: all 0.1s;
         outline: none;
         &:active {
           transform: scale(1.02);
         }
-        &:hover{
-          background-color: darken(color(skin-tone),10%);
+        &:hover {
+          background-color: darken(color(skin-tone), 10%);
         }
       }
     }
     p {
       width: 100%;
       text-align: center;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 100;
-      margin-top: 45px;
+      margin-top: 22px;
     }
   }
   .back {
@@ -473,6 +542,24 @@ export default {
     cursor: pointer;
     transition: all 0.1s;
     outline: none;
+    position: relative;
+    right: 50%;
+    transform: translate(50%);
+    margin-top: 12px;
+    &:active {
+      transform: scale(1.02) translate(50%);
+    }
+  }
+  .back2 {
+    font-size: 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: color(skin-tone);
+    padding: 2px 15px;
+    cursor: pointer;
+    transition: all 0.1s;
+    outline: none;
+    width: fit-content;
     &:active {
       transform: scale(1.02);
     }

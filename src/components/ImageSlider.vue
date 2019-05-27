@@ -1,14 +1,14 @@
 <template>
   <div :class="$style.slider">
-    <img :id="currentImageId" :src="currentImage">
-    <div :class="$style.paginations">
-      <span
-        v-for="(span,id) in spans"
-        :key="span"
-        :id="span"
-        :class="[$style.pagination,currentImageId===span?$style.active:'']"
-        @click="selectImage(id)"
-      ></span>
+    <img :id="currentImageId" :src="currentImage" :class="$style.mainImage">
+    <div :class="$style.allImages">
+      <img
+        v-for="(image,index) in images"
+        :key="image.id"
+        :src="image.src"
+        :class="currentImageId===image.id?$style.active:''"
+        @click="selectImage(index)"
+      >
     </div>
   </div>
 </template>
@@ -32,19 +32,16 @@ export default {
       return this.images[this.index].id;
     }
   },
-  methods:{
-      selectImage(id){
-          this.index=id;
-      }
+  methods: {
+    selectImage(id) {
+      this.index = id;
+    }
   },
   mounted() {
     this.timer = setInterval(() => {
-      if (this.index < this.images.length -1) this.index++;
+      if (this.index < this.images.length - 1) this.index++;
       else this.index = 0;
     }, this.speed);
-    this.images.map(image => {
-      this.spans.push(image.id);
-    });
   },
   destroyed() {
     clearInterval(this.timer);
@@ -57,29 +54,32 @@ export default {
 
 .slider {
   position: relative;
-  img {
+  width: 430px;
+  .mainImage {
     width: 100%;
-    border-radius: 6px;
+    border: 2px solid color(skin-tone);
   }
-  .paginations {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    justify-content: center;
+  .allImages {
+    height: 85px;
+    width: 430px;
     display: flex;
     flex-direction: row;
-    padding: 20px 0;
-    .pagination {
-      @include size(10px, 10px);
-      border-radius: 10px;
-      margin: 10px;
-      display: block;
-      border: 1px solid darken(color(chocolate),10%);
+    overflow: hidden;
+    overflow-x: auto;
+    img {
+      height: 100%;
+      border-radius: 6px;
+      transition: opacity 1s, transform .5s;
       cursor: pointer;
-      &.active {
-        background-color: darken(color(chocolate),10%);
+      &:not(:last-of-type){
+        margin-left: 10px;
       }
+      &:hover{
+        transform: scale(1.05);
+      }
+    }
+    .active{
+      opacity: .68;
     }
   }
 }

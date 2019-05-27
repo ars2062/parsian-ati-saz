@@ -2,7 +2,7 @@
   <section :class="$style.searchcard">
     <p>همین امروز ملک مورد نظر خودتون رو پیدا کنید</p>
     <p>فیلد های زیر را پر کنید طبق معیار های مد نظرتون سپس دکمه جستجو بزنید</p>
-    <form>
+    <form ref="searchForm"  @submit.prevent="goto('search-result')">
       <Combolist
         title="نوع ملک مد نظرتون رو انتخاب کنید"
         :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
@@ -35,7 +35,7 @@
         data-scroll
       >
       <div :class="[$style.submitContainer,'slide-in-top']" data-scroll>
-        <button>
+        <button type="submit">
           <span>جستجو</span>
           <i></i>
           <i></i>
@@ -66,6 +66,9 @@ export default {
       } else {
         return "display: none; width: 30vw";
       }
+    },
+    formPosition() {
+      return "position: fixed !important; top: 80px !important;";
     }
   },
   components: {
@@ -82,7 +85,10 @@ export default {
         this.showForoosh = true;
         this.showMosharekat = false;
       }
-    }
+    },
+    goto(name,$event) {
+      this.$router.push(name);
+    },
   }
 };
 </script>
