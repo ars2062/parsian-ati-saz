@@ -10,7 +10,9 @@ export default {
     master_adverts: [],
     gold_melks: [],
     search_results: [],
-    cities:[]
+    cities:[],
+    // this state field is for add contact to admin 
+    msg:'' 
   },
   getters: {
     product_adverts: state => {
@@ -29,13 +31,19 @@ export default {
       return state.search_results;
     },
     recent: state => {
-      return state.search_results[state.search_results.length - 1];
+      var recent = Array(2);
+      recent[0] = state.partnership_adverts[state.partnership_adverts.length - 1] ; 
+      recent[1] = state.sell_adverts[state.sell_adverts.length - 1] ; 
+      return recent;
     },
     gold_melks: state => {
       return state.gold_melks;
     },
     cities: state => {
       return state.cities;
+    },
+    msg:state => {
+      return state.msg;
     }
   },
   mutations: {
@@ -48,7 +56,6 @@ export default {
 
       // set cities in rootstate
       state.cities = server_response.cities;
-      console.log(state.cities);
     },
     get_advert(state, { type, id }) {
       if (type == 1) {
@@ -72,28 +79,32 @@ export default {
     },
     set_cities(state,cities){
       state.cities = cities;
+    },
+    set_add_contact_msg: (state,msg)=> {
+      state.msg = msg;
     }
   },
   actions: {
     // tested
     fetch_adverts: ({ commit }) => {
+
+      commit("start_loading", { root: true });
+
       Axios.get(consts.api_urls.home)
         .then(function(response) {
-          commit("stop_loading");
+          commit("stop_loading",{root:true});
 
           commit("set_adverts", response.data);
-          console.log(response.data);
         })
         .catch(function(error) {
-          commit("stop_loading");
-          console.log(error);
+          commit("stop_loading",{root:true});
         });
     },
     // tested
-    search: (
-      { commit },
-      { min_metrazh, max_metrazh, cities = [], advert_type }
-    ) => {
+    search: ({ commit },{ min_metrazh, max_metrazh, cities = [], advert_type }) => {
+
+      commit("start_loading", { root: true });
+
       Axios.post(
         consts.api_urls.search + advert_type,
         {
@@ -108,13 +119,30 @@ export default {
         }
       )
         .then(function(response) {
-          commit("stop_loading", { root: true });
-
           commit("set_search_result", response.data);
+          
+          commit("stop_loading", { root: true });
         })
         .catch(function(error) {
           commit("stop_loading", { root: true });
         });
+    },
+    send_contact:({commit},{name,subject,phone,description})=>{
+
+      commit("start_loading", { root: true });
+
+      Axios.post(consts.api_urls.add_contact,{
+        name:name,
+        subject:subject,
+        phone:phone,
+        description:description
+      },{
+        headers:{ 'Content-Type': 'application/json' }
+      }).then(response => {
+        commit('set_add_contact_msg',response.data.message);
+      }).error(error => {
+        commit('set_add_contact_msg','خطا در ارتباط با میزبان');
+      });
     }
   }
 };
