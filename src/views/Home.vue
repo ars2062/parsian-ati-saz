@@ -64,9 +64,12 @@
       </div>
     </section>
     <section :class="$style.two">
-      <Title title="لوازم ساختمانی" style="margin-top:80px"/>
+      <Title
+        title="لوازم ساختمانی"
+        style="margin-top:80px;display:inline-block;position:relative;left:50%;transform:translateX(-50%)"
+      />
       <div :class="$style.posts">
-        <div :class="[$style.post,'slide-in-bottom']" data-scroll v-for="i in [1,2,3]" :key="i">
+        <div :class="[$style.post,'slide-in-bottom']" data-scroll v-for="i in [1,2,3,4]" :key="i">
           <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
           <h3>لوازم ساختمانی برادران بیژن</h3>
           <h4>زمینه کاری : تولید لوازم پلاستیکی</h4>
@@ -143,7 +146,13 @@
     <section :class="$style.six">
       <Title title="سازنده گانی که باما کار میکنند"/>
       <div :class="$style.collaborators">
-        <router-link to="#" v-for="i in [1,2,3,4,5,6,7,8]" :key="i" class="slide-in-bottom" data-scroll>
+        <router-link
+          to="#"
+          v-for="i in [1,2,3,4,5,6,7,8]"
+          :key="i"
+          class="slide-in-bottom"
+          data-scroll
+        >
           <img src="@/assets/icons/Kamyar-Maroufzadeh-225x168.jpg">
         </router-link>
       </div>
@@ -705,11 +714,11 @@ export default {
     }
   }
   section.two {
-    background-color: #F8F8F8;
+    background-color: #f8f8f8;
     .posts {
       margin-top: 55px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, 330px);
+      grid-template-columns: repeat(auto-fit, 250px);
       grid-gap: 30px;
       padding: 50px 120px;
       justify-content: center;
@@ -723,12 +732,12 @@ export default {
         }
         h3 {
           font-weight: normal;
-          font-size: 18px;
+          font-size: 14px;
           margin: 0 10px;
         }
         h4 {
           font-weight: 100;
-          font-size: 17px;
+          font-size: 14px;
           margin: 0 10px;
         }
         button {
@@ -737,8 +746,8 @@ export default {
           background-color: color(skin-tone);
           width: 100%;
           cursor: pointer;
-          font-size: 20px;
-          line-height: 50px;
+          font-size: 14px;
+          line-height: 40px;
           margin-top: 17px;
           outline: none;
           &:active {
@@ -749,13 +758,13 @@ export default {
     }
 
     .more {
-      font-size: 20px;
+      font-size: 14px;
       position: relative;
-      line-height: 54px;
+      line-height: 40px;
       margin-top: 45px;
       margin-bottom: 100px;
       text-align: center;
-      width: 620px;
+      width: 300px;
       border: none;
       @include HorizontalCenter();
       cursor: pointer;
@@ -770,13 +779,13 @@ export default {
         width: 100%;
         position: absolute;
         top: 0;
-        left: -54px;
+        left: -40px;
         /* stick out into margined area */
         z-index: -1;
         /* make it the background */
-        border: 54px solid transparent;
+        border: 40px solid transparent;
         /* left/right diagonals */
-        border-top: 54px solid color(skin-tone);
+        border-top: 40px solid color(skin-tone);
         border-bottom: 0px solid transparent;
       }
     }
@@ -841,12 +850,12 @@ export default {
           }
         }
         h3 {
-          font-size: 20px;
+          font-size: 19px;
           color: rgba(black, 0.5);
         }
         ul {
           list-style: none;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 100;
           color: rgba(black, 0.7);
           li {
@@ -859,20 +868,21 @@ export default {
           border: 1px solid color(skin-tone);
         }
         .price {
-          font-size: 20px;
+          font-size: 19px;
           font-weight: 100;
           color: black;
         }
       }
     }
-    button {
-      font-size: 20px;
+    
+    .more {
+      font-size: 14px;
       position: relative;
-      line-height: 54px;
+      line-height: 40px;
       margin-top: 45px;
       margin-bottom: 100px;
       text-align: center;
-      width: 620px;
+      width: 300px;
       border: none;
       @include HorizontalCenter();
       cursor: pointer;
@@ -887,13 +897,13 @@ export default {
         width: 100%;
         position: absolute;
         top: 0;
-        left: -54px;
+        left: -40px;
         /* stick out into margined area */
         z-index: -1;
         /* make it the background */
-        border: 54px solid transparent;
+        border: 40px solid transparent;
         /* left/right diagonals */
-        border-top: 54px solid color(skin-tone);
+        border-top: 40px solid color(skin-tone);
         border-bottom: 0px solid transparent;
       }
     }
@@ -1021,14 +1031,15 @@ export default {
         }
       }
     }
+
     .more {
-      font-size: 20px;
+      font-size: 14px;
       position: relative;
-      line-height: 54px;
+      line-height: 40px;
       margin-top: 45px;
       margin-bottom: 100px;
       text-align: center;
-      width: 620px;
+      width: 300px;
       border: none;
       @include HorizontalCenter();
       cursor: pointer;
@@ -1043,13 +1054,13 @@ export default {
         width: 100%;
         position: absolute;
         top: 0;
-        left: -54px;
+        left: -40px;
         /* stick out into margined area */
         z-index: -1;
         /* make it the background */
-        border: 54px solid transparent;
+        border: 40px solid transparent;
         /* left/right diagonals */
-        border-top: 54px solid color(skin-tone);
+        border-top: 40px solid color(skin-tone);
         border-bottom: 0px solid transparent;
       }
     }
@@ -1147,17 +1158,36 @@ export default {
         width: 100%;
       }
       .more {
-        border: 1px solid color(skin-tone);
-        background-color: rgba($color: #fff, $alpha: 0.95);
-        position: absolute;
-        top: 25%;
-        left: 0;
+        font-size: 14px;
+        position: relative;
+        line-height: 40px;
+        margin-top: 45px;
+        margin-bottom: 100px;
+        text-align: center;
+        width: 300px;
+        border: none;
+        @include HorizontalCenter();
         cursor: pointer;
-        height: 50px;
-        line-height: 50px;
-        padding: 0 15px;
-        padding-right: 35px;
-        font-size: 16px;
+        transition: all 0.1s;
+        outline: none;
+        &:active::before {
+          border-top: 54px solid darken(color(skin-tone), 5%);
+        }
+        &::before {
+          content: "";
+          height: 0;
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: -40px;
+          /* stick out into margined area */
+          z-index: -1;
+          /* make it the background */
+          border: 40px solid transparent;
+          /* left/right diagonals */
+          border-top: 40px solid color(skin-tone);
+          border-bottom: 0px solid transparent;
+        }
       }
       section {
         background-color: rgba($color: #000000, $alpha: 0.85);

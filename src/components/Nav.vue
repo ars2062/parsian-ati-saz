@@ -29,7 +29,7 @@
     <img src="@/assets/icons/logo.svg" :class="$style.logo">
     <div :class="$style.info">
       <h1>پارسیان آتی ساز</h1>
-      <h2>تمامی امور ملکی شما را پاسخگو هستیم</h2>
+      <h2>اولین در ارئه خدمات مشارکت در ساخت</h2>
       <h2>با ما در ارتباط باشید</h2>
     </div>
     <div :class="$style.menuContainer" @click="this.closeMenu" :style="this.displayMenu">

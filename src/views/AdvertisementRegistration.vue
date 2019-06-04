@@ -29,7 +29,7 @@
             <span :class="$style.light">ثبت آگهی</span> محصولات ساختمانی
           </button>
         </div>
-        <p>توجه داشته باشید که پارسیان آتی ساز فقط در این دو زمینه به صورت تخصصی فعالت می کند</p>
+        <p>توجه داشته باشید که ثبت آگهی املاک شامل هزینه می باشید </p>
       </div>
     </section>
 
@@ -48,7 +48,6 @@
             @click="display('choose_property_category','register_sell',[{text:'ثبت'},{text:'آگهی املاک فروش کلنگی', class:$style.skin_tone}])"
           >املاک فروش کلنگی</button>
         </div>
-        <p>توجه داشته باشید که پارسیان آتی ساز فقط در این دو زمینه به صورت تخصصی فعالت می کند</p>
         <button
           :class="$style.back"
           @click="display('choose_property_category','choose_category',[{text:'صفحه ثبت'},{text:'آگهی', class:$style.skin_tone}])"

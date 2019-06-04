@@ -16,8 +16,8 @@ export default {
 <style lang="scss" module>
 @import "@/assets/main.scss";
 .title {
-  font-size: 30px;
-  font-weight: 100;
+  font-size: 23px;
+  font-weight: bold;
   text-align: center;
   div {
     margin: auto;

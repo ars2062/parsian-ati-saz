@@ -18,6 +18,10 @@ import Test from "./views/Test.vue";
 import Contact from "./views/Contact.vue";
 import SearchResult from "./views/SearchResult.vue";
 
+import Property from "./views/Admin/Property/Index.vue";
+import PropertyForm from "./views/Admin/Property/Form.vue";
+import PropertyList from "./views/Admin/Property/List.vue";
+
 Vue.use(Router);
 let router = new Router({
   mode: "history",
@@ -69,11 +73,6 @@ let router = new Router({
       component: MyAccount
     },
     {
-      path: "/admin",
-      name: "admin",
-      component: Admin
-    },
-    {
       path: "/partnerships",
       name: "partnerships",
       component: PartnershipList
@@ -108,6 +107,29 @@ let router = new Router({
       path: "/search-result",
       name: "search-result",
       component: SearchResult
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: Admin,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: "property",
+          name: "property",
+          component: Property
+        },
+        {
+          path: "property-form",
+          name: "property-form",
+          component: PropertyForm
+        },
+        {
+          path: "property-list",
+          name: "property-list",
+          component: PropertyList
+        }
+      ]
     }
   ]
 });

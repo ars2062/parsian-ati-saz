@@ -1,17 +1,17 @@
 <template>
   <section :class="$style.searchcard">
-    <p>همین امروز ملک مورد نظر خودتون رو پیدا کنید</p>
-    <p>فیلد های زیر را پر کنید طبق معیار های مد نظرتون سپس دکمه جستجو بزنید</p>
+    <p>برای جستجوی ملک مورد نظر خود</p>
+    <p>با پرکردن فیلد های زیر سریع تر به نتیجه مطلوب خواهید رسید.</p>
     <form ref="searchForm"  @submit.prevent="goto('search-result')">
       <Combolist
-        title="نوع ملک مد نظرتون رو انتخاب کنید"
+        title="نوع تقاضای خود را مشخص کنید"
         :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
         @value="chooseType($event)"
         class="fade-in"
         data-scroll
       />
       <ComboListMultiselect
-        placeholder="محله های مورد نظر خود را انتخاب کنید"
+        placeholder="محله های مورد نظر خود را مشخص کنید"
         :keywords="[{id:0,name:'a'},{id:1,name:'b'},{id:2,name:'c'},{id:3,name:'d'}]"
         class="fade-in"
         data-scroll

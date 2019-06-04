@@ -1,28 +1,18 @@
 <template>
   <div>
-    <Navbar></Navbar>
-    <Main></Main>
+    <router-link to='admin/property/list'>list</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-
-import Navbar from "@/components/Admin/Navbar.vue";
-import Main from "@/components/Admin/Main.vue";
-import router from '@/admin_router'
-
 export default {
-  router,
-  name:'Admin',
-  components:{
-    Navbar,
-    Main
-  }
-}
+  name: "Admin",
+  components: {}
+};
 </script>
 
-<style scoped>
-
+<style lang="scss" module>
 </style>
 
 
