@@ -46,7 +46,7 @@ $fonts-path:'@/assets/fonts/';
     transform: translateX(-50%);
 }
 
-@mixin size($width, $height) {
+@mixin size($width, $height: $width) {
     width: $width;
     height: $height;
 }

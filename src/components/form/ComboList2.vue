@@ -1,8 +1,9 @@
 <template>
-  <div :class="$style.combolist" dir="rtl">
+  <!--(disabled)?'background-color:rgba(#000, 0.1);':''-->
+  <div :class="$style.combolist" dir="rtl" :style="(disabled==true)?'background-color:#afafaf;border-radius:6px;':''">
     <div
       @click="toggleDisplay"
-      :style="display=='block'?'border-radius: 6px 6px 0 0; border-bottom:none':''"
+      :style="(display=='block')?'border-radius: 6px 6px 0 0; border-bottom:none;':''"
     >
       <span>{{choosen||''}}</span>
       <img src="@/assets/icons/right-arrow.svg">
@@ -21,7 +22,8 @@ export default {
   props: {
     items: { type: Array },
     title: { type: String },
-    checkbox: { type: Boolean, default: false }
+    checkbox: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false }
   },
   data() {
     return {
@@ -38,10 +40,11 @@ export default {
   methods: {
     toggleDisplay($event) {
       $event.stopPropagation();
+      if (!this.disabled)
       this.display = this.display === "block" ? "none" : "block";
     },
     choose(id) {
-      if (!this.checkbox) {
+      if (!this.disabled) {
         this.choosen = this.items.find(item => {
           return item.id == id;
         }).text;
@@ -71,6 +74,8 @@ export default {
 .combolist {
   position: relative;
   user-select: none;
+  
+    height: 54px;
   div {
     color: #cecece;
     height: 24px;
@@ -101,6 +106,8 @@ export default {
     background-color: white;
     box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
     border-radius: 0 0 6px 6px;
+    overflow: auto;
+    max-height: 250px;
     li {
       text-align: right;
       flex-direction: row;
