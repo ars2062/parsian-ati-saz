@@ -76,8 +76,6 @@ export default {
     actions: {
         login: function ({ commit }, phone) {
 
-            commit('start_loading',{root:true});
-
             axios.post(
                 consts.api_urls.login, {
                     'phone': phone
@@ -87,7 +85,6 @@ export default {
                     }
                 }
             ).then(res => {
-                commit('stop_loading',{root:true});
 
                 commit('set_loginMsg',res.data.message);
 
@@ -103,8 +100,6 @@ export default {
             });
         },
         verify: function ({ commit }, { phone, code }) {
-
-            commit('start_loading',{root:true});
 
             axios.post(
                 consts.api_urls.verify, {

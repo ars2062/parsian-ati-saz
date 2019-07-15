@@ -5,14 +5,18 @@ export default {
   namespaced: true,
   state: {
     product_adverts: [],
+    recent: [],
     sell_adverts: [],
-    partnership_adverts: [],
     master_adverts: [],
     gold_melks: [],
     search_results: [],
-    cities:[],
     // this state field is for add contact to admin 
-    msg:'' 
+    msg:'',
+    sell_files:[],
+    partnership_files:[],
+    all_products:[],
+    all_masters:[],
+    all_golds:[],
   },
   getters: {
     product_adverts: state => {
@@ -21,9 +25,6 @@ export default {
     sell_adverts: state => {
       return state.sell_adverts;
     },
-    partnership_adverts: state => {
-      return state.partnership_adverts;
-    },
     master_adverts: state => {
       return state.master_adverts;
     },
@@ -31,10 +32,7 @@ export default {
       return state.search_results;
     },
     recent: state => {
-      var recent = Array(2);
-      recent[0] = state.partnership_adverts[state.partnership_adverts.length - 1] ; 
-      recent[1] = state.sell_adverts[state.sell_adverts.length - 1] ; 
-      return recent;
+      return state.recent;
     },
     gold_melks: state => {
       return state.gold_melks;
@@ -44,15 +42,30 @@ export default {
     },
     msg:state => {
       return state.msg;
+    },
+    sell_files:state => {
+      return state.sell_files;
+    },
+    partnership_files:state => {
+      return state.partnership_files;
+    },
+    get_all_products:state => {
+      return state.all_products;
+    },
+    get_all_masters:state => {
+      return state.all_masters;
+    },
+    get_all_golds:state => {
+      return state.all_golds;
     }
   },
   mutations: {
     set_adverts: (state, server_response) =>{
-      state.product_adverts = server_response.home_adverts;
-      state.master_adverts = server_response.professor_adverts;
-      state.sell_adverts = server_response.clutter_sell_adverts;
-      state.partnership_adverts = server_response.clutter_partnership_adverts;
-      state.gold_melks = server_response.gold_melks;
+      state.product_adverts = server_response.products;
+      state.master_adverts = server_response.masters;
+      // state.sell_adverts = server_response.clutter_sell_adverts;
+      state.recent = server_response.recent;
+      state.gold_melks = server_response.golds;
 
       // set cities in rootstate
       state.cities = server_response.cities;
@@ -82,17 +95,29 @@ export default {
     },
     set_add_contact_msg: (state,msg)=> {
       state.msg = msg;
+    },
+    set_sell_files:(state,files)=>{
+      state.sell_files = files;
+    },
+    set_partnership_files:(state,files)=>{
+      state.partnership_files = files;
+    },
+    set_all_products:(state,files)=>{
+      state.all_products = files;
+    },
+    set_all_masters:(state,files)=>{
+      state.all_masters = files;
+    },
+    set_all_golds:(state,files)=>{
+      state.all_golds = files;
     }
   },
   actions: {
     // tested
     fetch_adverts: ({ commit }) => {
 
-      commit("start_loading", { root: true });
-
       Axios.get(consts.api_urls.home)
         .then(function(response) {
-          commit("stop_loading",{root:true});
 
           commit("set_adverts", response.data);
         })
@@ -105,12 +130,13 @@ export default {
 
       commit("start_loading", { root: true });
 
-      Axios.post(
-        consts.api_urls.search + advert_type,
+      Axios.get(
+        consts.api_urls.search,
         {
           min_metrazh: min_metrazh,
           max_metrazh: max_metrazh,
-          cities: cities
+          cities: cities,
+          advert_type:advert_type
         },
         {
           headers: {
@@ -143,6 +169,116 @@ export default {
       }).error(error => {
         commit('set_add_contact_msg','خطا در ارتباط با میزبان');
       });
+    },
+    get_sell_files:({commit})=>{
+
+      commit("start_loading", { root: true });
+
+      Axios.get(
+        consts.api_urls.sell_files,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        .then(function(response) {
+          commit("set_sell_files", response.data);
+          
+          commit("stop_loading", { root: true });
+        })
+        .catch(function(error) {
+          commit("stop_loading", { root: true });
+        });
+
+    },
+    get_partnership_files:({commit})=>{
+
+      commit("start_loading", { root: true });
+
+      Axios.get(
+        consts.api_urls.partnership_files,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        .then(function(response) {
+          commit("set_partnership_files", response.data);
+          
+          commit("stop_loading", { root: true });
+        })
+        .catch(function(error) {
+          commit("stop_loading", { root: true });
+        });
+
+    },
+    get_all_products:({commit})=>{
+
+      commit("start_loading", { root: true });
+
+      Axios.get(
+        consts.api_urls.all_products,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        .then(function(response) {
+          commit("set_all_products", response.data);
+          
+          commit("stop_loading", { root: true });
+        })
+        .catch(function(error) {
+          commit("stop_loading", { root: true });
+        });
+
+    },
+    get_all_masters:({commit})=>{
+
+      commit("start_loading", { root: true });
+
+      Axios.get(
+        consts.api_urls.all_masters,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        .then(function(response) {
+          commit("set_all_masters", response.data);
+          
+          commit("stop_loading", { root: true });
+        })
+        .catch(function(error) {
+          commit("stop_loading", { root: true });
+        });
+
+    },
+    get_all_golds:({commit})=>{
+
+      commit("start_loading", { root: true });
+
+      Axios.get(
+        consts.api_urls.all_golds,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        .then(function(response) {
+          commit("set_all_golds", response.data);
+          
+          commit("stop_loading", { root: true });
+        })
+        .catch(function(error) {
+          commit("stop_loading", { root: true });
+        });
+
     }
   }
 };

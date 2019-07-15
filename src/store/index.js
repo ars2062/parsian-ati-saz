@@ -23,7 +23,8 @@ export default new Vuex.Store({
   state: {
     loading: true,
     // this object is for property pages
-    detail_object: {}
+    detail_object: {},
+    cities:[]
   },
   getters: {
     loading: state => {

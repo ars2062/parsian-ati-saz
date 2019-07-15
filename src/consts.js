@@ -7,6 +7,11 @@ export default {
         home:api_url+'home',
         add_contact:api_url+'contact',
         search:api_url+'search/',
+        sell_files:api_url+'sells',
+        partnership_files:api_url+'partnerships',
+        all_products:api_url+'products',
+        all_masters:api_url+'masters',
+        all_golds:api_url+'golds',
 
         // this part is for account
         login:api_url+'account/login',
