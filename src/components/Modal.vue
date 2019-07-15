@@ -3,7 +3,7 @@
     <div :class="$style.container" :style="this.displayImage">
       <button :class="$style.close" @click="this.close"></button>
       <div :class="$style.scroller">
-        <slot/>
+        <slot />
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@ export default {
   bottom: 0;
   margin: auto;
   display: flex;
-  padding-top: 110px;
+  //padding-top: 110px;
   justify-content: center;
   z-index: 100;
   .container {
@@ -68,8 +68,10 @@ export default {
     border-radius: 6px;
     padding: 20px 25px;
     position: relative;
+    height: fit-content;
+    margin: auto;
     .scroller {
-      height: 100%;
+    max-height: calc(100vh - 150px);
       overflow: auto;
       width: 100%;
     }
@@ -85,6 +87,12 @@ export default {
       top: -16px;
       right: -9px;
       cursor: pointer;
+    }
+    @include mobile(685px) {
+      width: calc(100% - 100px);
+      .close {
+        @include size(30px);
+      }
     }
   }
   img {

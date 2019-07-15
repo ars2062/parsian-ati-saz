@@ -1,13 +1,17 @@
 <template>
   <nav>
     <ul>
-      <li @click="goto('advertisement-registration')">
+      <li @click="goto('advertisement-registration')" :class="(displaymenu)?$style.mobile:''">
         <span>ارسال آگهی</span>
-        <img src="@/assets/icons/deployment.svg">
+        <img src="@/assets/icons/deployment.svg" />
       </li>
-      <li v-if="loggedin" @click="this.toggleAccountOptions">
+      <li
+        v-if="loggedin"
+        @click="this.toggleAccountOptions"
+        :class="(displaymenu)?$style.mobile:''"
+      >
         <span>حساب من</span>
-        <img src="@/assets/icons/avatar.svg">
+        <img src="@/assets/icons/avatar.svg" />
         <ul :style="this.displayAccountOptions">
           <li>
             <router-link to="#">آگهی های من</router-link>
@@ -17,16 +21,20 @@
           </li>
         </ul>
       </li>
-      <li v-if="!loggedin" @click="openModal('LoginRegister')">
+      <li
+        v-if="!loggedin"
+        @click="openModal('LoginRegister')"
+        :class="(displaymenu)?$style.mobile:''"
+      >
         <span>ورود / ثبت نام</span>
-        <img src="@/assets/icons/avatar.svg">
+        <img src="@/assets/icons/avatar.svg" />
       </li>
       <li @click="this.openMenu">
         <span>منو</span>
-        <img src="@/assets/icons/menu (1).svg">
+        <img src="@/assets/icons/menu (1).svg" />
       </li>
     </ul>
-    <img src="@/assets/icons/logo.svg" :class="$style.logo">
+    <img src="@/assets/icons/logo.svg" :class="$style.logo" />
     <div :class="$style.info">
       <h1>پارسیان آتی ساز</h1>
       <h2>اولین در ارئه خدمات مشارکت در ساخت</h2>
@@ -34,22 +42,31 @@
     </div>
     <div :class="$style.menuContainer" @click="this.closeMenu" :style="this.displayMenu">
       <ul>
-        <img src="@/assets/icons/logo.svg">
+        <img src="@/assets/icons/logo.svg" />
         <h1>پارسیان آتی ساز</h1>
+        <button :class="$style.close" @click="close">
+          <i class="fas fa-times"></i>
+        </button>
         <li>
-          <router-link @click.native="close" to='/'>خانه</router-link>
+          <router-link @click.native="close" to="/">خانه</router-link>
         </li>
         <li>
-          <router-link @click.native="close" to='/partnerships'>فایل های مشارکت در ساخت</router-link>
+          <router-link @click.native="close" to="/partnerships">فایل های مشارکت در ساخت</router-link>
         </li>
         <li>
-          <router-link @click.native="close" to='/sells'>فایل های املاک کلنگی</router-link>
+          <router-link @click.native="close" to="/sells">فایل های املاک کلنگی</router-link>
         </li>
         <li>
-          <router-link @click.native="close" to='/advertisement-registration'>ثبت/ارسال آگهی استادکاران</router-link>
+          <router-link
+            @click.native="close"
+            to="/advertisement-registration"
+          >ثبت/ارسال آگهی استادکاران</router-link>
         </li>
         <li>
-          <router-link @click.native="close" to='/advertisement-registration'>ثبت آگهی محصولات ساختمانی</router-link>
+          <router-link
+            @click.native="close"
+            to="/advertisement-registration"
+          >ثبت آگهی محصولات ساختمانی</router-link>
         </li>
         <li>
           <router-link @click.native="close" to="#">درباره ما</router-link>
@@ -61,13 +78,20 @@
     </div>
     <Modal ref="LoginRegister">
       <div :class="$style.LoginRegister">
-        <Label>شماره موبایل</Label>
-        <MaskedInput mask="\+98 911 111 1111" placeholder-char="*"/>
-        <button v-if="!LoginRegisterSent" @click="loginRegister">ورود / ثبتنام</button>
+        <h3>ورود به حساب</h3>
+        <p>برای ورود به حساب نیاز به تایید شماره تماس است</p>
+        <div :class="$style.container">
+          <Label for="phone"
+          >
+            <i class="fas fa-phone"></i> شماره تماس
+          </Label>
+          <MaskedInput id="phone" mask="\+98 911 111 1111" placeholder-char="*" />
+        </div>
+        <button v-if="!LoginRegisterSent" @click="loginRegister">دریافت کد</button>
         <div v-if="LoginRegisterSent">
           <Label>کد</Label>
           <p>یک کد برای شما ارسال شد</p>
-          <MaskedInput mask="1 1 1 1 1 1" placeholder-char="-"/>
+          <MaskedInput mask="1 1 1 1 1 1" placeholder-char="-" />
           <button
             v-if="sendAgainTime>0"
             :class="$style.sendAgain"
@@ -105,8 +129,8 @@ export default {
       if ($event.target.classList.contains(this.$style.menuContainer))
         this.displaymenu = false;
     },
-    close(){
-        this.displaymenu = false;
+    close() {
+      this.displaymenu = false;
     },
     openModal(name) {
       this.$refs[name].display = true;
@@ -121,7 +145,7 @@ export default {
       this.$router.push(name);
     },
     loginRegister() {
-      this.LoginRegisterSent = true;
+      this.vcccccccccccccccc = true;
     },
     verify() {}
   },
@@ -178,11 +202,15 @@ nav {
       text-align: center;
       font-size: 14px;
       margin: auto;
-      margin-left: 20px;
       @include VerticalCenter();
       transform: translateY(calc(-50% - 5px));
       cursor: pointer;
       position: relative;
+
+      &:not(:last-of-type) {
+        margin-left: 20px;
+      }
+
       span {
         padding: 0;
       }
@@ -235,6 +263,46 @@ nav {
           transform: translateX(-75%) scaleY(1);
         }
       }
+      @include mobile(570px) {
+        transform: translateY(-50%);
+        &:not(:last-of-type) {
+          display: none;
+        }
+        &:last-of-type {
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+    @include mobile(570px) {
+      margin-left: 20px;
+      li.mobile {
+        display: block;
+        z-index: 99;
+        position: absolute;
+        top: calc(100vh - 50px);
+        left: 0;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        margin: 0;
+        padding: 0;
+        transform: none;
+        border-top: 1px solid color(skin-tone);
+        font-size: 20px;
+        img {
+          display: none;
+        }
+        span {
+          width: 100%;
+        }
+        ul {
+        }
+      }
+      li.mobile:nth-of-type(2) {
+        top: calc(100vh - 100px);
+      }
     }
   }
 
@@ -242,6 +310,10 @@ nav {
     height: 53px;
     margin-right: 80px;
     @include VerticalCenter();
+
+    @include mobile(680px) {
+      margin-right: 20px;
+    }
   }
 
   .info {
@@ -266,6 +338,13 @@ nav {
         width: 1.5px;
         left: -6.25px;
         background-color: white;
+        @include mobile(850px) {
+          display: none;
+        }
+      }
+
+      @include mobile(680px) {
+        display: none;
       }
     }
 
@@ -280,6 +359,9 @@ nav {
       &:last-of-type {
         font-size: 9px;
         grid-area: desc2;
+      }
+      @include mobile(850px) {
+        display: none;
       }
     }
   }
@@ -306,6 +388,18 @@ nav {
       img {
         margin: 12px;
         height: 50px;
+      }
+      .close {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 35px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        cursor: pointer;
       }
       h1 {
         font-size: 22px;
@@ -335,6 +429,13 @@ nav {
             background-color: lighten(color(coal), 10%);
           }
         }
+        @include mobile(570px) {
+          transform: translateY(-50%);
+          display: block;
+          a {
+            width: 100%;
+          }
+        }
       }
     }
     @keyframes openMenu {
@@ -345,58 +446,84 @@ nav {
         height: 100vh;
       }
     }
+    @include mobile() {
+      ul {
+        width: 100%;
+        position: relative;
+        .close {
+          display: block;
+        }
+      }
+    }
   }
   .LoginRegister {
-    width: 100%;
+    float: none;
+    text-align: center;
     direction: rtl;
-    display: flex;
-
-    flex-direction: column;
-    justify-content: center;
-    @include VerticalCenter();
-    div {
+    * {
+      float: none;
+      display: block;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(black, 0.8);
+    }
+    .container {
+      width: 90%;
+      margin:0 5%;
       display: flex;
-
-      flex-direction: column;
-      justify-content: center;
+        margin-top: 15px;
+      box-shadow: 0 0 6px rgba($color: #000000, $alpha: .16);
+      label,
+      input {
+        display: inline-block;
+        line-height: 40px;
+      }
+      input {
+        flex-grow: 1;
+        border: 1px solid color(skin-tone);
+        border-right: none;
+        border-radius: 6px 0 0 6px;
+        direction: ltr;
+        padding: 0 20px;
+      }
+      label {
+        border: 1px solid color(skin-tone);
+        border-left: none;
+        background-color: color(skin-tone);
+        width: fit-content;
+        padding: 0 10px;
+        color: rgba($color: #3B3B3B, $alpha: .74);
+        border-radius: 0 6px 6px 0;
+        * {
+          display: inline-block;
+        }
+      }
     }
-    input {
-      width: 80%;
+    button{
+      line-height: 40px;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      background-color: color(chocolate);
+      color: white;
+      padding: 0 45px;
+      font-size: 14px;
+      font-weight: 500;
       position: relative;
       right: 50%;
-      transform: translate(50%);
-      margin-bottom: 10px;
-      border-radius: 6px;
-      border: none;
-      line-height: 50px;
-      font-size: 20px;
-      box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
-      padding: 0 20px;
-      direction: ltr;
-      outline: none;
-      background-color: #f5f5f5;
-    }
-    button {
-      width: 80%;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      border: none;
-      background-color: color(skin-tone);
-      line-height: 50px;
-      font-size: 20px;
+      margin-top: 20px;
+      transform: translateX(50%);
       cursor: pointer;
-      outline: none;
-      position: relative;
-      right: 50%;
-      transform: translate(50%);
     }
-    label{
-      font-size: 25px;
-      text-align: center;
-    }
-    p{
-      text-align: center;
-    }
+  }
+  @include mobile() {
+    height: 70px;
   }
 }
 </style>

@@ -178,8 +178,9 @@ export default {
     width: 17px;
     position: absolute;
     left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    bottom: 0;
+    margin: auto;
   }
 }
 </style>

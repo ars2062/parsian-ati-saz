@@ -8,7 +8,7 @@
       <div v-if="subtitle" :class="[$style.trapezoid,this.subtitleS,$style.last]" data-scroll>
         <span v-for="span in subtitle" :key="span.id" :class="span.class">{{span.text}}</span>
       </div>
-    </div> 
+    </div>
     <img src="@/assets/icons/mouse.svg">
   </header>
 </template>
@@ -67,6 +67,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
 
     .trapezoid {
       line-break: none;
@@ -76,53 +77,55 @@ header {
       }
       &.first {
         color: white;
-        font-size: 40px !important;
-        border-bottom: 80px solid rgba($color: #000000, $alpha: 0.65);
-        border-left: 54px solid transparent;
-        border-right: 54px solid transparent;
+        font-size: 40px;
+        background-color: rgba($color: #000000, $alpha: 0.65);
         line-height: 80px;
-        height: 0;
+        height: 80px;
         width: 750px;
+        clip-path: polygon(50px 0%, calc(100% - 50px) 0%, 100% 100%, 0% 100%);
+        @include HorizontalCenter();
+        @include mobile(860px) {
+          clip-path: polygon(30px 0%, calc(100% - 30px) 0%, 100% 100%, 0% 100%);
+          width: 100%;
+          font-size: 22px;
+          height: 40px;
+          line-height: 40px;
+        }
+        @include mobile(550px) {
+          font-size: 15px;
+        }
       }
 
       &.last {
-        font-size: 20px !important;
+        font-size: 20px;
         position: relative;
         line-height: 54px;
+        height: 54px;
         margin-top: 5px;
         text-align: center;
         width: 620px;
         color: white;
         @include HorizontalCenter();
+        clip-path: polygon(0 0, 100% 0, calc(100% - 50px) 100%, 50px 100%);
+        background-color: color(dimm-black);
 
-        &::before {
-          content: "";
-          height: 0;
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: -54px;
-          /* stick out into margined area */
-          z-index: -1;
-          /* make it the background */
-          border: 54px solid transparent;
-          /* left/right diagonals */
-          border-top: 54px solid color(dimm-black);
-          border-bottom: 0px solid transparent;
+        @include mobile(740px) {
+          clip-path: polygon(0 0, 100% 0, calc(100% - 30px) 100%, 30px 100%);
+          width: calc(100% - 50px);
+          font-size: 17px;
+          line-height: 30px;
+          height: 30px;
         }
       }
     }
     .skin_tone_trapezoid {
       color: #000000 !important;
-      border-bottom-color: color(skin-tone) !important;
+      background-color: color(skin-tone) !important;
     }
     .skin_tone_Utrapezoid {
       color: #000000 !important;
-      &::before {
-        border-top-color: color(skin-tone) !important;
-      }
+      background-color: color(skin-tone) !important;
     }
   }
 }
-
 </style>

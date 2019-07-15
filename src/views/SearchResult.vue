@@ -171,5 +171,8 @@ export default {
       color: black;
     }
   }
+  @include mobile(){
+  padding: 125px 20px;
+  }
 }
 </style>

@@ -29,7 +29,7 @@
             <span :class="$style.light">ثبت آگهی</span> محصولات ساختمانی
           </button>
         </div>
-        <p>توجه داشته باشید که ثبت آگهی املاک شامل هزینه می باشید </p>
+        <p>توجه داشته باشید که ثبت آگهی املاک شامل هزینه می باشید</p>
       </div>
     </section>
 
@@ -80,50 +80,50 @@
         <div :class="$style.form_group">
           <label>عکس آگهی نمونه محصولات</label>
           <span>گذاشتن نمونه کار الزامی می باشد</span>
-          <ImageSelector multiple v-model="images"/>
+          <ImageSelector multiple v-model="images" />
         </div>
         <div :class="$style.form_group">
           <label>لوگوی خود را اضافه کنید</label>
           <span>گذاشتن لوگو الزامی مبیاشد</span>
-          <ImageSelector/>
+          <ImageSelector />
         </div>
         <div :class="$style.form_group">
           <label>نام صاحب امتایز</label>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="$style.form_group">
           <label>نام برند</label>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="$style.form_group">
           <label>شماره تماس</label>
-          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr"/>
+          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr" />
         </div>
         <div :class="$style.form_group">
           <label>زمینه کاری</label>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="$style.form_group">
           <label>تاریخ تاسیس (سال)</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>ایمیل شما</label>
-          <input type="text">
+          <input type="text" />
           <div :class="$style.checkbox_container">
-            <Checkbox/>
+            <Checkbox />
             <span>ایمیل در آگهی نمایش داده نشود</span>
           </div>
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>آدرس شما</label>
           <span>آدرس خود را به طور دقیق وارد کنید</span>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>عنوان آگهی</label>
           <span>در عنوان آگهی از مطالب مهم و چشمگیر استفاده کنید</span>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>توضیحات</label>
@@ -163,45 +163,45 @@
         <div :class="$style.form_group">
           <label>عکس آگهی نمونه کارها</label>
           <span>گذاشتن نمونه کار الزامی می باشد</span>
-          <ImageSelector multiple v-model="images"/>
+          <ImageSelector multiple v-model="images" />
         </div>
         <div :class="$style.form_group">
           <label>لوگوی خود را اضافه کنید</label>
           <span>گذاشتن لوگو الزامی مبیاشد</span>
-          <ImageSelector/>
+          <ImageSelector />
         </div>
         <div :class="$style.form_group">
           <label>نام صاحب امتایز</label>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="$style.form_group">
           <label>نام برند</label>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="$style.form_group">
           <label>شماره تماس</label>
-          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr"/>
+          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr" />
         </div>
         <div :class="$style.form_group">
           <label>زمینه کاری</label>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="$style.form_group">
           <label>تاریخ تاسیس (سال)</label>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="$style.form_group">
           <label>ایمیل شما</label>
-          <input type="email">
+          <input type="email" />
           <div :class="$style.checkbox_container">
-            <Checkbox/>
+            <Checkbox />
             <span>ایمیل در آگهی نمایش داده نشود</span>
           </div>
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>آدرس شما</label>
           <span>آدرس خود را به طور دقیق وارد کنید</span>
-          <input type="text">
+          <input type="text" />
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>توضیحات</label>
@@ -216,11 +216,7 @@
       </div>
     </section>
 
-    <section 
-      :class="[$style.register_sell,$style.sec]"
-      ref="register_sell" 
-      style="display:none"
-    >
+    <section :class="[$style.register_sell,$style.sec]" ref="register_sell" style="display:none">
       <div
         :class="$style.message"
       >شما دسته ثبت آگهی برای فروش کلنگی را انتخاب کرده اید لطفا اطلاعات زیر را تکمیل کنید و کلید ارسال را بزنید</div>
@@ -245,11 +241,11 @@
         <div :class="[$style.form_group,$style.full]">
           <label>عکس آگهی</label>
           <span>آگر آگهی شما فاقد عکس می باشد این قسمت را خالی رها کنید</span>
-          <ImageSelector multiple v-model="images"/>
+          <ImageSelector multiple v-model="images" />
         </div>
         <div :class="$style.form_group">
           <label>متراژ کل</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>موقعیت</label>
@@ -260,11 +256,11 @@
         </div>
         <div :class="$style.form_group">
           <label>بر ملک</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>گذر</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>نوع سند</label>
@@ -283,20 +279,20 @@
         </div>
         <div :class="$style.form_group">
           <label>قیمت کل</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>شماره تماس</label>
-          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr"/>
+          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr" />
         </div>
         <div :class="$style.form_group">
           <label>ایمیل شما</label>
-          <input type="email">
+          <input type="email" />
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>عنوان آگهی</label>
           <span>در عنوان آگهی از مطالب مهم و چشمگیر استفاده کنید</span>
-          <input type="text" placeholder="ملک 20 متری مشارک در سعادت آباد صرافها">
+          <input type="text" placeholder="ملک 20 متری مشارک در سعادت آباد صرافها" />
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>توضیحات آگهی</label>
@@ -340,11 +336,11 @@
         <div :class="[$style.form_group,$style.full]">
           <label>عکس آگهی</label>
           <span>آگر آگهی شما فاقد عکس می باشد این قسمت را خالی رها کنید</span>
-          <ImageSelector multiple v-model="images"/>
+          <ImageSelector multiple v-model="images" />
         </div>
         <div :class="$style.form_group">
           <label>متراژ کل</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>موقعیت</label>
@@ -355,11 +351,11 @@
         </div>
         <div :class="$style.form_group">
           <label>بر ملک</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>گذر</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>نوع سند</label>
@@ -378,24 +374,24 @@
         </div>
         <div :class="$style.form_group">
           <label>مبلغ بلاعوض</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>مبلغ قرض الحسنه</label>
-          <input type="number">
+          <input type="number" />
         </div>
         <div :class="$style.form_group">
           <label>شماره تماس</label>
-          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr"/>
+          <MaskedInput mask="\+98 911 111 1111" placeholder-char="*" style="direction:ltr" />
         </div>
         <div :class="$style.form_group">
           <label>ایمیل شما</label>
-          <input type="email">
+          <input type="email" />
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>عنوان آگهی</label>
           <span>در عنوان آگهی از مطالب مهم و چشمگیر استفاده کنید</span>
-          <input type="text" placeholder="ملک 20 متری مشارک در سعادت آباد صرافها">
+          <input type="text" placeholder="ملک 20 متری مشارک در سعادت آباد صرافها" />
         </div>
         <div :class="[$style.form_group, $style.full]">
           <label>توضیحات آگهی</label>
@@ -410,7 +406,7 @@
       </div>
     </section>
 
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -575,7 +571,8 @@ export default {
     position: relative;
     margin-bottom: 70px;
     .full {
-      grid-column: span 2;
+      grid-column-start: 1;
+      grid-column-end: -1;
     }
     .form_group {
       display: flex;
@@ -635,6 +632,12 @@ export default {
       bottom: 10px;
       right: 10px;
     }
+    @include mobile() {
+      grid-template-columns: auto;
+    }
+  }
+  @include mobile() {
+    padding: 20px;
   }
 }
 </style>

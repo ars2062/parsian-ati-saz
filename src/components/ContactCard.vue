@@ -7,14 +7,14 @@
       </span>
     </h2>
     <form @submit="($event)=>{$event.preventDefault();}" class="slide-in-left" data-scroll>
-      <input type="text" placeholder="نام و نام خانوادگی">
-      <input type="text" placeholder="شماره تماس شما">
-      <input type="text" placeholder="ایمیل شما" :class="$style.full">
+      <input type="text" placeholder="نام و نام خانوادگی" />
+      <input type="text" placeholder="شماره تماس شما" />
+      <input type="text" placeholder="ایمیل شما" :class="$style.full" />
       <textarea rows="4" placeholder="پیام شما" :class="$style.full"></textarea>
       <button type="submit" :class="$style.full">ارسال پیام</button>
     </form>
     <section :class="[$style.left,'fade-in']" data-scroll>
-      <img src="@/assets/icons/252945-P46MBA-946.png">
+      <img src="@/assets/icons/252945-P46MBA-946.png" />
       <h5>میلاد شهرایی</h5>
     </section>
   </div>
@@ -35,7 +35,7 @@ export default {};
   grid-template-areas:
     "title title"
     "left right";
-  grid-template-columns: 0.4fr 0.6fr;
+  grid-template-columns: 0.8fr 1.2fr;
   border-top: 5px solid color(skin-tone);
   h2 {
     grid-area: title;
@@ -124,7 +124,8 @@ export default {};
       padding: 15px 20px;
     }
     .full {
-      grid-column-end: span 2;
+      grid-column-start: 1;
+      grid-column-end: -1;
     }
     button {
       background-color: color(skin-tone);
@@ -137,6 +138,25 @@ export default {};
       &:hover {
         background-color: darken(color(skin-tone), 5%);
       }
+    }
+    @include mobile(610px){
+      margin: 0;
+    grid-template-columns: auto;
+    }
+  }
+  @include mobile(940px) {
+    grid-template-areas:
+      "title"
+      "right";
+    grid-template-columns: auto;
+    padding: 10px 30px;
+    h2{
+      span i{
+        display: none;
+      }
+    }
+    .left {
+      display: none;
     }
   }
 }

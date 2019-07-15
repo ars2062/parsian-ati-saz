@@ -114,7 +114,7 @@ export default {
   }
   form {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 22vw);
+    grid-template-columns: repeat(auto-fit, 280px);
     grid-gap: 15px;
     width: 100%;
     margin-bottom: 100px;

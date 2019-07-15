@@ -161,39 +161,36 @@ export default {
       text-align: justify;
       font-size: 18px;
     }
+    @include mobile() {
+      grid-template-areas:
+        "main secondary_image"
+        "project_info project_info"
+        "description description";
+      grid-template-columns: 1fr 1fr;
+      padding: 90px 20px;
+    }
   }
 }
+
 .more {
-  font-size: 20px;
+  font-size: 14px;
   position: relative;
-  line-height: 54px;
+  line-height: 40px;
   margin-top: 45px;
   margin-bottom: 100px;
   text-align: center;
-  width: 620px;
+  width: 300px;
   border: none;
+  position: relative;
   right: 50%;
   transform: translateX(50%);
   cursor: pointer;
   transition: all 0.1s;
   outline: none;
-  &:active::before {
-    border-top: 54px solid darken(color(skin-tone), 5%);
-  }
-  &::before {
-    content: "";
-    height: 0;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: -54px;
-    /* stick out into margined area */
-    z-index: -1;
-    /* make it the background */
-    border: 54px solid transparent;
-    /* left/right diagonals */
-    border-top: 54px solid color(skin-tone);
-    border-bottom: 0px solid transparent;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+  background-color: color(skin-tone);
+  @include mobile(320px) {
+    width: calc(100% - 20px);
   }
 }
 </style>

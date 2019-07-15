@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div :class="$style.head">
-      <img src="@/assets/icons/logo.svg">
+      <img src="@/assets/icons/logo.svg" />
       <h1>پارسیان آتی ساز</h1>
       <span>سعادت آباد ، چهار راه شهرداری ، برج نارنجستان ، طبقه 5 واحد 1</span>
     </div>
@@ -10,10 +10,20 @@
         <h2 :class="$style.title">شبکه ها</h2>
         <ul>
           <li>
-            <a target="_blank" href="https://www.t.me/parsianatisaz" class="fade-in" data-scroll>تلگرام</a>
+            <a
+              target="_blank"
+              href="https://www.t.me/parsianatisaz"
+              class="fade-in"
+              data-scroll
+            >تلگرام</a>
           </li>
           <li>
-            <a target="_blank" href="https://www.instagram.com/parsian.atisaz" class="fade-in" data-scroll>اینستاگرام</a>
+            <a
+              target="_blank"
+              href="https://www.instagram.com/parsian.atisaz"
+              class="fade-in"
+              data-scroll
+            >اینستاگرام</a>
           </li>
         </ul>
       </div>
@@ -21,9 +31,15 @@
         <h2 :class="$style.title">
           <span :class="$style.gold">فایل</span> های اخیر
         </h2>
-        <router-link to="#" :class="[$style.card,'fade-in']" v-for="i in [1,2]" :key="i"  data-scroll>
+        <router-link
+          to="#"
+          :class="[$style.card,'fade-in']"
+          v-for="recent in recents"
+          :key="recent.id"
+          data-scroll
+        >
           <div :class="$style.type">مشارکت در ساخت</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
+          <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
           <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
         </router-link>
@@ -64,7 +80,19 @@
 </template>
 
 <script>
+import Axios from "axios";
+import consts from "@/consts"
 export default {
+  data(){
+    return{
+      recents:[]
+    }
+  },
+  async created(){
+    let res=(await Axios.get(consts.api_urls.home)).data;
+    this.recents=res.recent;
+    console.log(this.recents);
+  },
   methods: {
     goToTop() {
       let scrollDuration = 500;
@@ -116,11 +144,36 @@ footer {
       bottom: 10px;
       left: 20px;
     }
+    @include mobile(980px) {
+      img {
+        top: 40%;
+      }
+      h1 {
+        line-height: 90px;
+        font-size: 19px;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
+    @include mobile(570px) {
+      img {
+        top: 10%;
+      }
+      h1 {
+        line-height: 40px;
+        font-size: 19px;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
   }
   .contents {
     display: grid;
     display: grid;
     grid-template-columns: repeat(3, auto);
+    grid-template-areas: "col1 col2 col3";
     margin: 60px 0;
     .col {
       padding: 10px;
@@ -166,7 +219,7 @@ footer {
         .type {
           position: absolute;
           top: -5px;
-          left: -10px;
+          left: -14px;
           padding: 5px 15px;
           font-size: 14px;
           font-weight: 100;
@@ -195,6 +248,21 @@ footer {
         text-align: justify;
         margin: 10px;
       }
+    }
+    .col:nth-of-type(1) {
+      grid-area: col1;
+    }
+    .col:nth-of-type(2) {
+      grid-area: col2;
+    }
+    .col:nth-of-type(3) {
+      grid-area: col3;
+    }
+    @include mobile(900px) {
+      grid-template-areas:
+        "col2"
+        "col3"
+        "col1";
     }
   }
   .foot {
@@ -230,33 +298,34 @@ footer {
     background-color: color(skin-tone);
     button {
       position: absolute;
-      background-color: transparent;
+      background-color: color(skin-tone);
       border: none;
       left: 0;
       right: 0;
-      top: 0;
-      bottom: 0;
+      bottom: 100%;
       margin: auto;
-      width: 0;
-      height: 0;
-      border-left: 96px solid transparent;
-      border-right: 96px solid transparent;
-      border-bottom: 96px solid color(skin-tone);
+      height: 32px;
+      width: 64px;
       cursor: pointer;
       outline: none;
       transition: all 0.1s;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
       &:active {
         transform: scale(1.1);
       }
       i {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
         font-size: 24px;
-        line-height: 50px;
         margin: auto;
+        position: absolute;
+        top: 6px;
+        left: 0;
+        right: 0;
       }
     }
+  }
+
+  @include mobile(570px) {
+    padding: 20px;
   }
 }
 </style>

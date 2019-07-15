@@ -7,7 +7,7 @@ $colors: (skin-tone:#FFE1A0,
     red:#D52004,
     green:#A2C64D,
     jelly-bean: #E2574C);
-$mobile-width:650px;
+$mobile-width:690px;
 $fonts-path:'@/assets/fonts/';
 
 @function color($color-name) {
@@ -136,12 +136,19 @@ $fonts-path:'@/assets/fonts/';
 }
 
 .done {
-    background-color: color(green) !important;
+
+    //background-color: color(green) !important;
+    &::after {
+        background-color: color(green) !important;
+    }
 }
 
 .current_step {
-    background-color: #E2574C !important;
-    color: white !important;
+    //background-color: #E2574C !important;
+    //color: white !important;
+    &::after {
+        background-color: #E2574C !important;
+    }
 }
 
 @mixin ripple {

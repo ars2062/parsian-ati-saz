@@ -11,10 +11,14 @@
           <span :class="$style.address">
             <i class="fas fa-map-marker-alt"></i>تهران ، سعادت آباد
           </span>
-          <button @click="openModal('contactInfo')"  class="slide-in-left" data-scroll>دریافت شماره تماس</button>
+          <button
+            @click="openModal('contactInfo')"
+            class="slide-in-left"
+            data-scroll
+          >دریافت شماره تماس</button>
           <button class="slide-in-left" data-scroll>نشان کردن</button>
           <button :class="[$style.left,'slide-in-left']" data-scroll>آماده امضاء</button>
-          <ul  class="slide-in-top" data-scroll>
+          <ul class="slide-in-top" data-scroll>
             <li>
               <label>دسته بندی</label>
               <span>مشارکت در ساخت</span>
@@ -72,13 +76,13 @@
       </p>
     </section>
 
-    <ContactCard/>
+    <ContactCard />
 
-    <Footer/>
+    <Footer />
 
     <Modal ref="contactInfo">
       <div :class="$style.contactInfo">
-        <img src="@/assets/icons/slide1.svg">
+        <img src="@/assets/icons/slide1.svg" />
         <h1>میلاد شهرایی</h1>
         <a href="tel:+9891240892313">
           <span>شماره تماس:</span> 091240892313
@@ -160,14 +164,26 @@ export default {
       cursor: pointer;
       outline: none;
     }
+    @include mobile(860px) {
+      border: none;
+      padding: 0;
+      span {
+        color: rgba(#cc3333, 0.79);
+      }
+      button {
+        display: none;
+      }
+    }
   }
   .container {
     display: grid;
     grid-template-columns: auto 430px;
+    grid-template-areas: "details images";
     grid-gap: 120px;
     padding: 20px 0;
-      border-bottom: 1px solid #707070;
+    border-bottom: 1px solid #707070;
     section {
+      grid-area: details;
       h1 {
         font-size: 30px;
         font-weight: normal;
@@ -191,7 +207,7 @@ export default {
         cursor: pointer;
         outline: none;
         &.left {
-          float: left !important;
+          float: left;
         }
         &:nth-of-type(1) {
           background-color: color(skin-tone);
@@ -221,12 +237,41 @@ export default {
           }
           span {
             float: left;
-            font-size: 17px;
+            font-size: 16px;
             color: #202020;
           }
         }
       }
+      @include mobile() {
+        h1 {
+          font-size: 23px;
+        }
+        .address {
+          font-size: 15px;
+        }
+      }
+      @include mobile(470px) {
+        button{
+          width: 100%;
+          margin: 0;
+          margin-bottom: 10px;
+        }
+        button.left {
+          float: none;
+        }
+      }
     }
+    @include mobile(1000px) {
+      grid-template-columns: auto;
+      grid-template-areas:
+        "images"
+        "details";
+      grid-gap: 20px;
+    }
+  }
+
+  @include mobile(1260px) {
+    padding: 120px 20px;
   }
 }
 .contactInfo {

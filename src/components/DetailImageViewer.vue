@@ -45,11 +45,13 @@ export default {
 }
 .image_grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fit, 100px);
+  justify-content: center;
   .image_container{
     border: 1px solid color(skin-tone);
     cursor: pointer;
     position: relative;
+    @include size(100px);
     img{
       width: 100%;
     }

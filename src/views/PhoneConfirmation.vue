@@ -1,34 +1,30 @@
 <template>
   <div>
-    <Header
-      :Title="[{ text: 'تایید شماره' },{ text: 'تماس', class: this.$style.skin_tone }]"
-      :image="require('@/assets/icons/slide1.svg')"
-    />
     <section :class="$style.one">
-      <Title title="تایید شماره"/>
+      <Title title="تایید شماره" />
       <p
         :class="$style.message"
       >آگهی شما ثبت و در صف بررسی قرار گرفت بعد از تایید ناظر شما به صورت خودکار به صفحه ای پرداخت منتقل می شوید</p>
       <section>
-        <ProgressSteps :steps="steps"/>
+        <ProgressSteps :steps="steps" />
         <p>
           یک پیام حاوی کد تایید به شماره
           <span :class="$style.bold">09121234567</span> ارسال گردید
         </p>
         <label>کد را وارد کنید</label>
-        <MaskedInput mask="1 1 1 1 1 1" placeholder-char="-"/>
-        <button id="confirm" @click="goto('supervisor-confirmation')">تایید شماره</button>
-        <button @click="goto(-1)">بازگشت به صفحه قبل</button>
-        <button>ویرایش شماره تماس</button>
-        <button
+        <MaskedInput mask="1 1 1 1 1 1" placeholder-char="-" />
+        <a
           v-if="sendAgainTime>0"
           :class="$style.sendAgain"
           disabled
-        >{{sendAgainTime}} تا ارسال دوباره کد</button>
-        <button v-if="sendAgainTime==0" :class="$style.sendAgain">ارسال دوباره کد</button>
+        >{{sendAgainTime}} تا ارسال دوباره کد</a>
+        <a href="#" v-if="sendAgainTime==0" :class="$style.sendAgain">ارسال دوباره کد</a>
+        <button id="confirm" @click="goto('supervisor-confirmation')">تایید شماره</button>
+        <button @click="goto(-1)">بازگشت به صفحه قبل</button>
+        <button>ویرایش شماره تماس</button>
       </section>
     </section>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -63,8 +59,7 @@ export default {
         { text: "ثبت کردن آگهی", class: this.$style.done },
         { text: "تایید شماره", class: this.$style.current_step },
         { text: "تایید ناظر" },
-        { text: "پرداخت" },
-        { text: "تایید نهایی" }
+        { text: "پرداخت" }
       ],
       sendAgainTime: 120,
       interval: null
@@ -109,6 +104,11 @@ section.one {
     background-color: rgba($color: color(skin-tone), $alpha: 0.57);
     padding: 0 25px;
     border-radius: 6px;
+    @include mobile() {
+      font-size: 15px;
+      line-height: 30px;
+      padding: 10px 25px;
+    }
   }
   section {
     display: flex;
@@ -140,11 +140,15 @@ section.one {
       box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
       padding: 16px 0;
       margin: 20px 0;
+      margin-bottom: auto;
       right: 50%;
       position: relative;
       transform: translateX(50%);
       text-align: center;
       direction: ltr;
+    }
+    a {
+      margin-bottom: 10px;
     }
     button {
       border: none;
@@ -181,18 +185,30 @@ section.one {
       padding: 0 30px;
     }
 
-    button:nth-of-type(4),
-    button:nth-of-type(5) {
-      position: absolute;
-      margin: auto;
-      bottom: 6px;
-      right: 0;
-      left: 0;
-      transform: none;
-      font-size: 16px;
-      line-height: 40px;
-      padding: 0 30px;
+    @include mobile() {
+      padding: 20px 10px;
+      padding-bottom: 80px;
+      input {
+        width: 100%;
+      }
+      button:nth-of-type(1) {
+        width: 100%;
+      }
     }
+    @include mobile(490px){
+      padding-bottom: 20px;
+      button:nth-of-type(2),
+      button:nth-of-type(3){
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin-top: 10px;
+      }
+    }
+  }
+  @include mobile() {
+    padding: 80px 20px;
   }
 }
 </style>

@@ -55,6 +55,18 @@ export default {
       margin: auto;
       background-color: color(chocolate);
     }
+    @include mobile(380px) {
+      width: calc(100% - 20px);
+      margin-top: 15px;
+      i{
+        @include size(20px);
+      }
+    }
+  }
+
+  @include mobile(380px) {
+    font-size: 18px;
+    width: 100%;
   }
 }
 </style>

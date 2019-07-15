@@ -7,10 +7,10 @@
       subtitleC
     />
     <section :class="$style.one">
-      <Title title="استاد کاران برند منطقه" style="margin-top:45px"/>
+      <Title title="استاد کاران برند منطقه" style="margin-top:45px" />
       <div :class="$style.cards">
         <div v-for="i in [1,2,3,4,5,6,7,8]" :key="i" :class="$style.card">
-          <img src="@/assets/icons/450-3366-225x168.jpg">
+          <img src="@/assets/icons/450-3366-225x168.jpg" />
           <h4>کنعان پاسبانی</h4>
           <span>کار {{i}}</span>
           <button @click="goto('master-worker-detail')">نمایش نمونه کارها</button>
@@ -20,8 +20,8 @@
         <span>نمایش آگهی بیشتر</span>
       </button>
     </section>
-    <AreYouAMasterWorker/>
-    <Footer/>
+    <AreYouAMasterWorker />
+    <Footer />
   </div>
 </template>
 
@@ -57,17 +57,19 @@ export default {
 section.one {
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, 260px);
     grid-gap: 15px;
-    padding: 50px 125px;
+    padding: 50px 20px;
+    justify-content: center;
     .card {
       border-radius: 6px;
       box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.16);
       background-color: white;
       position: relative;
       padding-bottom: 35px;
+      width: 260px;
       img {
-        width: calc((100vw - 340px) / 4);
+        width: 100%;
         border-radius: 6px;
         height: 195px;
       }
@@ -102,66 +104,53 @@ section.one {
     }
   }
   .more {
-    font-size: 20px;
+    font-size: 14px;
     position: relative;
-    line-height: 54px;
+    line-height: 40px;
     margin-top: 45px;
     margin-bottom: 100px;
     text-align: center;
-    width: 620px;
+    width: 300px;
     border: none;
     @include HorizontalCenter();
     cursor: pointer;
     transition: all 0.1s;
     outline: none;
-    &:active::before {
-      border-top: 54px solid darken(color(skin-tone), 5%);
-    }
-    &::before {
-      content: "";
-      height: 0;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: -54px;
-      /* stick out into margined area */
-      z-index: -1;
-      /* make it the background */
-      border: 54px solid transparent;
-      /* left/right diagonals */
-      border-top: 54px solid color(skin-tone);
-      border-bottom: 0px solid transparent;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+    background-color: color(skin-tone);
+    @include mobile(320px) {
+      width: calc(100% - 20px);
     }
   }
 }
 section.two {
-    background-color: #f1f1f1;
-    padding: 25px;
-    direction: rtl;
-    h1{
-        font-size: 30px;
-        font-weight: normal;
-    }
-    p{
-        font-size: 18px;
-        font-weight: normal;
-    }
-    button{
-        border: none;
-        background-color: #fff;
-        color: blue;
-        box-shadow: 0 3px 6px rgba($color: #000000, $alpha: .16);
-        padding: 10px 55px;
-        font-size: 18px;
-        border-radius: 6px;
-        position: relative;
-        right: 50%;
-        transform: translateX(50%);
-        margin-bottom: 50px;
-        margin-top: 25px;
-        cursor: pointer;
-        outline: none;
-        @include ripple();
-    }
+  background-color: #f1f1f1;
+  padding: 25px;
+  direction: rtl;
+  h1 {
+    font-size: 30px;
+    font-weight: normal;
+  }
+  p {
+    font-size: 18px;
+    font-weight: normal;
+  }
+  button {
+    border: none;
+    background-color: #fff;
+    color: blue;
+    box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+    padding: 10px 55px;
+    font-size: 18px;
+    border-radius: 6px;
+    position: relative;
+    right: 50%;
+    transform: translateX(50%);
+    margin-bottom: 50px;
+    margin-top: 25px;
+    cursor: pointer;
+    outline: none;
+    @include ripple();
+  }
 }
 </style>

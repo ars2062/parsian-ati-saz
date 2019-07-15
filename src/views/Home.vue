@@ -7,10 +7,10 @@
     />
     <Searchcard></Searchcard>
     <section :class="$style.one">
-      <Title title="دسترسی سریع به امکانات سایت" style="margin-top:90px"/>
+      <Title title="دسترسی سریع به امکانات سایت" style="margin-top:90px" />
       <div :class="$style.cards">
         <div :class="[$style.card,'slide-in-bottom']" data-scroll>
-          <img src="@/assets/icons/stationery.svg">
+          <img src="@/assets/icons/stationery.svg" />
           <h3>قوانین نظام مهندسی</h3>
           <p>
             لیست استاد کاران درجه یک ساختمان
@@ -18,12 +18,12 @@
             نمونه کار انتخاب کنید
           </p>
           <button @click="openLink('rules')">
-            <img src="@/assets/icons/right-arrow (2).svg">
+            <img src="@/assets/icons/right-arrow (2).svg" />
             <span>نمایش</span>
           </button>
         </div>
         <div :class="[$style.card,'slide-in-bottom']" data-scroll>
-          <img src="@/assets/icons/customer-service.svg">
+          <img src="@/assets/icons/customer-service.svg" />
           <h3>لیست تلفن</h3>
           <p>
             لیستی تلفن مهندسان ، مشاوران
@@ -31,12 +31,12 @@
             به آسانی یک کلیک دریافت کنید
           </p>
           <button @click="Alert('به زودی...')">
-            <img src="@/assets/icons/right-arrow (2).svg">
+            <img src="@/assets/icons/right-arrow (2).svg" />
             <span>نمایش</span>
           </button>
         </div>
         <div :class="[$style.card,'slide-in-bottom']" data-scroll>
-          <img src="@/assets/icons/organize.svg">
+          <img src="@/assets/icons/organize.svg" />
           <h3>لیست دفاتر خدمات</h3>
           <p>
             لیستی بسیار قوی از دفاتر خدمات
@@ -44,12 +44,12 @@
             و در اختیار شما قرار داده ایم
           </p>
           <button @click="openModal('dafater-khadamat-shahri')">
-            <img src="@/assets/icons/right-arrow (2).svg">
+            <img src="@/assets/icons/right-arrow (2).svg" />
             <span>نمایش</span>
           </button>
         </div>
         <div :class="[$style.card,$style.big,'slide-in-left']" data-scroll>
-          <img src="@/assets/icons/setting.svg">
+          <img src="@/assets/icons/setting.svg" />
           <h3>لیست استاد کاران</h3>
           <p>
             لیست استاد کاران درجه یک ساختمان
@@ -57,11 +57,43 @@
             نمونه کار انتخاب کنید
           </p>
           <button @click="goto('master-workers')">
-            <img src="@/assets/icons/right-arrow (2).svg">
+            <img src="@/assets/icons/right-arrow (2).svg" />
             <span>نمایش</span>
           </button>
         </div>
       </div>
+    </section>
+    <section :class="$style.three">
+      <Title title="املاک آماده به امضاء" style="margin-top:50px" />
+      <div :class="$style.goldenPosts">
+        <router-link
+          to="/property-detail"
+          :class="[$style.post,'slide-in-top']"
+          data-scroll
+          v-for=" gold in golds"
+          :key="gold.id"
+        >
+          <div :class="$style.ribbonContainer">
+            <div :class="$style.ribbon">
+              <img src="@/assets/icons/star.svg" />
+            </div>
+          </div>
+          <div :class="$style.type">مشارکت در ساخت</div>
+          <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
+          <h3>{{gold.title}}</h3>
+          <ul>
+            <li>متراژ وموقعيت : {{gold.total_metrazh}}متر {{gold.position}}</li>
+            <li>بروگذر : بر {{gold.bar}}گذر {{gold.gozar}}متر</li>
+            <li>پهنه طرح تفصيلي : r122</li>
+            <li>تعداد مالك :٢مالك</li>
+          </ul>
+          <hr />
+          <span :class="$style.price">مبلغ بلاعوض : {{Number(gold.cost).toLocaleString()}} تومان</span>
+        </router-link>
+      </div>
+      <button :class="[$style.more,'slide-in-left']" data-scroll @click="goto('clutters')">
+        <span>نمایش آگهی بیشتر</span>
+      </button>
     </section>
     <section :class="$style.two">
       <Title
@@ -69,47 +101,15 @@
         style="margin-top:80px;display:inline-block;position:relative;left:50%;transform:translateX(-50%)"
       />
       <div :class="$style.posts">
-        <div :class="[$style.post,'slide-in-bottom']" data-scroll v-for="i in [1,2,3,4]" :key="i">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-          <h3>لوازم ساختمانی برادران بیژن</h3>
-          <h4>زمینه کاری : تولید لوازم پلاستیکی</h4>
+        <div :class="[$style.post,'slide-in-bottom']" data-scroll v-for="product in products" :key="product.id">
+          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg" />
+          <h3>{{product.brand_name}}</h3>
+          <h4>زمینه کاری : {{product.working_field}}</h4>
           <button @click="goto('product-detail')">نمایش کامل اطلاعات</button>
         </div>
       </div>
       <button :class="$style.more" @click="goto('product-list')">
         <span>نمایش محصولات بیشتر</span>
-      </button>
-    </section>
-    <section :class="$style.three">
-      <Title title="املاک آماده به امضاء" style="margin-top:50px"/>
-      <div :class="$style.goldenPosts">
-        <router-link
-          to="/property-detail"
-          :class="[$style.post,'slide-in-top']"
-          data-scroll
-          v-for=" i in [1,2,3,4,5,6]"
-          :key="i"
-        >
-          <div :class="$style.ribbonContainer">
-            <div :class="$style.ribbon">
-              <img src="@/assets/icons/star.svg">
-            </div>
-          </div>
-          <div :class="$style.type">مشارکت در ساخت</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
-          <ul>
-            <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
-            <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
-            <li>پهنه طرح تفصيلي : r122</li>
-            <li>تعداد مالك :٢مالك</li>
-          </ul>
-          <hr>
-          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
-        </router-link>
-      </div>
-      <button :class="[$style.more,'slide-in-left']" data-scroll @click="goto('clutters')">
-        <span>نمایش آگهی بیشتر</span>
       </button>
     </section>
     <section :class="$style.four">
@@ -125,15 +125,15 @@
         با زدن آکهی در این زمینه نتیجه بی نظیر بگیرید
       </p>
       <section :class="[$style.left,'fade-in']" data-scroll>
-        <img src="@/assets/icons/252945-P46MBA-946.png">
+        <img src="@/assets/icons/252945-P46MBA-946.png" />
         <button @click="goto('advertisement-registration')">ثبت آگهی</button>
       </section>
     </section>
     <section :class="$style.five">
-      <Title title="استاد کاران برند منطقه" style="margin-top:65px"/>
+      <Title title="استاد کاران برند منطقه" style="margin-top:65px" />
       <CardSlider>
         <div v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i" :class="[$style.card]">
-          <img src="@/assets/icons/450-3366-225x168.jpg">
+          <img src="@/assets/icons/450-3366-225x168.jpg" />
           <h4>کنعان پاسبانی</h4>
           <span>کار {{i}}</span>
           <button @click="goto('master-worker-detail')">نمایش نمونه کارها</button>
@@ -143,21 +143,7 @@
         <span>نمایش به صورت کامل</span>
       </button>
     </section>
-    <section :class="$style.six">
-      <Title title="سازنده گانی که باما کار میکنند"/>
-      <div :class="$style.collaborators">
-        <router-link
-          to="#"
-          v-for="i in [1,2,3,4,5,6,7,8]"
-          :key="i"
-          class="slide-in-bottom"
-          data-scroll
-        >
-          <img src="@/assets/icons/Kamyar-Maroufzadeh-225x168.jpg">
-        </router-link>
-      </div>
-    </section>
-    <Footer/>
+    <Footer />
     <Modal :class="$style.dafater_khadamat_shahri" ref="dafater-khadamat-shahri">
       <div ref="selectorPanel">
         <h3>لیست دفاتر خدمات شهرداری</h3>
@@ -568,7 +554,22 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import Loading from "@/components/Loading.vue";
+import store from "@/store/";
+import Axios from "axios";
+import consts from "@/consts"
+import { constants } from 'crypto';
 export default {
+  data(){
+    return{
+      products:[],
+      golds:[]
+    }
+  },
+  async beforeMount(){
+    let res=(await Axios.get(consts.api_urls.home)).data;
+    this.products=res.products;
+    this.golds=res.golds;
+  },
   components: {
     Header,
     Searchcard,
@@ -602,7 +603,7 @@ export default {
     },
     displayKhadamatShari(index) {
       this.$refs["selectorPanel"].style.display = "none";
-      this.$refs["dafater_khadamat_shahri_" + index].style.display = "block";
+      this.$refs["dafater_khadamat_shahri_" + index].style.display = "grid";
     },
     backToSelector(index) {
       this.$refs["selectorPanel"].style.display = "block";
@@ -618,9 +619,12 @@ export default {
   section.one {
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      padding: 70px 160px;
+      grid-template-columns: repeat(auto-fit, 250px);
+      padding: 70px 20px;
       grid-gap: 10px;
+      grid-row-gap: 30px;
+      justify-content: center;
+      grid-auto-flow: dense;
       .card {
         text-align: center;
         padding: 20px 10px;
@@ -706,9 +710,17 @@ export default {
         button {
           background-color: transparent;
           border: 1px solid white;
+          margin-top: 20px;
           span {
             display: none;
           }
+        }
+      }
+      @include mobile(580px) {
+        padding: 10px;
+        .big {
+          grid-row: 1;
+          margin-top: 30px;
         }
       }
     }
@@ -770,23 +782,10 @@ export default {
       cursor: pointer;
       transition: all 0.1s;
       outline: none;
-      &:active::before {
-        border-top: 54px solid darken(color(skin-tone), 5%);
-      }
-      &::before {
-        content: "";
-        height: 0;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: -40px;
-        /* stick out into margined area */
-        z-index: -1;
-        /* make it the background */
-        border: 40px solid transparent;
-        /* left/right diagonals */
-        border-top: 40px solid color(skin-tone);
-        border-bottom: 0px solid transparent;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+      background-color: color(skin-tone);
+      @include mobile(320px) {
+        width: calc(100% - 20px);
       }
     }
   }
@@ -795,7 +794,8 @@ export default {
       direction: rtl;
       margin-top: 85px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      justify-content: center;
       grid-gap: 40px;
       padding: 0 100px;
       .post {
@@ -873,8 +873,11 @@ export default {
           color: black;
         }
       }
+      @include mobile {
+        padding: 0 30px;
+      }
     }
-    
+
     .more {
       font-size: 14px;
       position: relative;
@@ -888,23 +891,10 @@ export default {
       cursor: pointer;
       transition: all 0.1s;
       outline: none;
-      &:active::before {
-        border-top: 54px solid darken(color(skin-tone), 5%);
-      }
-      &::before {
-        content: "";
-        height: 0;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: -40px;
-        /* stick out into margined area */
-        z-index: -1;
-        /* make it the background */
-        border: 40px solid transparent;
-        /* left/right diagonals */
-        border-top: 40px solid color(skin-tone);
-        border-bottom: 0px solid transparent;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+      background-color: color(skin-tone);
+      @include mobile(320px) {
+        width: calc(100% - 20px);
       }
     }
   }
@@ -958,6 +948,12 @@ export default {
               left: 100%;
             }
           }
+          @include mobile(1060px) {
+            width: 20vw;
+          }
+          @include mobile(780px) {
+            width: 15vw;
+          }
         }
       }
     }
@@ -969,6 +965,9 @@ export default {
       text-align: right;
       margin-right: 65px;
       margin-left: 200px;
+      @include mobile(1050px) {
+        margin-left: 100px;
+      }
     }
     .left {
       grid-area: left;
@@ -988,6 +987,30 @@ export default {
         border-radius: 6px;
         border: none;
         cursor: pointer;
+      }
+    }
+    @include mobile() {
+      grid-template-areas:
+        "title"
+        "left"
+        "right";
+      padding: 10px;
+      p,
+      h2,
+      .left {
+        margin: 0;
+      }
+      h2 {
+        font-size: 20px;
+        span i {
+          display: none;
+        }
+      }
+      p {
+        font-size: 15px;
+      }
+      .left {
+        margin: auto;
       }
     }
   }
@@ -1011,7 +1034,8 @@ export default {
         float: left;
         font-size: 14px;
         font-weight: 100;
-        margin: 17px;
+        margin-left: 17px;
+        margin-top: 15px;
       }
       button {
         bottom: 0;
@@ -1045,23 +1069,10 @@ export default {
       cursor: pointer;
       transition: all 0.1s;
       outline: none;
-      &:active::before {
-        border-top: 54px solid darken(color(skin-tone), 5%);
-      }
-      &::before {
-        content: "";
-        height: 0;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: -40px;
-        /* stick out into margined area */
-        z-index: -1;
-        /* make it the background */
-        border: 40px solid transparent;
-        /* left/right diagonals */
-        border-top: 40px solid color(skin-tone);
-        border-bottom: 0px solid transparent;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+      background-color: color(skin-tone);
+      @include mobile(320px) {
+        width: calc(100% - 20px);
       }
     }
   }
@@ -1110,12 +1121,16 @@ export default {
         cursor: pointer;
       }
       li:last-of-type {
-        grid-column: span 3;
+        grid-column-start: 1;
+        grid-column-end: -1;
       }
     }
     .zone {
       direction: rtl;
+      display: grid;
+      height: 100%;
       ul {
+        overflow: auto;
         list-style: none;
         display: block;
         li {
@@ -1124,17 +1139,21 @@ export default {
           &:not(:last-of-type) {
             border-bottom: 1px solid #707070;
           }
+          .code,
+          .tel {
+            font-size: 22px;
+            display: block;
+          }
           .code {
             float: right;
-            display: block;
           }
           .tel {
             float: left;
-            display: block;
           }
           p {
             display: inline-block;
             width: 100%;
+            font-size: 18px;
           }
         }
       }
@@ -1142,12 +1161,28 @@ export default {
         width: 90%;
         border: none;
         border-radius: 6px;
-        margin: 20px 0;
+        margin: 20px auto;
         background-color: darken(color(chocolate), 10%);
         color: white;
         font-size: 20px;
         cursor: pointer;
         outline: none;
+      }
+    }
+    @include mobile() {
+      ul {
+        grid-template-columns: repeat(auto-fit, minmax(95px, auto));
+        grid-gap: 7.5px;
+        button {
+          font-size: 13px;
+          line-height: 35px;
+        }
+      }
+      h3 {
+        font-size: 19px;
+      }
+      h4 {
+        font-size: 11px;
       }
     }
   }
@@ -1170,23 +1205,10 @@ export default {
         cursor: pointer;
         transition: all 0.1s;
         outline: none;
-        &:active::before {
-          border-top: 54px solid darken(color(skin-tone), 5%);
-        }
-        &::before {
-          content: "";
-          height: 0;
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: -40px;
-          /* stick out into margined area */
-          z-index: -1;
-          /* make it the background */
-          border: 40px solid transparent;
-          /* left/right diagonals */
-          border-top: 40px solid color(skin-tone);
-          border-bottom: 0px solid transparent;
+        clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 40px 100%);
+        background-color: color(skin-tone);
+        @include mobile(320px) {
+          width: calc(100% - 20px);
         }
       }
       section {

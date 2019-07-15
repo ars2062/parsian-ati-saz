@@ -27,12 +27,10 @@ export default {
   },
   methods: {
     slideLeft() {
-      console.log(this.cardWidth);
-      if (
-        this.transform <
-        Array.from(this.$refs["cards"].querySelectorAll("div")).length *
-          this.cardWidth
-      )
+      let count = this.$refs["cards"].querySelectorAll("div").length;
+      count-=this.displayCount;
+      console.log(this.cardWidth)
+      if (this.transform < count * this.cardWidth)
         this.transform += this.cardWidth + 15;
     },
     slideRight() {
@@ -65,7 +63,18 @@ export default {
       else if (this.vw(100) <= 920) return (this.vw(100) - 340) / 2;
       else if (this.vw(100) <= 1120) return (this.vw(100) - 340) / 3;
       else return (this.vw(100) - 340) / 4;
+    },
+    displayCount(){
+      if (this.vw(100) <= 730) return 1;
+      else if (this.vw(100) <= 920) return 2;
+      else if (this.vw(100) <= 1120) return 3;
+      else return 4;
     }
+  },
+  mounted() {
+    window.addEventListener("resize", () => {
+      this.transform = 0;
+    });
   }
 };
 </script>
@@ -158,6 +167,20 @@ export default {
     @include mobile(530px) {
       padding: 0 70px;
       width: calc(100% - 130px);
+    }
+  }
+  @include mobile() {
+    .navBtn {
+      &:first-of-type {
+        left: 20px;
+      }
+      &:last-of-type {
+        right: 20px;
+      }
+    }
+    &::after,
+    &::before {
+      box-shadow: 0 0 40px 25px white;
     }
   }
 }
