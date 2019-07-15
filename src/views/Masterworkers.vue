@@ -9,7 +9,7 @@
     <section :class="$style.one">
       <Title title="استاد کاران برند منطقه" style="margin-top:45px" />
       <div :class="$style.cards">
-        <div v-for="i in [1,2,3,4,5,6,7,8]" :key="i" :class="$style.card">
+        <div v-for="master in list" :key="master.id" :class="$style.card">
           <img src="@/assets/icons/450-3366-225x168.jpg" />
           <h4>کنعان پاسبانی</h4>
           <span>کار {{i}}</span>
@@ -35,6 +35,15 @@ import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import AreYouAMasterWorker from "@/components/AreYouAMasterWorker.vue";
 export default {
+  data(){
+    return{
+      list:[]
+    }
+  },
+  async created(){
+    await this.$store.dispatch("home/get_all_masters");
+    this.list=this.$store.getters["home/get_all_masters"];
+  },
   components: {
     Header,
     Searchcard,

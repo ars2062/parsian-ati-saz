@@ -41,6 +41,15 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 export default {
+  data(){
+    return{
+      list:[]
+    }
+  },
+  async created(){
+    await this.$store.dispatch("home/get_sell_files");
+    this.list=this.$store.getters["home/get_sell_files"];
+  },
   components: {
     Header,
     Searchcard,

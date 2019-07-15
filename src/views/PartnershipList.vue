@@ -6,7 +6,7 @@
     />
     <Searchcard></Searchcard>
     <div :class="$style.list_container">
-      <router-link to="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+      <router-link to="/property-detail" :class="$style.post" v-for="ship in list" :key="ship.id">
         <div :class="$style.ribbonContainer">
           <div :class="$style.ribbon">
             <img src="@/assets/icons/star.svg">
@@ -41,6 +41,15 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 export default {
+  data(){
+    return{
+      list:[]
+    }
+  },
+  async created(){
+    await this.$store.dispatch("home/get_partnership_files");
+    this.list=this.$store.getters["home/get_partnership_files"];
+  },
   components: {
     Header,
     Searchcard,

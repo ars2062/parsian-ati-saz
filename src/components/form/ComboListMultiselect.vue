@@ -10,7 +10,7 @@
         <button @click="removeKeyword(index)"></button>
       </span>
       <span v-if="selectedKeywords.length==0" :class="$style.all">همه محله ها</span>
-      <img src="@/assets/icons/right-arrow.svg">
+      <img src="@/assets/icons/right-arrow.svg" />
     </div>
     <ul :style="{display: isVisible}">
       <li
@@ -51,6 +51,13 @@ export default {
       if (this.isVisible == "block") this.isVisible = "none";
     });
   },
+  computed: {
+    computedkeywords() {
+      return this.keywords.filter(keyword => {
+        return !this.selectedKeywords.find(k => k.id == keyword.id);
+      });
+    }
+  },
   methods: {
     toggle($event) {
       $event.stopPropagation();
@@ -61,11 +68,11 @@ export default {
     async addKeyword($event, k) {
       $event.stopPropagation();
       await this.selectedKeywords.push(k);
-      const input = document.getElementById("tagInput");
-      input.blur();
-      this.value = "";
-      this.hide();
-      this.$emit("input", this.selectedKeywords.map(keyword => keyword.id));
+      //const input = document.getElementById("tagInput");
+      //input.blur();
+      //this.value = "";
+      //this.hide();
+      this.emit();
     },
     hide() {
       this.isVisible = "none";
@@ -77,18 +84,10 @@ export default {
         this.selectedKeywords.map(keyword => keyword.id)
       );
       this.hide();
-    }
-  },
-  computed: {
-    computedkeywords() {
-      return this.keywords.filter(keyword => {
-        if (this.value != "") {
-          return (
-            keyword.name.includes(this.value) &&
-            !this.selectedKeywords.includes(keyword)
-          );
-        } else return !this.selectedKeywords.includes(keyword);
-      });
+      this.emit();
+    },
+    emit() {
+      this.$emit("input", this.selectedKeywords.map(keyword => keyword.id));
     }
   }
 };

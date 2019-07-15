@@ -48,22 +48,9 @@ export default {
         this.choosen = this.items.find(item => {
           return item.id == id;
         }).text;
-        this.$emit("value", id);
+        this.$emit("input", id);
       }
       this.toggleDisplay();
-    },
-    change() {
-      let text = "";
-      this.CheckedItems.map(i => {
-        text +=
-          '"' +
-          this.items.find(item => {
-            return item.id == i;
-          }).text +
-          '" ';
-      });
-      this.$emit("value", this.CheckedItems);
-      this.choosen = text;
     }
   }
 };

@@ -7,7 +7,7 @@
       subtitleC/>
     <Title title="لیست محصولات برند منظقه" style="margin-top:50px;"/>
     <div :class="$style.products">
-      <div :class="$style.post" v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i">
+      <div :class="$style.post" v-for="product in list" :key="product.id">
         <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
         <h3>لوازم ساختمانی برادران بیژن </h3>
         <h4>زمینه کاری : تولید لوازم پلاستیکی</h4>
@@ -32,6 +32,15 @@ import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import AreYouAMasterWorker from "@/components/AreYouAMasterWorker.vue";
 export default {
+  data(){
+    return{
+      list:[]
+    }
+  },
+  async created(){
+    await this.$store.dispatch("home/get_all_products");
+    this.list=this.$store.getters["home/get_all_products"];
+  },
   components: {
     Header,
     Searchcard,

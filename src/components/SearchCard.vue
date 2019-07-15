@@ -2,19 +2,21 @@
   <section :class="$style.searchcard">
     <p>برای جستجوی ملک مورد نظر خود</p>
     <p>با پرکردن فیلد های زیر سریع تر به نتیجه مطلوب خواهید رسید.</p>
-    <form ref="searchForm"  @submit.prevent="goto('search-result')">
+    <form ref="searchForm" @submit.prevent="search">
       <Combolist
         title="نوع تقاضای خود را مشخص کنید"
-        :items="[{id: 1, text: 'مشارکت در ساخت'},{id: 2, text: 'فروش کلنگی'}]"
+        :items="[{id: 4, text: 'مشارکت در ساخت'},{id: 3, text: 'فروش کلنگی'}]"
         @value="chooseType($event)"
         class="fade-in"
         data-scroll
+        v-model="advert_type"
       />
       <ComboListMultiselect
         placeholder="محله های مورد نظر خود را مشخص کنید"
         :keywords="[{id:0,name:'a'},{id:1,name:'b'},{id:2,name:'c'},{id:3,name:'d'}]"
         class="fade-in"
         data-scroll
+        v-model="cities"
       />
       <input
         type="number"
@@ -24,7 +26,8 @@
         placeholder="حداکثر متراژ مورد نظر خود را وارد کنید"
         class="fade-in"
         data-scroll
-      >
+        v-model="max_metrazh"
+      />
       <input
         type="number"
         name="minMetrazh"
@@ -33,7 +36,8 @@
         placeholder="حداحقل متراژ مورد نظر خود را وارد کنید"
         class="fade-in"
         data-scroll
-      >
+        v-model="min_metrazh"
+      />
       <div :class="[$style.submitContainer,'slide-in-top']" data-scroll>
         <button type="submit">
           <span>جستجو</span>
@@ -56,7 +60,11 @@ export default {
     return {
       showMosharekat: false,
       showForoosh: false,
-      displayType: true
+      displayType: true,
+      min_metrazh: null,
+      max_metrazh: null,
+      cities: [],
+      advert_type: null
     };
   },
   computed: {
@@ -86,9 +94,18 @@ export default {
         this.showMosharekat = false;
       }
     },
-    goto(name,$event) {
+    goto(name, $event) {
       this.$router.push(name);
     },
+    async search() {
+      await this.$store.dispatch("home/search", {
+        min_metrazh: (this.min_metrazh)?this.min_metrazh:null,
+        max_metrazh: (this.max_metrazh)?this.max_metrazh:null,
+        cities: (this.cities)?this.cities:[],
+        advert_type: (this.advert_type)?this.advert_type:null
+      });
+      this.$router.push("search-result");
+    }
   }
 };
 </script>

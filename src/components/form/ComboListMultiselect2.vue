@@ -61,11 +61,11 @@ export default {
     async addKeyword($event, k) {
       $event.stopPropagation();
       await this.selectedKeywords.push(k);
-      const input = document.getElementById("tagInput");
-      input.blur();
-      this.value = "";
-      this.hide();
-      this.$emit("input", this.selectedKeywords.map(keyword => keyword.id));
+      //const input = document.getElementById("tagInput");
+      //input.blur();
+      //this.value = "";
+      //this.hide();
+      this.emit();
     },
     hide() {
       this.isVisible = "none";
@@ -77,17 +77,16 @@ export default {
         this.selectedKeywords.map(keyword => keyword.id)
       );
       this.hide();
+      this.emit();
+    },
+    emit() {
+      this.$emit("input", this.selectedKeywords.map(keyword => keyword.id));
     }
   },
   computed: {
     computedkeywords() {
       return this.keywords.filter(keyword => {
-        if (this.value != "") {
-          return (
-            keyword.name.includes(this.value) &&
-            !this.selectedKeywords.includes(keyword)
-          );
-        } else return !this.selectedKeywords.includes(keyword);
+        return !this.selectedKeywords.find(k => k.id == keyword.id);
       });
     }
   }

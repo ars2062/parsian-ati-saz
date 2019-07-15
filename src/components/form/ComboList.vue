@@ -5,7 +5,7 @@
       :style="display=='block'?'border-radius: 6px 6px 0 0; border-bottom:none':''"
     >
       <span>{{choosen||title}}</span>
-      <img src="@/assets/icons/right-arrow.svg">
+      <img src="@/assets/icons/right-arrow.svg" />
     </div>
     <ul :style="{display:this.display}">
       <li v-for="item in this.items" :key="item.id" @click="choose(item.id)">{{item.text}}</li>
@@ -37,7 +37,9 @@ export default {
   },
   methods: {
     toggleDisplay($event) {
-      $event.stopPropagation();
+      try {
+        $event.stopPropagation();
+      } catch {}
       this.display = this.display === "block" ? "none" : "block";
     },
     choose(id) {
@@ -45,22 +47,9 @@ export default {
         this.choosen = this.items.find(item => {
           return item.id == id;
         }).text;
-        this.$emit("value", id);
+        this.$emit("input", id);
       }
       this.toggleDisplay();
-    },
-    change() {
-      let text = "";
-      this.CheckedItems.map(i => {
-        text +=
-          '"' +
-          this.items.find(item => {
-            return item.id == i;
-          }).text +
-          '" ';
-      });
-      this.$emit("value", this.CheckedItems);
-      this.choosen = text;
     }
   }
 };

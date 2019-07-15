@@ -40,8 +40,8 @@
         >
           <div :class="$style.type">مشارکت در ساخت</div>
           <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
-          <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
-          <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
+          <h3>{{recent.title}}</h3>
+          <span :class="$style.price">مبلغ بلاعوض : {{Number(recent.cost).toLocaleString()}} تومان</span>
         </router-link>
       </div>
       <div :class="$style.col">
@@ -81,17 +81,17 @@
 
 <script>
 import Axios from "axios";
-import consts from "@/consts"
+import store from "@/store";
 export default {
-  data(){
-    return{
-      recents:[]
-    }
+  data() {
+    return {
+      recents: []
+    };
   },
-  async created(){
-    let res=(await Axios.get(consts.api_urls.home)).data;
-    this.recents=res.recent;
-    console.log(this.recents);
+  async created() {
+    await this.$store.dispatch("home/fetch_adverts");
+    this.recents = this.$store.getters["home/recent"];
+    console.log(this.recents)
   },
   methods: {
     goToTop() {

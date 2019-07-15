@@ -17,14 +17,14 @@ export default new Vuex.Store({
     adviser: adviser,
     home: home,
     account: account,
-    advert:advert,
-    admin_advert:admin_advert
+    advert: advert,
+    admin_advert: admin_advert
   },
   state: {
     loading: true,
     // this object is for property pages
     detail_object: {},
-    cities:[]
+    cities: []
   },
   getters: {
     loading: state => {

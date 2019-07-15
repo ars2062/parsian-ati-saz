@@ -1,19 +1,25 @@
 <template>
   <div :class="$style.contact">
     <section v-if="!sendMessage" :class="$style.one">
-      <img src="@/assets/parsian-logo2.png">
+      <img src="@/assets/parsian-logo2.png" />
       <h1>ارتباط با ما</h1>
       <button @click="sendMessage=true">ارسال پیام</button>
     </section>
     <section :class="$style.two" :style="sendMessage?'display:flex':'display:none'">
-      <div :class="$style.form">
-        <input type="text" name="name" id="name" placeholder="نام و نام خانوادگی">
-        <input type="text" name="phone" id="phone" placeholder="شماره تماس">
-        <input type="text" name="subject" id="subject" placeholder="عنوان پیام">
-        <textarea name="description" id="description" rows="6" placeholder="توضیحات"></textarea>
+      <form @submit.prevent="send">
+        <input type="text" v-model="name" name="name" id="name" placeholder="نام و نام خانوادگی" />
+        <input type="text" v-model="phone" name="phone" id="phone" placeholder="شماره تماس" />
+        <input type="text" v-model="subject" name="subject" id="subject" placeholder="عنوان پیام" />
+        <textarea
+          name="description"
+          v-model="description"
+          id="description"
+          rows="6"
+          placeholder="توضیحات"
+        ></textarea>
         <button @click="goto('/')">بازگشت به صفحه صلی</button>
-        <button>ارسال پیام</button>
-      </div>
+        <button type="submit">ارسال پیام</button>
+      </form>
     </section>
     <section :class="$style.info">
       <div :class="$style.con">
@@ -57,7 +63,11 @@ export default {
   },
   data() {
     return {
-      sendMessage: false
+      sendMessage: false,
+      name: "",
+      subject: "",
+      phone: "",
+      description: ""
     };
   },
   methods: {
@@ -74,6 +84,15 @@ export default {
     backToSelector(index) {
       this.$refs["selectorPanel"].style.display = "block";
       this.$refs["dafater_khadamat_shahri_" + index].style.display = "none";
+    },
+    async send() {
+      await this.$store.dispatch("home/send_contact", {
+        name: this.name,
+        subject: this.subject,
+        phone: this.phone,
+        description: this.description
+      });
+      alert(this.$store.getters["home/msg"])
     }
   }
 };
@@ -124,7 +143,7 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 40px 0;
-    .form {
+    form {
       width: 833px;
       height: fit-content;
       display: grid;

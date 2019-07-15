@@ -81,11 +81,10 @@
         <h3>ورود به حساب</h3>
         <p>برای ورود به حساب نیاز به تایید شماره تماس است</p>
         <div :class="$style.container">
-          <Label for="phone"
-          >
+          <Label for="phone">
             <i class="fas fa-phone"></i> شماره تماس
           </Label>
-          <MaskedInput id="phone" mask="\+98 911 111 1111" placeholder-char="*" />
+          <MaskedInput id="phone" mask="\+98 911 111 1111" placeholder-char="*" v-model="phone" />
         </div>
         <button v-if="!LoginRegisterSent" @click="loginRegister">دریافت کد</button>
         <div v-if="LoginRegisterSent">
@@ -121,7 +120,8 @@ export default {
       loggedin: false,
       LoginRegisterSent: false,
       sendAgainTime: 120,
-      interval: null
+      interval: null,
+      phone: null
     };
   },
   methods: {
@@ -144,8 +144,22 @@ export default {
     goto(name) {
       this.$router.push(name);
     },
-    loginRegister() {
-      this.vcccccccccccccccc = true;
+    async loginRegister() {
+      if (this.phone.includes("*")) alert("شماره وارد شده صحیح نمی باشد");
+      else if(!this.phone) alert("وارد کردن شماره الزامی میباشد");
+      else {
+        await this.$store.dispatch(
+          "account/login",
+          this.phone.replace(/\s/g, "")
+        );
+        alert(this.$store.getters["account/login_message"]);
+        this.interval = setInterval(() => {
+          if (this.LoginRegisterSent) this.sendAgainTime--;
+          if (this.sendAgainTime == 0) {
+            clearInterval(this.interval);
+          }
+        }, 1000);
+      }
     },
     verify() {}
   },
@@ -166,14 +180,7 @@ export default {
       }
     }
   },
-  created() {
-    this.interval = setInterval(() => {
-      if (this.LoginRegisterSent) this.sendAgainTime--;
-      if (this.sendAgainTime == 0) {
-        clearInterval(this.interval);
-      }
-    }, 1000);
-  }
+  created() {}
 };
 </script>
 
@@ -475,10 +482,10 @@ nav {
     }
     .container {
       width: 90%;
-      margin:0 5%;
+      margin: 0 5%;
       display: flex;
-        margin-top: 15px;
-      box-shadow: 0 0 6px rgba($color: #000000, $alpha: .16);
+      margin-top: 15px;
+      box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.16);
       label,
       input {
         display: inline-block;
@@ -498,14 +505,14 @@ nav {
         background-color: color(skin-tone);
         width: fit-content;
         padding: 0 10px;
-        color: rgba($color: #3B3B3B, $alpha: .74);
+        color: rgba($color: #3b3b3b, $alpha: 0.74);
         border-radius: 0 6px 6px 0;
         * {
           display: inline-block;
         }
       }
     }
-    button{
+    button {
       line-height: 40px;
       border: none;
       border-radius: 6px;
