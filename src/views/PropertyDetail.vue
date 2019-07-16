@@ -103,7 +103,6 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import ImageSlider from "@/components/ImageSlider.vue";
-import ContactCard from "@/components/ContactCard.vue";
 
 export default {
   components: {
@@ -113,8 +112,7 @@ export default {
     CardSlider,
     Footer,
     Modal,
-    ImageSlider,
-    ContactCard
+    ImageSlider
   },
   methods: {
     goto(name) {
