@@ -43,6 +43,12 @@ import Modal from "@/components/Modal.vue";
 import Loading from "@/components/Loading.vue";
 import AreYouAMasterWorker from "@/components/AreYouAMasterWorker.vue";
 export default {
+  data(){
+    return{
+      result:[]
+    }
+  },
+  
   components: {
     Header,
     Searchcard,

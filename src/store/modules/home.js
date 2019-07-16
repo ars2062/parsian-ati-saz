@@ -1,6 +1,5 @@
 import consts from "@/consts";
 import Axios from "axios";
-import { async } from "q";
 
 export default {
   namespaced: true,
@@ -129,12 +128,8 @@ export default {
       { commit },
       { min_metrazh, max_metrazh, cities = [], advert_type }
     ) => {
-<<<<<<< HEAD
-      commit("start_loading", { root: true });
-=======
       commit("start_loading", null, { root: true });
-      
->>>>>>> c51a04f4df2d6a85a9624559637425404c95cdc0
+
       await Axios.get(
         consts.api_urls.search,
         {
@@ -153,26 +148,24 @@ export default {
       )
         .then(function(response) {
           commit("set_search_result", response.data);
-          console.log(response);
           commit("stop_loading", null, { root: true });
         })
         .catch(function(error) {
-          console.error(error);
           commit("stop_loading", null, { root: true });
         });
     },
     send_contact: async ({ commit }, { name, subject, phone, description }) => {
-      commit("start_loading", null,{ root: true });
+      commit("start_loading", null, { root: true });
 
       await Axios.post(
         consts.api_urls.add_contact,
         {
-          params:{
+          params: {
             name: name,
             subject: subject,
             phone: phone,
             description: description
-        }
+          }
         },
         {
           headers: { "Content-Type": "application/json" }
@@ -185,89 +178,109 @@ export default {
           commit("set_add_contact_msg", "خطا در ارتباط با میزبان");
         });
     },
-    get_sell_files: async({ commit }) => {
-      commit("start_loading", null,{ root: true });
+    get_sell_files: async ({ commit }) => {
+      commit("start_loading", null, { root: true });
 
-      await Axios.get(consts.api_urls.sell_files,{}, {
-        headers: {
-          "Content-Type": "application/json"
+      await Axios.get(
+        consts.api_urls.sell_files,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      })
+      )
         .then(function(response) {
           commit("set_sell_files", response.data);
 
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         })
         .catch(function(error) {
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         });
     },
     get_partnership_files: ({ commit }) => {
-      commit("start_loading", null,{ root: true });
+      commit("start_loading", null, { root: true });
 
-      Axios.get(consts.api_urls.partnership_files,{}, {
-        headers: {
-          "Content-Type": "application/json"
+      Axios.get(
+        consts.api_urls.partnership_files,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      })
+      )
         .then(function(response) {
           commit("set_partnership_files", response.data);
 
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         })
         .catch(function(error) {
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         });
     },
     get_all_products: ({ commit }) => {
-      commit("start_loading", null,{ root: true });
+      commit("start_loading", null, { root: true });
 
-      Axios.get(consts.api_urls.all_products,{}, {
-        headers: {
-          "Content-Type": "application/json"
+      Axios.get(
+        consts.api_urls.all_products,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      })
+      )
         .then(function(response) {
           commit("set_all_products", response.data);
 
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         })
         .catch(function(error) {
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         });
     },
     get_all_masters: ({ commit }) => {
-      commit("start_loading", null,{ root: true });
+      commit("start_loading", null, { root: true });
 
-      Axios.get(consts.api_urls.all_masters,{}, {
-        headers: {
-          "Content-Type": "application/json"
+      Axios.get(
+        consts.api_urls.all_masters,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      })
+      )
         .then(function(response) {
           commit("set_all_masters", response.data);
 
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         })
         .catch(function(error) {
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         });
     },
     get_all_golds: ({ commit }) => {
-      commit("start_loading", null,{ root: true });
+      commit("start_loading", null, { root: true });
 
-      Axios.get(consts.api_urls.all_golds,{}, {
-        headers: {
-          "Content-Type": "application/json"
+      Axios.get(
+        consts.api_urls.all_golds,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      })
+      )
         .then(function(response) {
           commit("set_all_golds", response.data);
 
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         })
         .catch(function(error) {
-          commit("stop_loading", null,{ root: true });
+          commit("stop_loading", null, { root: true });
         });
     }
   }
