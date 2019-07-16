@@ -4,6 +4,7 @@ export default {
   auth_header: "$2y$10$4ci4mDCRywK44qQg9zKqLeECMddbVkxmYgITwERF1PWZN1BKKCioG",
   api_urls: {
     home: api_url + "home",
+    city: api_url + "city",
     add_contact: api_url + "contact",
     search: api_url + "search/",
     sell_files: api_url + "sells",
@@ -13,9 +14,9 @@ export default {
     all_golds: api_url + "golds",
 
     // this part is for account
-    login: api_url + "account/login",
-    verify: api_url + "account/verify",
-    logout: api_url + "account/logout",
+    login: api_url + "accounts/login",
+    verify: api_url + "accounts/verify",
+    logout: api_url + "accounts/logout",
 
     // contact part for admin
     get_contacts: api_url + "contact",
@@ -80,9 +81,9 @@ export default {
   },
   // advert types for send to api
   advert_types: {
-    HomeAdvertToken: 1,
-    ProfessorAdvertToken: 2,
-    ClutterSellAdvertToken: 3,
-    ClutterPartnershipAdvertToken: 4
+    Product: 'ProductsAdvert',
+    Master: 'MasterAdvert',
+    Sell: 'Sell',
+    Partnership: 'Partnership'
   }
 };
