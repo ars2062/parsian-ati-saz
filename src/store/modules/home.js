@@ -1,6 +1,5 @@
 import consts from "@/consts";
 import Axios from "axios";
-import { async } from "q";
 
 export default {
   namespaced: true,
