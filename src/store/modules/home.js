@@ -128,12 +128,8 @@ export default {
       { commit },
       { min_metrazh, max_metrazh, cities = [], advert_type }
     ) => {
-<<<<<<< HEAD
-      commit("start_loading", { root: true });
-=======
       commit("start_loading", null, { root: true });
       
->>>>>>> c51a04f4df2d6a85a9624559637425404c95cdc0
       await Axios.get(
         consts.api_urls.search,
         {
