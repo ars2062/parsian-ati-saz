@@ -76,8 +76,6 @@
       </p>
     </section>
 
-    <ContactCard />
-
     <Footer />
 
     <Modal ref="contactInfo">
