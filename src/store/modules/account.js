@@ -121,7 +121,7 @@ export default {
           }
         )
         .then(res => {
-          commit("stop_loading", { root: true });
+          commit("stop_loading",null, { root: true });
           commit("set_loginMsg", res.data.message);
 
           if (res.data.result) {

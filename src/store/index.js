@@ -6,6 +6,9 @@ import home from "./modules/home";
 import account from "./modules/account";
 import advert from "./modules/advert";
 import admin_advert from "./modules/admin/advert";
+import { async } from "q";
+import Axios from "axios";
+import consts from "../consts";
 
 Vue.use(Vuex);
 
@@ -32,6 +35,9 @@ export default new Vuex.Store({
     },
     detail_object: state => {
       return state.detail_object;
+    },
+    cities: state => {
+      return state.cities;
     }
   },
   mutations: {
@@ -43,7 +49,26 @@ export default new Vuex.Store({
     },
     set_detail_object(state, obj) {
       state.detail_object = obj;
+    },
+    set_cities(state,cities){
+      state.cities = cities;
     }
   },
-  actions: {}
+  actions: {
+    fetch_cities:async ({commit})=>{
+
+      await Axios.get(
+        consts.api_urls.city,
+        {}
+      ).then(function(response) {
+        commit("set_cities", response.data);
+        console.log(response);
+        commit("stop_loading", { root: true });
+      })
+      .catch(function(error) {
+        console.error(error);
+        commit("stop_loading", { root: true });
+      });
+    }
+  }
 });
