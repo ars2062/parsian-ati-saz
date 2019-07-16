@@ -129,14 +129,15 @@ export default {
       { min_metrazh, max_metrazh, cities = [], advert_type }
     ) => {
       commit("start_loading", { root: true });
-      console.log(advert_type)
       await Axios.get(
         consts.api_urls.search,
         {
-          min_metrazh: min_metrazh,
-          max_metrazh: max_metrazh,
-          cities: cities,
-          advert_type: advert_type
+          params: {
+            min_metrazh: min_metrazh,
+            max_metrazh: max_metrazh,
+            cities: cities,
+            advert_type: advert_type
+          }
         },
         {
           headers: {

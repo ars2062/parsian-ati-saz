@@ -4,8 +4,8 @@
     <p>با پرکردن فیلد های زیر سریع تر به نتیجه مطلوب خواهید رسید.</p>
     <form ref="searchForm" @submit.prevent="search">
       <Combolist
-        title="نوع تقاضای خود را مشخص کنید"
-        :items="[{id: 4, text: 'مشارکت در ساخت'},{id: 3, text: 'فروش کلنگی'}]"
+        title="* نوع تقاضای خود را مشخص کنید"
+        :items="[{id: 'Partnership', text: 'مشارکت در ساخت'},{id: 'Sell', text: 'فروش کلنگی'}]"
         @value="chooseType($event)"
         class="fade-in"
         data-scroll
@@ -98,13 +98,17 @@ export default {
       this.$router.push(name);
     },
     async search() {
-      await this.$store.dispatch("home/search", {
-        min_metrazh: (this.min_metrazh)?this.min_metrazh:null,
-        max_metrazh: (this.max_metrazh)?this.max_metrazh:null,
-        cities: (this.cities)?this.cities:[],
-        advert_type: (this.advert_type)?this.advert_type:null
-      });
-      this.$router.push("search-result");
+      if (!this.advert_type) {
+        alert("وارد کردن نوع تقاضا الزامیست")
+      } else {
+        await this.$store.dispatch("home/search", {
+          min_metrazh: this.min_metrazh ? this.min_metrazh : null,
+          max_metrazh: this.max_metrazh ? this.max_metrazh : null,
+          cities: this.cities ? this.cities : [],
+          advert_type: this.advert_type ? this.advert_type : null
+        });
+        this.$router.push("search-result");
+      }
     }
   }
 };
