@@ -8,12 +8,18 @@ import advert from "./modules/advert";
 import admin_advert from "./modules/admin/advert";
 import Axios from "axios";
 import consts from "../consts";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
 // load modules from folder and save this file
 
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState({
+      paths: ["home.search_results"]
+    })
+  ],
   modules: {
     contact: contact,
     adviser: adviser,
