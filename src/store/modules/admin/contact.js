@@ -1,6 +1,8 @@
 import consts from "@/consts";
 import Axios from "axios";
 
+//edited
+
 export default {
     namespaced: true,
     state: {
@@ -23,34 +25,34 @@ export default {
         }
     },
     actions: {
-        fetchAllContacts: ({ commit }) => {
+        fetchAllContacts: async ({ commit }) => {
 
-            commit("start_loading", { root: true });
+            // commit("start_loading", null ,{ root: true });
 
-            Axios.get(consts.api_urls.get_contacts, {
+            await Axios.get(consts.api_urls.get_contacts, {
                 headers: {
                     'Authorization':localStorage.getItem('user.token')
                 },
             }).then(function (response) {
                 commit('set_contacts',response.data);
-                commit("stop_loading", { root: true });
+                // commit("stop_loading", { root: true });
             }).catch(function (error) {
-                commit("stop_loading", { root: true });
+                alert('error in fetch contacts');
             });
 
         },
-        delete: ({commit},id)=>{
+        delete_contact: async ({commit},id)=>{
 
             // set loading true
-            commit('start_loading',{root:true});
+            //commit('start_loading',{root:true});
 
-            Axios.delete(consts.api_urls.remove_contacts+id, {
+            await Axios.delete(consts.api_urls.remove_contacts+id, {
                 headers: {
                     'Authorization':localStorage.getItem('user.token')
                 },
             }).then(function (response) {
 
-                commit('start_loading',{root:true});
+                //commit('start_loading',{root:true});
 
                 commit('del_contact',id);
 
@@ -59,7 +61,8 @@ export default {
                 }
 
             }).catch(function (error) {
-                commit('stop_loading',{root:true});
+                //commit('stop_loading',{root:true});
+
                 commit('notfound_error','خطا در سیستم');
             });
         }

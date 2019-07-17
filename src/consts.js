@@ -20,7 +20,7 @@ export default {
     logout: api_url + "accounts/logout",
 
     // contact part for admin
-    get_contacts: api_url + "contact",
+    get_contacts: api_url + "/adminstrator/contact",
     remove_contacts: api_url + "contact/",
 
     // sell advert part
@@ -48,9 +48,10 @@ export default {
     edit_professor_advert_advert: api_url + "professor_advert/",
 
     // adviser part
-    add_adviser: api_url + "admin/adviser",
-    edit_adviser: api_url + "admin/adviser/",
-    remove_adviser: api_url + "admin/adviser/",
+    add_adviser: api_url + "adminstrator/adviser",
+    fetch_adviser: api_url + "adminstrator/adviser",
+    edit_adviser: api_url + "adminstrator/adviser/",
+    remove_adviser: api_url + "adviser/adviser/",
 
     request_payment_url: api_url + "request/payment/",
 
@@ -58,26 +59,30 @@ export default {
 
     admin_advert_area: {
       // sell advert part
-      add_sell_advert: api_url + "admin/clutter_sell_advert",
-      remove_sell_advert: api_url + "admin/clutter_sell_advert/",
-      edit_sell_advert: api_url + "admin/clutter_sell_advert/",
+      sell_advert: api_url + "adminstrator/sell",
+      add_sell_advert: api_url + "adminstrator/sell",
+      remove_sell_advert: api_url + "adminstrator/sell/",
+      edit_sell_advert: api_url + "adminstrator/sell/",
 
       // partnership advert
-      add_partnership_advert: api_url + "admin/clutter_partnership_advert",
-      remove_partnership_advert: api_url + "admin/clutter_partnership_advert/",
-      edit_partnership_advert: api_url + "admin/clutter_partnership_advert/",
+      add_partnership_advert: api_url + "adminstrator/partnership",
+      partnership_advert: api_url + "adminstrator/partnership",
+      remove_partnership_advert: api_url + "adminstrator/partnership/",
+      edit_partnership_advert: api_url + "adminstrator/partnership/",
 
       // product advert
-      add_product_advert: api_url + "admin/home_advert",
-      remove_product_advert: api_url + "admin/home_advert/",
-      edit_product_advert: api_url + "admin/home_advert/",
+      add_product_advert: api_url + "adminstrator/products-advert",
+      product_advert: api_url + "adminstrator/products-advert",
+      remove_product_advert: api_url + "adminstrator/products-advert/",
+      edit_product_advert: api_url + "adminstrator/products-advert/",
 
       // professor advert
-      add_professor_advert_advert: api_url + "admin/professor_advert",
-      remove_professor_advert_advert: api_url + "admin/professor_advert/",
-      edit_professor_advert_advert: api_url + "admin/professor_advert/",
+      add_master_advert: api_url + "adminstrator/master-advert",
+      master_advert: api_url + "adminstrator/master-advert",
+      remove_master_advert: api_url + "adminstrator/master-advert/",
+      edit_master_advert: api_url + "adminstrator/master-advert/",
 
-      verify_advert: api_url + "admin/verify_advert/"
+      verify_advert: api_url + "adminstrator/advert/verify/"
     }
   },
   // advert types for send to api
