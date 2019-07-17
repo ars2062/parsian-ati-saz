@@ -81,12 +81,10 @@ export default {
   actions: {
     login: async function({ commit }, phone) {
       await axios
-        .post(
+        .get(
           consts.api_urls.login,
           {
-            phone: phone
-          },
-          {
+            params: { phone: phone },
             headers: {
               "Content-Type": "application/json"
             }
@@ -94,7 +92,6 @@ export default {
         )
         .then(res => {
           commit("set_loginMsg", res.data.message);
-
           if (res.data.result) {
             commit("set_user_phone", phone);
             commit("set_login_status", "verify");
@@ -103,7 +100,8 @@ export default {
           }
         })
         .catch(error => {
-          commit("error");
+          //commit("error");
+          commit("set_loginMsg", error.response.data.message);
         });
     },
     verify: function({ commit }, { phone, code }) {
@@ -121,7 +119,7 @@ export default {
           }
         )
         .then(res => {
-          commit("stop_loading",null, { root: true });
+          commit("stop_loading", null, { root: true });
           commit("set_loginMsg", res.data.message);
 
           if (res.data.result) {

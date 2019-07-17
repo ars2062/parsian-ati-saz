@@ -78,16 +78,18 @@
     </div>
     <Modal ref="LoginRegister">
       <div :class="$style.LoginRegister">
-        <h3>ورود به حساب</h3>
-        <p>برای ورود به حساب نیاز به تایید شماره تماس است</p>
-        <div :class="$style.container">
-          <Label for="phone">
-            <i class="fas fa-phone"></i> شماره تماس
-          </Label>
-          <MaskedInput id="phone" mask="\+98 911 111 1111" placeholder-char="*" v-model="phone" />
-        </div>
-        <button v-if="!LoginRegisterSent" @click="loginRegister">دریافت کد</button>
-        <div v-if="LoginRegisterSent">
+        <form @submit.prevent="loginRegister" v-if="!LoginRegisterSent">
+          <h3>ورود به حساب</h3>
+          <p>برای ورود به حساب نیاز به تایید شماره تماس است</p>
+          <div :class="$style.container">
+            <Label for="phone">
+              <i class="fas fa-phone"></i> شماره تماس
+            </Label>
+            <MaskedInput id="phone" mask="\+98 911 111 1111" placeholder-char="*" v-model="phone" />
+          </div>
+          <button type="submit">دریافت کد</button>
+        </form>
+        <form @submit.prevent="verify" v-if="LoginRegisterSent">
           <Label>کد</Label>
           <p>یک کد برای شما ارسال شد</p>
           <MaskedInput mask="1 1 1 1 1 1" placeholder-char="-" />
@@ -97,8 +99,8 @@
             disabled
           >{{sendAgainTime}} تا ارسال دوباره کد</button>
           <button v-if="sendAgainTime==0" :class="$style.sendAgain">ارسال دوباره کد</button>
-        </div>
-        <button v-if="LoginRegisterSent" @click="verify">ورود / ثبتنام</button>
+          <button v-if="LoginRegisterSent" type="submit">ورود / ثبتنام</button>
+        </form>
       </div>
     </Modal>
   </nav>
@@ -146,7 +148,7 @@ export default {
     },
     async loginRegister() {
       if (this.phone.includes("*")) alert("شماره وارد شده صحیح نمی باشد");
-      else if(!this.phone) alert("وارد کردن شماره الزامی میباشد");
+      else if (!this.phone) alert("وارد کردن شماره الزامی میباشد");
       else {
         await this.$store.dispatch(
           "account/login",

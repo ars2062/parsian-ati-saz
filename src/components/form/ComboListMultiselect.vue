@@ -16,6 +16,7 @@
       <li
         v-for="keyword in computedkeywords"
         :key="keyword.id"
+        :id="keyword.id"
         @click="addKeyword($event,keyword)"
       >{{keyword.name}}</li>
     </ul>
@@ -35,26 +36,15 @@ export default {
     };
   },
   mounted() {
-    /*axios
-      .get("/api/keyword", {
-        headers: { "X-Authorization": user.remember_token },
-        validateStatus: () => {
-          return true;
-        }
-      })
-      .then(res => {
-        this.keywords = res.data;
-      });
-      */
-
     window.addEventListener("click", e => {
       if (this.isVisible == "block") this.isVisible = "none";
     });
   },
   computed: {
     computedkeywords() {
-      return this.keywords.filter(keyword => {
-        return !this.selectedKeywords.find(k => k.id == keyword.id);
+      let self = this;
+      return self.keywords.filter(keyword=>{
+        return !self.selectedKeywords.find(x=>x.id==keyword.id);
       });
     }
   },
@@ -87,7 +77,7 @@ export default {
       this.emit();
     },
     emit() {
-      this.$emit("input", this.selectedKeywords.map(keyword => keyword.id));
+      this.$emit("input", this.selectedKeywords);
     }
   }
 };
@@ -156,6 +146,8 @@ export default {
     background-color: #3b3b3b;
     border-top: none;
     border-radius: 0 0 6px 6px;
+    max-height: 175px;
+    overflow: auto;
     li {
       text-align: right;
       flex-direction: row;

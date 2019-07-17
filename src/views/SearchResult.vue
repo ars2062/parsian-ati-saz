@@ -6,8 +6,8 @@
         to="/property-detail"
         :class="[$style.post,'slide-in-top']"
         data-scroll
-        v-for=" i in [1,2,3,4,5,6]"
-        :key="i"
+        v-for="post in result"
+        :key="post.id"
       >
         <div :class="$style.ribbonContainer">
           <div :class="$style.ribbon">
@@ -48,7 +48,10 @@ export default {
       result:[]
     }
   },
-  
+  async mounted(){
+    this.result=await this.$store.getters["home/get_search_result"];
+    console.log(this.result);
+  },
   components: {
     Header,
     Searchcard,
@@ -99,7 +102,8 @@ export default {
 .posts {
   direction: rtl;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, 350px);
+  justify-content: center;
   grid-gap: 40px;
   padding: 125px 100px;
   .post {

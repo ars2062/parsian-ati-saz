@@ -10,7 +10,7 @@
         <button @click="removeKeyword(index)"></button>
       </span>
       <span v-if="selectedKeywords.length==0" :class="$style.all">همه</span>
-      <img src="@/assets/icons/right-arrow.svg">
+      <img src="@/assets/icons/right-arrow.svg" />
     </div>
     <ul :style="{display: isVisible}">
       <li
@@ -106,11 +106,11 @@ export default {
     min-height: 24px;
     font-size: 14px;
     cursor: pointer;
-        background-color: rgba($color: #fff, $alpha: 0.57);
-        border-radius: 6px;
-        border: none;
-        box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
-        padding: 15px 30px;
+    background-color: rgba($color: #fff, $alpha: 0.57);
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+    padding: 15px 30px;
     span {
       padding: 0 5px;
       background-color: #e6e6e6;
@@ -154,7 +154,9 @@ export default {
     z-index: 40;
     background-color: white;
     border-radius: 0 0 6px 6px;
-        box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+    box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+    max-height: 175px;
+    overflow: auto;
     li {
       text-align: right;
       flex-direction: row;
@@ -165,7 +167,7 @@ export default {
       color: #3b3b3b;
       padding: 0 10px;
       &:hover {
-        background-color: darken(white,10%);
+        background-color: darken(white, 10%);
       }
       &:last-of-type {
         border-radius: 0 0 6px 6px;

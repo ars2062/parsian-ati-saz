@@ -34,11 +34,11 @@
         <router-link
           to="#"
           :class="[$style.card,'fade-in']"
-          v-for="recent in recents"
-          :key="recent.id"
+          v-for="(recent,index) in recents"
+          :key="index"
           data-scroll
         >
-          <div :class="$style.type">مشارکت در ساخت</div>
+          <div :class="$style.type">{{(recent.type=="sell")?"فروشی":"ساخت در مشارکت"}}</div>
           <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
           <h3>{{recent.title}}</h3>
           <span :class="$style.price">مبلغ بلاعوض : {{Number(recent.cost).toLocaleString()}} تومان</span>
@@ -91,7 +91,6 @@ export default {
   async created() {
     await this.$store.dispatch("home/fetch_adverts");
     this.recents = this.$store.getters["home/recent"];
-    console.log(this.recents)
   },
   methods: {
     goToTop() {

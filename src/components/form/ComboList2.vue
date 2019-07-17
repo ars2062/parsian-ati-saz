@@ -93,8 +93,8 @@ export default {
     background-color: white;
     box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
     border-radius: 0 0 6px 6px;
+    max-height: 175px;
     overflow: auto;
-    max-height: 250px;
     li {
       text-align: right;
       flex-direction: row;

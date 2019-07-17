@@ -27,7 +27,7 @@ export default new Vuex.Store({
     // this object is for property pages
     detail_object: {},
     cities: [],
-    related_adverts:[]
+    related_adverts: []
   },
   getters: {
     loading: state => {
@@ -53,50 +53,40 @@ export default new Vuex.Store({
     set_detail_object(state, obj) {
       state.detail_object = obj;
     },
-    set_cities(state,cities){
+    set_cities(state, cities) {
       state.cities = cities;
     },
-    set_related_adverts(state,adverts){
+    set_related_adverts(state, adverts) {
       state.related_adverts = adverts;
     }
   },
   actions: {
-    fetch_cities:async ({commit})=>{
-
-      await Axios.get(
-        consts.api_urls.city,
-        {}
-      ).then(function(response) {
-        commit("set_cities", response.data);
-        console.log(response);
-        commit("stop_loading", { root: true });
-      })
-      .catch(function(error) {
-        console.error(error);
-        commit("stop_loading", { root: true });
-      });
+    fetch_cities: async ({ commit }) => {
+      await Axios.get(consts.api_urls.city, {})
+        .then(function(response) {
+          commit("set_cities", response.data);
+          commit("stop_loading", { root: true });
+        })
+        .catch(function(error) {
+          commit("stop_loading", { root: true });
+        });
     },
-    fetch_related_adverts: async ({commit},{advert_type,advert_id}) => {
-
-      await Axios.get(
-        consts.api_urls.related,
-        {
-          params:{
-            advert_type:advert_type,
-            advert_id:advert_id,
-          }
+    fetch_related_adverts: async ({ commit }, { advert_type, advert_id }) => {
+      await Axios.get(consts.api_urls.related, {
+        params: {
+          advert_type: advert_type,
+          advert_id: advert_id
         }
-      ).then(function(response) {
-        commit("set_related_adverts", response.data);
-        console.log(response);
-        commit("stop_loading");
       })
-      .catch(function(error) {
-        console.error(error);
-        commit("stop_loading");
-      });
-
+        .then(function(response) {
+          commit("set_related_adverts", response.data);
+          console.log(response);
+          commit("stop_loading");
+        })
+        .catch(function(error) {
+          console.error(error);
+          commit("stop_loading");
+        });
     }
-
   }
 });

@@ -89,6 +89,8 @@ export default {
     background-color: #3b3b3b;
     border-top: none;
     border-radius: 0 0 6px 6px;
+    max-height: 175px;
+    overflow: auto;
     li {
       text-align: right;
       flex-direction: row;
