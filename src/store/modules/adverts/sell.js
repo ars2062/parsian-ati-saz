@@ -6,7 +6,9 @@ export default {
   state: {
       sell_adverts:[],
       status:'create',
-      errors:{}
+      errors:{},
+      server_message:'',
+      detail:{}
   },
   getters: {
       sell_adverts:state=>{
@@ -17,6 +19,12 @@ export default {
       },
       errors:state=>{
           return state.errors;
+      },
+      server_message:state=>{
+          return state.server_message;
+      },
+      detail:state=>{
+          return state.detail;
       }
   },
   mutations: {
@@ -29,6 +37,12 @@ export default {
       set_errors:(state,errors)=>{
         state.errors = errors;
       },
+      set_server_message : (state,msg) => {
+        state.server_message = msg ;
+      },
+      set_detail : (state,obj) => {
+        state.detail = obj ;
+      }
   },
   actions: {
     // for sell advert
@@ -60,6 +74,30 @@ export default {
           }
         });
     },
+    verify_sell_advert: async ({commit},{advert_id,phone,code})=>{
+
+      await Axios.post(
+        consts.verify_sell_advert + advert_id,
+        {
+          params:{
+            phone:phone,
+            code:code
+          },
+        },
+        {
+          headers:{
+            'Content-Type':'application/json',
+             Authorization:localStorage.getItem('user.token')
+          }
+        }
+      ).then(response =>{
+
+        commit('set_server_message',response.data.message);
+        
+      }).catch(error => {
+        console.log(error.data);
+      });
+    },
     remove_sell_advert: async({commit,dispatch}, { advert_id }) => {
       
 
@@ -79,7 +117,7 @@ export default {
           console.log(error);
         });
     },
-    edit_sell_advert:async ({commit,dispatch},{advert_id,advert_object})=>{
+    edit_sell_advert: async ({commit,dispatch},{advert_id,advert_object})=>{
       
 
       await Axios.put(consts.api_urls.edit_sell_advert + advert_id,
@@ -103,7 +141,7 @@ export default {
 
 
     },
-    fetch_adverts:async ({commit})=>{
+    fetch_adverts: async ({commit})=>{
 
         await Axios.get(consts.api_urls.sell_advert,{
             headers:{
@@ -117,8 +155,26 @@ export default {
             console.log('error');
             // commit('stop_loading',null,{root:true});
           });
+    },
+    detail: async ({commit},{id})=>{
+
+      await Axios.get(
+        consts.get_sell_advert + id ,
+        {
+          headers:{
+             'Content-Type':'application/json',
+             Authorization:localStorage.getItem('user.token')
+          }
+        }
+      ).then(response=>{
+
+        commit('set_detail',response.data);
+
+      }).catch(error=>{
+        console.log(error);
+      });
+
     }
-    
     
   }
 };

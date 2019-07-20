@@ -1,8 +1,12 @@
 import consts from "@/consts";
 import Axios from "axios";
+import detail from "./detail";
 
 export default {
   namespaced: true,
+  modules:{
+    detail : detail
+  },
   state: {
     product_adverts: [],
     recent: [],
@@ -70,23 +74,6 @@ export default {
       // set cities in rootstate
       state.cities = server_response.cities;
     },
-    get_advert(state, { type, id }) {
-      if (type == 1) {
-        // is product advert
-        state.detail_object = state.product_adverts.find(obj => obj.id == id);
-      } else if (type == 2) {
-        // is master advert
-        state.detail_object = state.master_adverts.find(obj => obj.id == id);
-      } else if (type == 3) {
-        // is sell advert
-        state.detail_object = state.sell_adverts.find(obj => obj.id == id);
-      } else {
-        // is partnership advert
-        state.detail_object = state.partnership_adverts.find(
-          obj => obj.id == id
-        );
-      }
-    },
     set_search_result(state, res) {
       state.search_results = res;
     },
@@ -138,9 +125,7 @@ export default {
             max_metrazh: max_metrazh,
             cities: cities,
             advert_type: advert_type
-          }
-        },
-        {
+          },
           headers: {
             "Content-Type": "application/json"
           }
@@ -183,7 +168,6 @@ export default {
 
       await Axios.get(
         consts.api_urls.sell_files,
-        {},
         {
           headers: {
             "Content-Type": "application/json"
@@ -199,12 +183,11 @@ export default {
           commit("stop_loading", null, { root: true });
         });
     },
-    get_partnership_files: ({ commit }) => {
+    get_partnership_files: async({ commit }) => {
       commit("start_loading", null, { root: true });
 
-      Axios.get(
+      await Axios.get(
         consts.api_urls.partnership_files,
-        {},
         {
           headers: {
             "Content-Type": "application/json"
@@ -220,12 +203,11 @@ export default {
           commit("stop_loading", null, { root: true });
         });
     },
-    get_all_products: ({ commit }) => {
+    get_all_products: async ({ commit }) => {
       commit("start_loading", null, { root: true });
 
-      Axios.get(
+      await Axios.get(
         consts.api_urls.all_products,
-        {},
         {
           headers: {
             "Content-Type": "application/json"
@@ -241,12 +223,11 @@ export default {
           commit("stop_loading", null, { root: true });
         });
     },
-    get_all_masters: ({ commit }) => {
+    get_all_masters: async({ commit }) => {
       commit("start_loading", null, { root: true });
 
-      Axios.get(
+      await Axios.get(
         consts.api_urls.all_masters,
-        {},
         {
           headers: {
             "Content-Type": "application/json"
@@ -262,12 +243,11 @@ export default {
           commit("stop_loading", null, { root: true });
         });
     },
-    get_all_golds: ({ commit }) => {
+    get_all_golds: async({ commit }) => {
       commit("start_loading", null, { root: true });
 
-      Axios.get(
+      await Axios.get(
         consts.api_urls.all_golds,
-        {},
         {
           headers: {
             "Content-Type": "application/json"

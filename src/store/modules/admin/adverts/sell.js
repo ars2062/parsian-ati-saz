@@ -4,64 +4,71 @@ import Axios from "axios";
 export default {
   namespaced: true,
   state: {
-      sell_adverts:[],
-      status:'create',
-      errors:{}
+    sell_adverts: [],
+    status: 'create',
+    errors: {},
+    detail: {}
   },
   getters: {
-      sell_adverts:state=>{
-          return state.sell_adverts;
-      },
-      status:state=>{
-          return state.status;
-      },
-      errors:state=>{
-          return state.errors;
-      }
+    sell_adverts: state => {
+      return state.sell_adverts;
+    },
+    status: state => {
+      return state.status;
+    },
+    errors: state => {
+      return state.errors;
+    },
+    detail: state => {
+      return state.detail;
+    }
   },
   mutations: {
-      set_adverts:(state,adverts)=>{
-        state.sell_adverts = adverts;
-      },
-      set_status:(state,status)=>{
-        state.status = status;
-      },
-      set_errors:(state,errors)=>{
-        state.errors = errors;
-      }
+    set_adverts: (state, adverts) => {
+      state.sell_adverts = adverts;
+    },
+    set_status: (state, status) => {
+      state.status = status;
+    },
+    set_errors: (state, errors) => {
+      state.errors = errors;
+    },
+    set_detail: (state, obj) => {
+      state.detail = obj;
+    }
   },
   actions: {
     // for sell advert
-    add_sell_advert: async({ commit }, { advert_object }) => {
-      
+    add_sell_advert: async ({ commit }, { advert_object }) => {
 
-      await Axios.post(consts.api_urls.admin_advert_area.add_sell_advert, 
+
+      await Axios.post(consts.api_urls.admin_advert_area.add_sell_advert,
         {
-            params : advert_object
+          params: advert_object
         },
         {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("user.token")
-        }
-      })
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("user.token")
+          }
+        })
         .then(response => {
 
           alert('ایجاد شد');
 
-          commit('set_status','verify');
-          
+          commit('set_status', 'verify');
+
         })
         .catch(error => {
-            console.log(error);
+          console.log(error);
           if (error.response.status == 422) {
             // error
             commit("set_errors", error.response.data);
           }
         });
     },
-    remove_sell_advert: ({ commit }, { advert_id }) => {
-      
+    remove_sell_advert: async ({ commit }, { advert_id }) => {
+
 
       Axios.delete(consts.api_urls.admin_advert_area.remove_sell_advert + advert_id, {
         headers: {
@@ -76,45 +83,63 @@ export default {
           console.log(error);
         });
     },
-    edit_sell_advert:async ({commit},{advert_id,advert_object})=>{
-      
+    edit_sell_advert: async ({ commit }, { advert_id, advert_object }) => {
+
 
       await Axios.put(consts.api_urls.admin_advert_area.edit_sell_advert + advert_id,
         {
-            params : advert_object
+          params: advert_object
         },
         {
-        headers:{
-          'Content-Type':'application/json',
-          Authorization:localStorage.getItem('user.token')
-        }
-      }).then(response=>{
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('user.token')
+          }
+        }).then(response => {
 
-        alert('ویرایش شد');
-        
-      }).catch(error=>{
-        console.log(error);
-        //commit('stop_loading',null,{root:true});
-      });
+          alert('ویرایش شد');
+
+        }).catch(error => {
+          console.log(error);
+          //commit('stop_loading',null,{root:true});
+        });
 
 
     },
-    fetch_adverts:async ({commit})=>{
+    fetch_adverts: async ({ commit }) => {
 
-        await Axios.get(consts.api_urls.admin_advert_area.sell_advert,{
-            headers:{
-              'Content-Type':'application/json',
-              Authorization:localStorage.getItem('user.token')
-            }
-          }).then(response=>{
-            commit("set_adverts", response.data);
-            //commit('stop_loading',null,{root:true});
-          }).catch(error=>{
-            console.log('error');
-            // commit('stop_loading',null,{root:true});
-          });
+      await Axios.get(consts.api_urls.admin_advert_area.sell_advert, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('user.token')
+        }
+      }).then(response => {
+        commit("set_adverts", response.data);
+        //commit('stop_loading',null,{root:true});
+      }).catch(error => {
+        console.log('error');
+        // commit('stop_loading',null,{root:true});
+      });
+    },
+    detail: async ({ commit }, { id }) => {
+
+      await Axios.get(
+        consts.admin_advert_area.get_sell_advert + id,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('user.token')
+          }
+        }
+      ).then(response => {
+
+        commit('set_detail', response.data);
+
+      }).catch(error => {
+        console.log(error);
+      });
+
     }
-    
-    
+
   }
 };
