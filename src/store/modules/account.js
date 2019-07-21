@@ -104,8 +104,8 @@ export default {
           commit("set_loginMsg", error.response.data.message);
         });
     },
-    verify: function({ commit }, { phone, code }) {
-      axios
+    verify: async({ commit }, { phone, code }) =>{
+      await axios
         .post(
           consts.api_urls.verify,
           {
@@ -131,8 +131,8 @@ export default {
           commit("error");
         });
     },
-    logout: ({ commit }) => {
-      axios
+    logout: async({ commit }) => {
+      await axios
         .post(
           consts.api_urls.logout,
           {},

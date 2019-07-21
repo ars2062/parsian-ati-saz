@@ -50,9 +50,7 @@ export default {
 
 
       await Axios.post(consts.api_urls.add_partnership_advert,
-        {
-          params: advert_object
-        },
+        advert_object,
         {
           headers: {
             "Content-Type": "application/json",
@@ -79,9 +77,12 @@ export default {
       await Axios.post(
         consts.verify_partnership_advert + advert_id,
         {
-          params: {
-            phone: phone,
-            code: code
+          phone: phone,
+          code: code
+        },{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("user.token")
           }
         }
       ).then(response => {
@@ -115,9 +116,7 @@ export default {
 
 
       await Axios.put(consts.api_urls.edit_partnership_advert + advert_id,
-        {
-          params: advert_object
-        },
+        advert_object,
         {
           headers: {
             'Content-Type': 'application/json',

@@ -43,9 +43,7 @@ export default {
 
 
       await Axios.post(consts.api_urls.admin_advert_area.add_sell_advert,
-        {
-          params: advert_object
-        },
+        advert_object,
         {
           headers: {
             "Content-Type": "application/json",
@@ -70,7 +68,7 @@ export default {
     remove_sell_advert: async ({ commit }, { advert_id }) => {
 
 
-      Axios.delete(consts.api_urls.admin_advert_area.remove_sell_advert + advert_id, {
+      await Axios.delete(consts.api_urls.admin_advert_area.remove_sell_advert + advert_id, {
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.getItem("user.token")
@@ -87,9 +85,7 @@ export default {
 
 
       await Axios.put(consts.api_urls.admin_advert_area.edit_sell_advert + advert_id,
-        {
-          params: advert_object
-        },
+        advert_object,
         {
           headers: {
             'Content-Type': 'application/json',

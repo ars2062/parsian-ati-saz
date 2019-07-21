@@ -50,9 +50,7 @@ export default {
       
 
       await Axios.post(consts.api_urls.add_sell_advert, 
-        {
-            params : advert_object
-        },
+        advert_object,
         {
         headers: {
           "Content-Type": "application/json",
@@ -79,10 +77,8 @@ export default {
       await Axios.post(
         consts.verify_sell_advert + advert_id,
         {
-          params:{
-            phone:phone,
-            code:code
-          },
+          phone:phone,
+          code:code
         },
         {
           headers:{
@@ -121,9 +117,7 @@ export default {
       
 
       await Axios.put(consts.api_urls.edit_sell_advert + advert_id,
-        {
-            params : advert_object
-        },
+        advert_object,
         {
         headers:{
           'Content-Type':'application/json',
