@@ -7,6 +7,7 @@ export default {
     partnership_adverts: [],
     status: 'create',
     errors: {},
+    server_message: '',
     detail: {}
   },
   getters: {
@@ -18,6 +19,9 @@ export default {
     },
     errors: state => {
       return state.errors;
+    },
+    server_message: state => {
+      return state.server_message;
     },
     detail: state => {
       return state.detail;
@@ -33,6 +37,9 @@ export default {
     set_errors: (state, errors) => {
       state.errors = errors;
     },
+    set_server_message: (state, msg) => {
+      state.server_message = msg;
+    },
     set_detail: (state, obj) => {
       state.detail = obj;
     }
@@ -42,7 +49,7 @@ export default {
     add_partnership_advert: async ({ commit }, { advert_object }) => {
 
 
-      await Axios.post(consts.api_urls.admin_advert_area.add_partnership_advert,
+      await Axios.post(consts.api_urls.add_partnership_advert,
         advert_object,
         {
           headers: {
@@ -65,26 +72,50 @@ export default {
           }
         });
     },
-    remove_partnership_advert: async ({ commit }, { advert_id }) => {
+    verify_partnership_advert: async ({ commit }, { advert_id, phone, code }) => {
+
+      await Axios.post(
+        consts.verify_partnership_advert + advert_id,
+        {
+          phone: phone,
+          code: code
+        },{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("user.token")
+          }
+        }
+      ).then(response => {
+
+        commit('set_server_message', response.data.message);
+
+      }).catch(error => {
+        console.log(error.data);
+      });
+    },
+    remove_partnership_advert: async ({ commit, dispatch }, { advert_id }) => {
 
 
-      await Axios.delete(consts.api_urls.admin_advert_area.remove_partnership_advert + advert_id, {
+      await Axios.delete(consts.api_urls.remove_partnership_advert + advert_id, {
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.getItem("user.token")
         }
       })
         .then(response => {
+
+          dispatch('fetch_adverts');
           alert('حذف شد');
+
         })
         .catch(error => {
           console.log(error);
         });
     },
-    edit_partnership_advert: async ({ commit }, { advert_id, advert_object }) => {
+    edit_partnership_advert: async ({ commit, dispatch }, { advert_id, advert_object }) => {
 
 
-      await Axios.put(consts.api_urls.admin_advert_area.edit_partnership_advert + advert_id,
+      await Axios.put(consts.api_urls.edit_partnership_advert + advert_id,
         advert_object,
         {
           headers: {
@@ -93,6 +124,7 @@ export default {
           }
         }).then(response => {
 
+          dispatch('fetch_adverts');
           alert('ویرایش شد');
 
         }).catch(error => {
@@ -104,7 +136,7 @@ export default {
     },
     fetch_adverts: async ({ commit }) => {
 
-      await Axios.get(consts.api_urls.admin_advert_area.partnership_advert, {
+      await Axios.get(consts.api_urls.partnership_advert, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: localStorage.getItem('user.token')
@@ -120,7 +152,7 @@ export default {
     detail: async ({ commit }, { id }) => {
 
       await Axios.get(
-        consts.admin_advert_area.partnership + id,
+        consts.get_partnership_advert + id,
         {
           headers: {
             'Content-Type': 'application/json',

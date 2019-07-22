@@ -1,7 +1,6 @@
 var api_url = "http://localhost:8082/v1/";
 
 export default {
-  auth_header: "$2y$10$4ci4mDCRywK44qQg9zKqLeECMddbVkxmYgITwERF1PWZN1BKKCioG",
   api_urls: {
     home: api_url + "home",
     city: api_url + "city",
@@ -13,6 +12,13 @@ export default {
     all_products: api_url + "products",
     all_masters: api_url + "masters",
     all_golds: api_url + "golds",
+    home_screen_sell_detail: api_url + "sells/",
+    home_screen_partnership_detail: api_url + "partnerships/",
+    home_screen_master_detail: api_url + "masters/",
+    home_screen_product_detail: api_url + "products/",
+
+
+
 
     // this part is for account
     login: api_url + "accounts/login",
@@ -21,58 +27,70 @@ export default {
 
     // contact part for admin
     get_contacts: api_url + "/adminstrator/contact",
-    remove_contacts: api_url + "contact/",
+    remove_contacts: api_url + "/adminstrator/contact/",
 
     // sell advert part
-    add_sell_advert: api_url + "clutter_sell_advert",
-    verify_sell_advert: api_url + "clutter_sell_advert/verify/",
-    remove_sell_advert: api_url + "clutter_sell_advert/",
-    edit_sell_advert: api_url + "clutter_sell_advert/",
+    sell_advert: api_url + "standard/sell",
+    get_sell_advert: api_url + "standard/sell/",
+    add_sell_advert: api_url + "standard/sell",
+    verify_sell_advert: api_url + "standard/sell/verify/",
+    remove_sell_advert: api_url + "standard/sell/",
+    edit_sell_advert: api_url + "standard/sell/",
 
     // partnership advert
-    add_partnership_advert: api_url + "clutter_partnership_advert",
-    verify_partnership_advert: api_url + "clutter_partnership_advert/verify/",
-    remove_partnership_advert: api_url + "clutter_partnership_advert/",
-    edit_partnership_advert: api_url + "clutter_partnership_advert/",
+    partnership_advert: api_url + "standard/partnership",
+    add_partnership_advert: api_url + "standard/partnership",
+    verify_partnership_advert: api_url + "standard/partnership/verify/",
+    get_partnership_advert: api_url + "standard/partnership/",
+    remove_partnership_advert: api_url + "standard/partnership/",
+    edit_partnership_advert: api_url + "standard/partnership/",
 
     // product advert
-    add_product_advert: api_url + "home_advert",
-    verify_product_advert: api_url + "home_advert/verify/",
-    remove_product_advert: api_url + "home_advert/",
-    edit_product_advert: api_url + "home_advert/",
+    get_product_advert: api_url + "standard/products-advert/",
+    add_product_advert: api_url + "standard/products-advert",
+    verify_product_advert: api_url + "standard/products-advert/verify/",
+    product_advert: api_url + "standard/products-advert",
+    remove_product_advert: api_url + "standard/products-advert/",
+    edit_product_advert: api_url + "standard/products-advert/",
 
     // professor advert
-    add_professor_advert_advert: api_url + "professor_advert",
-    verify_professor_advert_advert: api_url + "professor_advert/verify/",
-    remove_professor_advert_advert: api_url + "professor_advert/",
-    edit_professor_advert_advert: api_url + "professor_advert/",
+    master_advert: api_url + "standard/master-advert",
+    add_master_advert: api_url + "standard/master-advert",
+    verify_master_advert: api_url + "standard/master-advert/verify/",
+    get_master_advert: api_url + "standard/master-advert/",
+    remove_master_advert: api_url + "standard/master-advert/",
+    edit_master_advert: api_url + "standard/master-advert/",
 
     // adviser part
     add_adviser: api_url + "adminstrator/adviser",
     fetch_adviser: api_url + "adminstrator/adviser",
     edit_adviser: api_url + "adminstrator/adviser/",
-    remove_adviser: api_url + "adviser/adviser/",
+    remove_adviser: api_url + "adminstrator/adviser/",
 
     request_payment_url: api_url + "request/payment/",
+    get_user_adverts_url : api_url + 'standard/user/adverts',
 
     // admin area
 
     admin_advert_area: {
       // sell advert part
       sell_advert: api_url + "adminstrator/sell",
+      get_sell_advert: api_url + "adminstrator/sell/",
       add_sell_advert: api_url + "adminstrator/sell",
       remove_sell_advert: api_url + "adminstrator/sell/",
       edit_sell_advert: api_url + "adminstrator/sell/",
 
       // partnership advert
-      add_partnership_advert: api_url + "adminstrator/partnership",
       partnership_advert: api_url + "adminstrator/partnership",
+      add_partnership_advert: api_url + "adminstrator/partnership",
+      get_partnership_advert: api_url + "adminstrator/partnership/",
       remove_partnership_advert: api_url + "adminstrator/partnership/",
       edit_partnership_advert: api_url + "adminstrator/partnership/",
 
       // product advert
-      add_product_advert: api_url + "adminstrator/products-advert",
       product_advert: api_url + "adminstrator/products-advert",
+      add_product_advert: api_url + "adminstrator/products-advert",
+      get_product_advert: api_url + "adminstrator/products-advert/",
       remove_product_advert: api_url + "adminstrator/products-advert/",
       edit_product_advert: api_url + "adminstrator/products-advert/",
 
@@ -82,7 +100,8 @@ export default {
       remove_master_advert: api_url + "adminstrator/master-advert/",
       edit_master_advert: api_url + "adminstrator/master-advert/",
 
-      verify_advert: api_url + "adminstrator/advert/verify/"
+      verify_advert: api_url + "adminstrator/advert/verify/",
+      pending_adverts: api_url + "adminstrator/pending-adverts"
     }
   },
   // advert types for send to api

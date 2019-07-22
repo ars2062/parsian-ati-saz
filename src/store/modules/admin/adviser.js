@@ -76,9 +76,7 @@ export default {
             // commit('start_loading',null,{root:true});
 
             await Axios.put(consts.api_urls.edit_adviser + id,
-                {
-                    params:adviser_object
-                },
+                adviser_object,
                 {
                 headers: {
                     'Content-Type':'application/json',
@@ -100,10 +98,8 @@ export default {
             });
         },
         create: async ({commit},{adviser_object})=>{
-            Axios.put(consts.api_urls.add_adviser,
-                {
-                    params:adviser_object
-                },
+            await Axios.put(consts.api_urls.add_adviser,
+                adviser_object,
                 {
                 headers: {
                     'Content-Type':'application/json',
