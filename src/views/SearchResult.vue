@@ -50,7 +50,7 @@ export default {
     }
   },
   async mounted(){
-    this.result=localStorage.getItem("search_result");
+    this.result=JSON.parse(localStorage.getItem("search_result"));
   },
   components: {
     Header,

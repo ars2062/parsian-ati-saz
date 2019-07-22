@@ -115,16 +115,16 @@ export default {
           advert_type: this.advert_type ? this.advert_type : null
         });
         if (res.status == 200) {
-          localStorage.setItem("search_result", res.data);
+          localStorage.setItem("search_result", JSON.stringify(res.data));
+          try {
+            if (this.$router.currentRoute.name == "search-result") {
+              console.log("go!");
+              window.location.reload(true);
+            } else this.$router.push("search-result");
+          } catch {}
         } else {
+          alert(res.data.message)
         }
-
-        try {
-          if (this.$router.currentRoute.name == "search-result") {
-            console.log("go!");
-            window.location.reload(true);
-          } else this.$router.push("search-result");
-        } catch {}
       }
     }
   }

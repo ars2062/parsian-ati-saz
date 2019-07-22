@@ -1,7 +1,7 @@
 import consts from "@/consts";
 import axios from "axios";
 class auth {
-  async login(phone) {
+  static async login(phone) {
     return await axios.get(consts.api_urls.login, {
       params: { phone: phone },
       headers: {
@@ -12,7 +12,7 @@ class auth {
       }
     });
   }
-  async verify(phone, code) {
+  static async verify(phone, code) {
     return await axios.post(
       consts.api_urls.verify,
       {
@@ -29,7 +29,7 @@ class auth {
       }
     );
   }
-  async logout() {
+  static async logout() {
     return await axios.post(
       consts.api_urls.logout,
       {},
