@@ -1,24 +1,22 @@
 <template>
   <div>
-    <Header 
+    <Header
       :Title="[{text:'لیست کامل محصولات ساختمانی'}]"
       :subtitle="[{text:'ثبت آگهی'}]"
       :image="require('@/assets/icons/3246.jpg')"
-      subtitleC/>
-    <Title title="لیست محصولات برند منظقه" style="margin-top:50px;"/>
+      subtitleC
+    />
+    <Title title="لیست محصولات برند منظقه" style="margin-top:50px;" />
     <div :class="$style.products">
-      <div :class="$style.post" v-for="product in list" :key="product.id">
-        <img src="@/assets/icons/37729214171_cb54f56933_m.jpg">
-        <h3>لوازم ساختمانی برادران بیژن </h3>
-        <h4>زمینه کاری : تولید لوازم پلاستیکی</h4>
-        <button @click="goto('product-detail')">نمایش کامل اطلاعات</button>
-      </div>
+        <div :class="$style.post" v-for="(product,index) in list" v-if="index<=show" :key="product.id" ref="scroller">
+          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg" />
+          <h3>{{product.brand_name}}</h3>
+          <h4>زمینه کاری : {{product.working_field}}</h4>
+          <button @click="goto('product-detail')">نمایش کامل اطلاعات</button>
+        </div>
     </div>
-    <button :class="$style.more">
-      <span>نمایش آگهی بیشتر</span>
-    </button>
-    <AreYouAMasterWorker/>
-    <Footer/>
+    <AreYouAMasterWorker />
+    <Footer />
   </div>
 </template>
 
@@ -31,15 +29,28 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import AreYouAMasterWorker from "@/components/AreYouAMasterWorker.vue";
+import InfiniteScroll from "@tygr/vue-infinite-scroll";
 export default {
-  data(){
-    return{
-      list:[]
-    }
+  data() {
+    return {
+      list: [],
+      show:8
+    };
   },
-  async created(){
+  async created() {
     await this.$store.dispatch("home/get_all_products");
-    this.list=this.$store.getters["home/get_all_products"];
+    this.list = this.$store.getters["home/get_all_products"];
+  },
+  mounted(){
+    window.onscroll = () => {
+      let scroller=this.$refs["scroller"];
+      let lastCard=scroller[scroller.length-1];
+      let bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight >= lastCard.offsetTop;
+      if (bottomOfWindow) {
+        this.show+=9;
+      }
+    };
   },
   components: {
     Header,
@@ -48,7 +59,8 @@ export default {
     CardSlider,
     Footer,
     Modal,
-    AreYouAMasterWorker
+    AreYouAMasterWorker,
+    InfiniteScroll
   },
   methods: {
     goto(name) {
@@ -71,6 +83,9 @@ export default {
         default:
           break;
       }
+    },
+    loadMore() {
+      console.log(1);
     }
   }
 };
@@ -88,21 +103,21 @@ export default {
     direction: rtl;
     background-color: #fff;
     border-radius: 6px;
-    box-shadow: 0 0 6px rgba($color: #000000, $alpha: .16);
-    img{
+    box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.16);
+    img {
       width: 100%;
     }
-    h3{
+    h3 {
       font-weight: normal;
       font-size: 18px;
       margin: 0 10px;
     }
-    h4{
+    h4 {
       font-weight: 100;
       font-size: 17px;
       margin: 0 10px;
     }
-    button{
+    button {
       border: none;
       border-radius: 0 0 6px 6px;
       background-color: color(skin-tone);
@@ -112,7 +127,7 @@ export default {
       line-height: 50px;
       margin-top: 17px;
       outline: none;
-      &:active{
+      &:active {
         background-color: darken($color: color(skin-tone), $amount: 10%);
       }
     }

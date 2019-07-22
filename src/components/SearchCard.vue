@@ -54,6 +54,8 @@
 <script>
 import Combolist from "./form/ComboList.vue";
 import ComboListMultiselect from "./form/ComboListMultiselect.vue";
+
+import repositories from "@/repositories/repositories.js";
 export default {
   name: "Searchcard",
   data() {
@@ -106,20 +108,23 @@ export default {
       if (!this.advert_type) {
         alert("وارد کردن نوع تقاضا الزامیست");
       } else {
-        await this.$store.dispatch("home/search", {
+        let res = await repositories.home.search({
           min_metrazh: this.min_metrazh ? this.min_metrazh : null,
           max_metrazh: this.max_metrazh ? this.max_metrazh : null,
           cities: this.selectedcities ? this.selectedcities : [],
           advert_type: this.advert_type ? this.advert_type : null
         });
-        console.log(this.$router.currentRoute);
-        try{
-        if (this.$router.currentRoute.name == "search-result"){
-          console.log("go!");
-          window.location.reload(true);
+        if (res.status == 200) {
+          localStorage.setItem("search_result", res.data);
+        } else {
         }
-        else this.$router.push("search-result");
-        }catch{}
+
+        try {
+          if (this.$router.currentRoute.name == "search-result") {
+            console.log("go!");
+            window.location.reload(true);
+          } else this.$router.push("search-result");
+        } catch {}
       }
     }
   }

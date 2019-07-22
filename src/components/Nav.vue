@@ -12,9 +12,9 @@
       >
         <span>حساب من</span>
         <img src="@/assets/icons/avatar.svg" />
-        <ul :style="this.displayAccountOptions">
+        <ul :style="this.displayAccountOptions" :class="$style.myaccount">
           <li>
-            <router-link to="#">آگهی های من</router-link>
+            <router-link to="my-account">آگهی های من</router-link>
           </li>
           <li>
             <router-link to="#">خروج از حساب</router-link>
@@ -89,17 +89,17 @@
           </div>
           <button type="submit">دریافت کد</button>
         </form>
-        <form @submit.prevent="verify" v-if="LoginRegisterSent">
-          <Label>کد</Label>
-          <p>یک کد برای شما ارسال شد</p>
+        <form @submit.prevent="verify" v-if="LoginRegisterSent" :class="$style.verify">
+          <Label>ورود به حساب</Label>
+          <p>برای ورود به حساب نیاز به تایید شماره تماس است</p>
           <MaskedInput mask="1 1 1 1 1 1" placeholder-char="-" />
-          <button
+          <button type="submit">ورود</button>
+          <a
             v-if="sendAgainTime>0"
             :class="$style.sendAgain"
             disabled
-          >{{sendAgainTime}} تا ارسال دوباره کد</button>
-          <button v-if="sendAgainTime==0" :class="$style.sendAgain">ارسال دوباره کد</button>
-          <button v-if="LoginRegisterSent" type="submit">ورود / ثبتنام</button>
+          >ارسال مجدد کد تا {{secondsToHms}} دیگر ارسال دوباره کد</a>
+          <a v-if="sendAgainTime==0" :class="$style.sendAgain">ارسال دوباره کد</a>
         </form>
       </div>
     </Modal>
@@ -109,6 +109,7 @@
 <script>
 import Modal from "@/components/Modal.vue";
 import MaskedInput from "vue-masked-input";
+import repositories from "@/repositories/repositories.js";
 export default {
   name: "Nav",
   components: {
@@ -121,7 +122,7 @@ export default {
       displayaccountoptions: false,
       loggedin: false,
       LoginRegisterSent: false,
-      sendAgainTime: 120,
+      sendAgainTime: 30,
       interval: null,
       phone: null
     };
@@ -150,17 +151,20 @@ export default {
       if (this.phone.includes("*")) alert("شماره وارد شده صحیح نمی باشد");
       else if (!this.phone) alert("وارد کردن شماره الزامی میباشد");
       else {
-        await this.$store.dispatch(
-          "account/login",
-          this.phone.replace(/\s/g, "")
-        );
-        alert(this.$store.getters["account/login_message"]);
-        this.interval = setInterval(() => {
-          if (this.LoginRegisterSent) this.sendAgainTime--;
-          if (this.sendAgainTime == 0) {
-            clearInterval(this.interval);
-          }
-        }, 1000);
+        let res = await repositories.auth.login(this.phone.replace(/\s/g, ""));
+        res.status=200;
+        if (res.status != 200) {
+          alert(res.data.message);
+        } else {
+          alert(res.data.message);
+          this.LoginRegisterSent = true;
+          this.interval = setInterval(() => {
+            this.sendAgainTime--;
+            if (this.sendAgainTime == 0) {
+              clearInterval(this.interval);
+            }
+          }, 1000);
+        }
       }
     },
     verify() {}
@@ -180,6 +184,17 @@ export default {
       } else {
         return "height: 0";
       }
+    },
+    secondsToHms() {
+      let d = Number(this.sendAgainTime);
+      let h = Math.floor(d / 3600);
+      let m = Math.floor((d % 3600) / 60);
+      let s = Math.floor((d % 3600) % 60);
+
+      let hDisplay = h > 9 ? h : "0" + h;
+      let mDisplay = m > 9 ? m : "0" + m;
+      let sDisplay = s > 9 ? s : "0" + s;
+      return /*hDisplay +*/ sDisplay + " : " + mDisplay;
     }
   },
   created() {}
@@ -261,6 +276,19 @@ nav {
             text-decoration: none;
             display: block;
             width: 100%;
+          }
+        }
+        @include mobile(570px) {
+          top: auto;
+          bottom: 100%;
+          left: 0;
+          right: 0;
+          transform: none;
+          width: 100%;
+          height: auto;
+          margin: auto;
+          li {
+            display: block !important;
           }
         }
       }
@@ -512,6 +540,37 @@ nav {
         * {
           display: inline-block;
         }
+      }
+    }
+    .verify {
+      label {
+        background-color: transparent;
+        font-size: 20px;
+        font-weight: 500;
+        color: #3b3b3b;
+      }
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba($color: #3b3b3b, $alpha: 0.8);
+      }
+      input {
+        width: 250px;
+        border-radius: 6px;
+        margin: auto;
+        border: 1px solid color(skin-tone);
+        text-align: center;
+        font-size: 25px;
+        line-height: 40px;
+        direction: ltr;
+        box-shadow: 0 0 6px rgba($color: #000000, $alpha: 0.16);
+        outline: none;
+        margin-top: 12px;
+      }
+      a {
+        cursor: pointer;
+        color: color(chocolate);
+        font-style: 15px;
       }
     }
     button {

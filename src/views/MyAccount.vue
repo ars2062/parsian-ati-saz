@@ -1,12 +1,21 @@
 <template>
   <div>
-    <Header :Title="[{ text: 'حساب شما' }]" :image="require('@/assets/icons/slide1.svg')"/>
-    <Title title="حساب کاربری آگهی ها" style="margin:60px 0;"/>
+    <Header :Title="[{ text: 'حساب شما' }]" :image="require('@/assets/icons/slide1.svg')" />
+    <Title title="حساب کاربری آگهی ها" style="margin:60px 0;" />
     <div :class="$style.ads">
       <div :class="$style.tabs">
-        <button :class="[$style.tab,this.displayConfirmed?$style.active:'']" @click="displayTab('confirmed')">آگهی های ثبت شده</button>
-        <button :class="[$style.tab,this.displayNotconfirmed?$style.active:'']" @click="displayTab('notconfirmed')">آگهی های در دست تایید</button>
-        <button :class="[$style.tab,this.displayStars?$style.active:'']" @click="displayTab('stars')">آگهی های در دست تایید</button>
+        <button
+          :class="[$style.tab,this.displayConfirmed?$style.active:'']"
+          @click="displayTab('confirmed')"
+        >آگهی های ثبت شده</button>
+        <button
+          :class="[$style.tab,this.displayNotconfirmed?$style.active:'']"
+          @click="displayTab('notconfirmed')"
+        >آگهی های در دست تایید</button>
+        <button
+          :class="[$style.tab,this.displayStars?$style.active:'']"
+          @click="displayTab('stars')"
+        >آگهی های نشان شده</button>
       </div>
       <section
         ref="confirmed"
@@ -15,7 +24,7 @@
       >
         <div :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
           <div :class="[$style.type,$style.green]">ثبت شده</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
+          <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
           <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
           <ul>
             <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
@@ -23,7 +32,7 @@
             <li>پهنه طرح تفصيلي : r122</li>
             <li>تعداد مالك :٢مالك</li>
           </ul>
-          <hr>
+          <hr />
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
           <div :class="$style.actions">
             <button>ویرایش آگهی</button>
@@ -38,7 +47,7 @@
       >
         <div :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
           <div :class="[$style.type,$style.red]">در انتظار تایید ناظر</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
+          <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
           <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
           <ul>
             <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
@@ -46,7 +55,7 @@
             <li>پهنه طرح تفصيلي : r122</li>
             <li>تعداد مالك :٢مالك</li>
           </ul>
-          <hr>
+          <hr />
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
           <div :class="$style.actions">
             <button>ویرایش آگهی</button>
@@ -54,14 +63,10 @@
           </div>
         </div>
       </section>
-      <section
-        ref="stars"
-        :class="[$style.tab_view,$style.stars]"
-        :style="this.starsStyle"
-      >
+      <section ref="stars" :class="[$style.tab_view,$style.stars]" :style="this.starsStyle">
         <div :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
           <div :class="$style.type">مشارکت در ساخت</div>
-          <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
+          <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
           <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
           <ul>
             <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
@@ -69,7 +74,7 @@
             <li>پهنه طرح تفصيلي : r122</li>
             <li>تعداد مالك :٢مالك</li>
           </ul>
-          <hr>
+          <hr />
           <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
           <div :class="$style.actions">
             <button :class="$style.red">حذف آگهی</button>
@@ -77,7 +82,7 @@
         </div>
       </section>
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -174,9 +179,12 @@ export default {
       padding: 5px 20px;
       cursor: pointer;
       outline: none;
-      &.active{
+      &.active {
         background-color: color(chocolate);
-        color:white;
+        color: white;
+      }
+      @include mobile() {
+        width: 100%;
       }
     }
   }
@@ -248,6 +256,9 @@ export default {
   .confirmed {
   }
   .notconfirmed {
+  }
+  @include mobile() {
+    padding: 0 20px;
   }
 }
 </style>

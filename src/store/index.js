@@ -17,7 +17,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      paths: ["home.search_results"]
+      paths: [
+        "home.search_results",
+        "home.all_products",
+        "home.all_masters",
+        "home.all_golds"
+      ]
     })
   ],
   modules: {

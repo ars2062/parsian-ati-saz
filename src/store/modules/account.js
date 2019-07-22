@@ -81,15 +81,12 @@ export default {
   actions: {
     login: async function({ commit }, phone) {
       await axios
-        .get(
-          consts.api_urls.login,
-          {
-            params: { phone: phone },
-            headers: {
-              "Content-Type": "application/json"
-            }
+        .get(consts.api_urls.login, {
+          params: { phone: phone },
+          headers: {
+            "Content-Type": "application/json"
           }
-        )
+        })
         .then(res => {
           commit("set_loginMsg", res.data.message);
           if (res.data.result) {

@@ -81,7 +81,7 @@
 
 <script>
 import Axios from "axios";
-import store from "@/store";
+import repositories from "@/repositories/repositories.js";
 export default {
   data() {
     return {
@@ -89,8 +89,11 @@ export default {
     };
   },
   async created() {
-    await this.$store.dispatch("home/fetch_adverts");
-    this.recents = this.$store.getters["home/recent"];
+    let res = await repositories.home.fetch_adverts();
+    if (res.status == 200) {
+      this.recents = res.data.recent;
+    } else {
+    }
   },
   methods: {
     goToTop() {

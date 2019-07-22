@@ -101,7 +101,12 @@
         style="margin-top:80px;display:inline-block;position:relative;left:50%;transform:translateX(-50%)"
       />
       <div :class="$style.posts">
-        <div :class="[$style.post,'slide-in-bottom']" data-scroll v-for="product in products" :key="product.id">
+        <div
+          :class="[$style.post,'slide-in-bottom']"
+          data-scroll
+          v-for="product in products"
+          :key="product.id"
+        >
           <img src="@/assets/icons/37729214171_cb54f56933_m.jpg" />
           <h3>{{product.brand_name}}</h3>
           <h4>زمینه کاری : {{product.working_field}}</h4>
@@ -554,21 +559,22 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import Loading from "@/components/Loading.vue";
-import store from "@/store/";
 import Axios from "axios";
-import consts from "@/consts"
-import { constants } from 'crypto';
+import repositories from "@/repositories/repositories.js";
 export default {
-  data(){
-    return{
-      products:[],
-      golds:[]
-    }
+  data() {
+    return {
+      products: [],
+      golds: []
+    };
   },
-  async beforeMount(){
-    let res=(await Axios.get(consts.api_urls.home)).data;
-    this.products=res.products;
-    this.golds=res.golds;
+  async beforeMount() {
+    let res = await repositories.home.fetch_adverts();
+    if (res.status == 200) {
+      this.products = res.data.products;
+      this.golds = res.data.golds;
+    } else {
+    }
   },
   components: {
     Header,

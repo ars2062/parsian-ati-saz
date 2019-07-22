@@ -238,6 +238,7 @@ export default {
           commit("stop_loading", null, { root: true });
         })
         .catch(function(error) {
+          console.log(error);
           commit("stop_loading", null, { root: true });
         });
     },

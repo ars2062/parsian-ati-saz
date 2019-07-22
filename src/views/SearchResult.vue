@@ -9,22 +9,23 @@
         v-for="post in result"
         :key="post.id"
       >
-        <div :class="$style.ribbonContainer">
+        <div v-if="post.is_special" :class="$style.ribbonContainer">
           <div :class="$style.ribbon">
             <img src="@/assets/icons/star.svg">
           </div>
         </div>
-        <div :class="$style.type">مشارکت در ساخت</div>
+        <div :class="$style.type">{{(post.type=="sell")?"فروشی":"مشارکت در ساخت"}}</div>
         <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-        <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
+        <h3>{{post.title}}</h3>
         <ul>
-          <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
-          <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
-          <li>پهنه طرح تفصيلي : r122</li>
+          <li>متراژ وموقعيت : {{post.total_metrazh}}متر {{post.position}}</li>
+          <li>بروگذر : بر {{post.bar}}گذر  {{post.gozar}}متر</li>
+          <li>{{post.document_type}} : r122</li>
           <li>تعداد مالك :٢مالك</li>
         </ul>
         <hr>
-        <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
+        <span v-if="post.cost" :class="$style.price">مبلغ بلاعوض : {{Number(post.cost).toLocaleString()}} تومان</span>
+        <span v-if="post.loan_cost" :class="$style.price">مبلغ وام : {{Number(post.loan_cost).toLocaleString()}} تومان</span>
       </router-link>
     </div>
     <AreYouAMasterWorker/>
@@ -49,8 +50,7 @@ export default {
     }
   },
   async mounted(){
-    this.result=await this.$store.getters["home/get_search_result"];
-    console.log(this.result);
+    this.result=localStorage.getItem("search_result");
   },
   components: {
     Header,

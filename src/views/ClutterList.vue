@@ -1,35 +1,36 @@
 <template>
-    <div>
-    <Header
-      :Title="[{text:'جدیدترین ها'}]"
-      :image="require('@/assets/icons/slide1.svg')"
-    />
+  <div>
+    <Header :Title="[{text:'جدیدترین ها'}]" :image="require('@/assets/icons/slide1.svg')" />
     <Searchcard></Searchcard>
-    <div :class="$style.list_container">
-      <router-link to="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14]" :key="i">
+    <div :class="$style.list_container" style="margin-bottom:120px">
+      <router-link
+        to="/property-detail"
+        :class="$style.post"
+        v-for="(clutter,index) in list"
+        v-if="index<=show"
+        :key="clutter.index"
+        ref="clutterscroller"
+      >
         <div :class="$style.ribbonContainer">
           <div :class="$style.ribbon">
-            <img src="@/assets/icons/star.svg">
+            <img src="@/assets/icons/star.svg" />
           </div>
         </div>
-        <div :class="$style.type">{{i%2==0?"فروش":"درخواست مشارکت"}}</div>
-        <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
-        <h3>ملک {{i%2==0?"فروش":"مشارکت در ساخت"}} در سعادت آباد</h3>
+        <div :class="$style.type">{{clutter.type=="sell"?"فروشی":"درخواست مشارکت"}}</div>
+        <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
+        <h3>{{clutter.title}}</h3>
         <ul>
           <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
           <li>بروگذر : بر ١٠گذر ١٠و٨متر</li>
           <li>پهنه طرح تفصيلي : r122</li>
           <li>تعداد مالك :٢مالك</li>
         </ul>
-        <hr>
+        <hr />
         <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
       </router-link>
     </div>
-    <button :class="$style.more">
-      <span>نمایش آگهی بیشتر</span>
-    </button>
-    <Footer/>
-    </div>
+    <Footer />
+  </div>
 </template>
 
 <script>
@@ -41,6 +42,30 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 export default {
+  data() {
+    return {
+      list: [],
+      show: 8
+    };
+  },
+  async created() {
+    await this.$store.dispatch("home/get_all_golds");
+    this.list = this.$store.getters["home/get_all_golds"];
+  },
+  mounted() {
+    window.onscroll = () => {
+      try {
+        let scroller = this.$refs["clutterscroller"];
+        let lastCard = scroller[scroller.length - 1];
+        let bottomOfWindow =
+          document.documentElement.scrollTop + window.innerHeight >=
+          lastCard.$el.offsetTop;
+        if (bottomOfWindow) {
+          this.show += 9;
+        }
+      } catch {}
+    };
+  },
   components: {
     Header,
     Searchcard,
