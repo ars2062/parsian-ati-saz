@@ -1,14 +1,19 @@
 <template>
   <div>
-    <Header :Title="[{text:'جدیدترین ها'}]" :image="require('@/assets/icons/slide1.svg')" />
+    <Header :Title="[{text:'املاک طلایی'}]" :image="require('@/assets/icons/slide1.svg')" />
     <Searchcard></Searchcard>
-    <div :class="$style.list_container" style="margin-bottom:120px">
+    <div
+      :class="$style.list_container"
+      style="margin-bottom:120px"
+      v-infinite-scroll="loadmore"
+      infinite-scroll-disabled="busy"
+      infinite-scroll-distance="10"
+    >
       <router-link
         to="/property-detail"
         :class="$style.post"
         v-for="(clutter,index) in list"
-        v-if="index<=show"
-        :key="clutter.index"
+        :key="index"
         ref="clutterscroller"
       >
         <div :class="$style.ribbonContainer">
@@ -27,8 +32,10 @@
         </ul>
         <hr />
         <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
+        {{clutter.id}}
       </router-link>
     </div>
+    <MiniLoading v-if="busy" />
     <Footer />
   </div>
 </template>
@@ -41,30 +48,18 @@ import Title from "@/components/Title.vue";
 import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
+import MiniLoading from "@/components/MiniLoading.vue";
+import repositories from "@/repositories/repositories.js";
+import infiniteScroll from "vue-infinite-scroll";
 export default {
   data() {
     return {
       list: [],
-      show: 8
+      busy: false
     };
   },
   async created() {
-    await this.$store.dispatch("home/get_all_golds");
-    this.list = this.$store.getters["home/get_all_golds"];
-  },
-  mounted() {
-    window.onscroll = () => {
-      try {
-        let scroller = this.$refs["clutterscroller"];
-        let lastCard = scroller[scroller.length - 1];
-        let bottomOfWindow =
-          document.documentElement.scrollTop + window.innerHeight >=
-          lastCard.$el.offsetTop;
-        if (bottomOfWindow) {
-          this.show += 9;
-        }
-      } catch {}
-    };
+    this.list = (await repositories.home.get_all_golds()).data;
   },
   components: {
     Header,
@@ -72,7 +67,11 @@ export default {
     Title,
     CardSlider,
     Footer,
-    Modal
+    Modal,
+    MiniLoading
+  },
+  directives: {
+    infiniteScroll
   },
   methods: {
     goto(name) {
@@ -95,6 +94,20 @@ export default {
         default:
           break;
       }
+    },
+    async loadmore() {
+      try {
+        this.busy = true;
+        setTimeout(
+          this.list.push(
+            ...(await repositories.home.get_all_golds(
+              this.list[this.list.length - 1].id
+            )).data
+          ),
+          1000
+        );
+        this.busy = false;
+      } catch {}
     }
   }
 };

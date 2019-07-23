@@ -42,50 +42,70 @@ class home {
       }
     );
   }
-  static async get_sell_files() {
+  static async get_sell_files(last_id = null, paginate = 9) {
     return await Axios.get(consts.api_urls.sell_files, {
       headers: {
         "Content-Type": "application/json"
       },
+      params: {
+        lastItem_Id: last_id,
+        paginate: paginate
+      },
       validateStatus: () => {
         return true;
       }
     });
   }
-  static async get_partnership_files() {
+  static async get_partnership_files(last_id = null, paginate = 9) {
     return await Axios.get(consts.api_urls.partnership_files, {
       headers: {
         "Content-Type": "application/json"
       },
+      params: {
+        lastItem_Id: last_id,
+        paginate: paginate
+      },
       validateStatus: () => {
         return true;
       }
     });
   }
-  static async get_all_products() {
+  static async get_all_products(last_id = null, paginate = 9) {
     return await Axios.get(consts.api_urls.all_products, {
       headers: {
         "Content-Type": "application/json"
       },
-      validateStatus: () => {
-        return true;
-      }
-    });
-  }
-  static async get_all_masters() {
-    return await Axios.get(consts.api_urls.all_masters, {
-      headers: {
-        "Content-Type": "application/json"
+      params: {
+        lastItem_Id: last_id,
+        paginate: paginate
       },
       validateStatus: () => {
         return true;
       }
     });
   }
-  static async get_all_golds() {
+  static async get_all_masters(last_id = null, paginate = 9) {
+    return await Axios.get(consts.api_urls.all_masters, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      params: {
+        lastItem_Id: last_id,
+        paginate: paginate
+      },
+      validateStatus: () => {
+        return true;
+      }
+    });
+  }
+  static async get_all_golds(last_id = null, paginate = 9) {
     return await Axios.get(consts.api_urls.all_golds, {
       headers: {
         "Content-Type": "application/json"
+      },
+      params: {
+        lastItem_Id: last_id,
+        paginate: paginate
       },
       validateStatus: () => {
         return true;

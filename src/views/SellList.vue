@@ -1,19 +1,21 @@
 <template>
-    <div>
-    <Header
-      :Title="[{text:'خرید'}]"
-      :image="require('@/assets/icons/slide1.svg')"
-    />
+  <div>
+    <Header :Title="[{text:'خرید'}]" :image="require('@/assets/icons/slide1.svg')" />
     <Searchcard></Searchcard>
-    <div :class="$style.list_container">
-      <router-link to="/property-detail" :class="$style.post" v-for=" i in [1,2,3,4,5,6]" :key="i">
+    <div
+      :class="$style.list_container"
+      v-infinite-scroll="loadmore"
+      infinite-scroll-disabled="busy"
+      infinite-scroll-distance="10"
+    >
+      <router-link to="/property-detail" :class="$style.post" v-for="sell in list" :key="sell.id">
         <div :class="$style.ribbonContainer">
           <div :class="$style.ribbon">
-            <img src="@/assets/icons/star.svg">
+            <img src="@/assets/icons/star.svg" />
           </div>
         </div>
         <div :class="$style.type">فروش</div>
-        <img :class="$style.mainImage" src="@/assets/icons/04.jpg">
+        <img :class="$style.mainImage" src="@/assets/icons/04.jpg" />
         <h3>ملک مشارکت در ساخت در سعادت آباد</h3>
         <ul>
           <li>متراژ وموقعيت : ٢٦٠متر جنوبى ،شمالى</li>
@@ -21,15 +23,13 @@
           <li>پهنه طرح تفصيلي : r122</li>
           <li>تعداد مالك :٢مالك</li>
         </ul>
-        <hr>
+        <hr />
         <span :class="$style.price">مبلغ بلاعوض : 634.000.000 تومان</span>
       </router-link>
     </div>
-    <button :class="$style.more">
-      <span>نمایش آگهی بیشتر</span>
-    </button>
-    <Footer/>
-    </div>
+    <MiniLoading v-if="busy" />
+    <Footer />
+  </div>
 </template>
 
 <script>
@@ -40,15 +40,18 @@ import Title from "@/components/Title.vue";
 import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
+import MiniLoading from "@/components/MiniLoading.vue";
+import repositories from "@/repositories/repositories.js";
+import infiniteScroll from "vue-infinite-scroll";
 export default {
-  data(){
-    return{
-      list:[]
-    }
+  data() {
+    return {
+      list: [],
+      busy: false
+    };
   },
-  async created(){
-    await this.$store.dispatch("home/get_sell_files");
-    this.list=this.$store.getters["home/get_sell_files"];
+  async created() {
+    this.list = (await repositories.home.get_sell_files()).data;
   },
   components: {
     Header,
@@ -56,7 +59,11 @@ export default {
     Title,
     CardSlider,
     Footer,
-    Modal
+    Modal,
+    MiniLoading
+  },
+  directives: {
+    infiniteScroll
   },
   methods: {
     goto(name) {
@@ -79,6 +86,20 @@ export default {
         default:
           break;
       }
+    },
+    async loadmore() {
+      try {
+        this.busy = true;
+        setTimeout(
+          this.list.push(
+            ...(await repositories.home.get_sell_files(
+              this.list[this.list.length - 1].id
+            )).data
+          ),
+          1000
+        );
+        this.busy = false;
+      } catch {}
     }
   }
 };

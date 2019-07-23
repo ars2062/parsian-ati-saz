@@ -7,14 +7,20 @@
       subtitleC
     />
     <Title title="لیست محصولات برند منظقه" style="margin-top:50px;" />
-    <div :class="$style.products">
-        <div :class="$style.post" v-for="(product,index) in list" v-if="index<=show" :key="product.id" ref="scroller">
-          <img src="@/assets/icons/37729214171_cb54f56933_m.jpg" />
-          <h3>{{product.brand_name}}</h3>
-          <h4>زمینه کاری : {{product.working_field}}</h4>
-          <button @click="goto('product-detail')">نمایش کامل اطلاعات</button>
-        </div>
+    <div
+      :class="$style.products"
+      v-infinite-scroll="loadmore"
+      infinite-scroll-disabled="busy"
+      infinite-scroll-distance="10"
+    >
+      <div :class="$style.post" v-for="product in list" :key="product.id" ref="scroller">
+        <img src="@/assets/icons/37729214171_cb54f56933_m.jpg" />
+        <h3>{{product.brand_name}}</h3>
+        <h4>زمینه کاری : {{product.working_field}}</h4>
+        <button @click="goto('product-detail')">نمایش کامل اطلاعات</button>
+      </div>
     </div>
+    <MiniLoading v-if="busy" />
     <AreYouAMasterWorker />
     <Footer />
   </div>
@@ -29,28 +35,20 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import AreYouAMasterWorker from "@/components/AreYouAMasterWorker.vue";
-import InfiniteScroll from "@tygr/vue-infinite-scroll";
+import repositories from "@/repositories/repositories.js";
+import infiniteScroll from "vue-infinite-scroll";
+import MiniLoading from "@/components/MiniLoading.vue";
 export default {
   data() {
     return {
       list: [],
-      show:8
+      busy: false
     };
   },
   async created() {
-    await this.$store.dispatch("home/get_all_products");
-    this.list = this.$store.getters["home/get_all_products"];
-  },
-  mounted(){
-    window.onscroll = () => {
-      let scroller=this.$refs["scroller"];
-      let lastCard=scroller[scroller.length-1];
-      let bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight >= lastCard.offsetTop;
-      if (bottomOfWindow) {
-        this.show+=9;
-      }
-    };
+    //await this.$store.dispatch("home/get_all_products");
+    //this.list = this.$store.getters["home/get_all_products"];
+    this.list = (await repositories.home.get_all_products()).data;
   },
   components: {
     Header,
@@ -60,7 +58,10 @@ export default {
     Footer,
     Modal,
     AreYouAMasterWorker,
-    InfiniteScroll
+    MiniLoading
+  },
+  directives: {
+    infiniteScroll
   },
   methods: {
     goto(name) {
@@ -84,8 +85,19 @@ export default {
           break;
       }
     },
-    loadMore() {
-      console.log(1);
+    async loadmore() {
+      try {
+        this.busy = true;
+        setTimeout(
+          this.list.push(
+            ...(await repositories.home.get_all_products(
+              this.list[this.list.length - 1].id
+            )).data
+          ),
+          1000
+        );
+        this.busy = false;
+      } catch {}
     }
   }
 };

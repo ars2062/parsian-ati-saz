@@ -8,7 +8,12 @@
     />
     <section :class="$style.one">
       <Title title="استاد کاران برند منطقه" style="margin-top:45px" />
-      <div :class="$style.cards">
+      <div
+        :class="$style.cards"
+        v-infinite-scroll="loadmore"
+        infinite-scroll-disabled="busy"
+        infinite-scroll-distance="10"
+      >
         <div v-for="master in list" :key="master.id" :class="$style.card">
           <img src="@/assets/icons/450-3366-225x168.jpg" />
           <h4>کنعان پاسبانی</h4>
@@ -16,9 +21,7 @@
           <button @click="goto('master-worker-detail')">نمایش نمونه کارها</button>
         </div>
       </div>
-      <button :class="$style.more">
-        <span>نمایش آگهی بیشتر</span>
-      </button>
+      <MiniLoading v-if="busy" />
     </section>
     <AreYouAMasterWorker />
     <Footer />
@@ -34,15 +37,18 @@ import CardSlider from "@/components/CardSlider.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import AreYouAMasterWorker from "@/components/AreYouAMasterWorker.vue";
+import MiniLoading from "@/components/MiniLoading.vue";
+import repositories from "@/repositories/repositories.js";
+import infiniteScroll from "vue-infinite-scroll";
 export default {
-  data(){
-    return{
-      list:[]
-    }
+  data() {
+    return {
+      list: [],
+      busy: false
+    };
   },
-  async created(){
-    await this.$store.dispatch("home/get_all_masters");
-    this.list=this.$store.getters["home/get_all_masters"];
+  async created() {
+    this.list = (await repositories.home.get_all_masters()).data;
   },
   components: {
     Header,
@@ -51,11 +57,29 @@ export default {
     CardSlider,
     Footer,
     Modal,
-    AreYouAMasterWorker
+    AreYouAMasterWorker,
+    MiniLoading
+  },
+  directives: {
+    infiniteScroll
   },
   methods: {
     goto(name) {
       this.$router.push(name);
+    },
+    async loadmore() {
+      try {
+        this.busy = true;
+        setTimeout(
+          this.list.push(
+            ...(await repositories.home.get_all_masters(
+              this.list[this.list.length - 1].id
+            )).data
+          ),
+          1000
+        );
+        this.busy = false;
+      } catch {}
     }
   }
 };

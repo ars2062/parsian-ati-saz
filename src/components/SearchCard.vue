@@ -108,10 +108,12 @@ export default {
       if (!this.advert_type) {
         alert("وارد کردن نوع تقاضا الزامیست");
       } else {
+        let cs=this.selectedcities.map(x=>x.id);
+        console.log(cs)
         let res = await repositories.home.search({
           min_metrazh: this.min_metrazh ? this.min_metrazh : null,
           max_metrazh: this.max_metrazh ? this.max_metrazh : null,
-          cities: this.selectedcities ? this.selectedcities : [],
+          cities: cs ? cs : [],
           advert_type: this.advert_type ? this.advert_type : null
         });
         if (res.status == 200) {
